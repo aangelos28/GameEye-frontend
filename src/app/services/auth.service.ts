@@ -122,7 +122,7 @@ export class AuthService {
       // Call method to log out
       client.logout({
         client_id: "aMoXHlnW7aHir2Bk7RN4G6x4c9s3x1bg",
-        returnTo: `${window.location.origin}`
+        returnTo: `${window.location.href}`
       });
     });
   }
