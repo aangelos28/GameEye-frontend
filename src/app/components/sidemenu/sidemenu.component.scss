@@ -1,0 +1,133 @@
+/*
+==============================================
+Sidemenu Styles
+==============================================
+ */
+.sidemenu {
+    top: 0;
+    height: 100%;
+    width: 30%;
+    margin-right: -20px;
+    position: fixed;
+    right: 0;
+    z-index: 1100;
+    background-color: rgb(68, 84, 105);
+    border: 1px solid rgba(0, 0, 0, .2);
+    transition: width 0.5s ease;
+}
+.sidemenu.hidden {
+    width: 0;
+    transition: width 0.5s ease;
+}
+@media (max-height: 720px) {
+    .sidemenu {
+        width: 70%;
+    }
+}
+
+.sidemenu-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1090;
+    background-color: black;
+    opacity: 0.8;
+    pointer-events: all;
+    transition: opacity 0.5s ease;
+}
+.sidemenu-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidemenu-logo {
+    margin-left: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+.sidemenu-logo.hidden {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidemenu-content {
+    position: relative;
+    padding-right: 20px;
+}
+
+.sidemenu-item {
+    height: max(50px, 5.6vh);
+    min-height: 50px;
+    padding-left: 12px;
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+.sidemenu-item.hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidemenu-item.top {
+    border-top: 1px solid rgba(0, 0, 0, .2);
+}
+
+.sidemenu-item:hover {
+    background-color: rgb(78, 98, 121);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.sidemenu-item:hover .sidemenu-link {
+    color: #fff;
+    font-weight: bolder;
+    transition: all 0.1s ease;
+    text-decoration: none;
+}
+
+.sidemenu-item.login-item {
+    background-color: rgb(118, 170, 73);
+    border-top: 1px solid rgba(0, 0, 0, .2);
+    transition: all 0.4s ease;
+}
+.sidemenu-item.login-item:hover {
+    background-color: rgb(108, 147, 81);
+}
+.sidemenu-item.logout-item {
+    background-color: rgb(222, 86, 86);
+    border-top: 1px solid rgba(0, 0, 0, .2);
+    transition: all 0.4s ease;
+}
+.sidemenu-item.logout-item:hover {
+    background-color: rgb(186, 90, 90);
+}
+
+.sidemenu-link-icon {
+    padding-right: 10px;
+}
+
+.sidemenu-link {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    transition: all 0.1s ease;
+}
+
+@media (max-height: 720px) {
+    .sidemenu-link {
+        font-size: 12px;
+    }
+}
+
+.sidemenu-content > .sidemenu-item > a {
+    text-decoration: none;
+}
