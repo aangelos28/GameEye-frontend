@@ -23,6 +23,7 @@
     "@angular/router": "~10.0.4",
     "@angular/service-worker": "~10.0.4",
     "@auth0/auth0-spa-js": "^1.10.0",
+    "bootstrap": "^4.5.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
