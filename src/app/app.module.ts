@@ -10,12 +10,18 @@ import { environment } from '../environments/environment';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatRippleModule} from "@angular/material/core";
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { AccountComponent } from './components/account/account.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    AccountComponent,
+    DashboardComponent,
+    HeaderComponent
   ],
     imports: [
         BrowserModule,
