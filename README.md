@@ -1,6 +1,6 @@
-# GameEyeFrontend
+# GameEye Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+This project contains the frontend code of GameEye.
 
 ## Development server
 
