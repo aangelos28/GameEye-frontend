@@ -26,6 +26,11 @@ Navbar Styles
 
 .navbar-brand {
     margin-right: 2rem;
+    transition: 0.5s ease;
+}
+.navbar-brand:hover {
+    transform: scale(1.1);
+    transition: 0.5s ease;
 }
 .navbar-brand.logo:focus, .navbar-brand.logo:hover {
     color: #ffffff;
