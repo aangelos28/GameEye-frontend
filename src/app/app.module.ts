@@ -13,6 +13,7 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AccountComponent } from './components/account/account.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TitlebarComponent } from './components/titlebar/titlebar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from './components/header/header.component';
     SidemenuComponent,
     AccountComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    TitlebarComponent
   ],
     imports: [
         BrowserModule,

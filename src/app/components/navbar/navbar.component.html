@@ -1,10 +1,13 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light fixed-top clean-navbar">
-    <div class="container">
+    <div class="container navbar-container">
+        <button (click)="this.goBack()" class="back-button nav-control-button">
+            <i class="fas fa-angle-left back-button-icon"></i>
+        </button>
         <a class="navbar-brand logo mx-auto" routerLink="dashboard">
             <img src="/assets/logos/GameEyeLogoWhite.png" alt="GameEye logo white">
         </a>
-        <button (click)="this.sidemenu.toggle()" class="navbar-toggler">
+        <button (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
             <i class="fas fa-bars navbar-toggler-icon-2"></i>
         </button>
     </div>

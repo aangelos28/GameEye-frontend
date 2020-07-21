@@ -1,3 +1,9 @@
+// Bootstrap Styles
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+
+
 /*
 ==============================================
 Sidemenu Styles
@@ -19,7 +25,7 @@ Sidemenu Styles
     width: 0;
     transition: width 0.5s ease;
 }
-@media (max-height: 720px) {
+@include media-breakpoint-down(sm) {
     .sidemenu {
         width: 70%;
     }
@@ -122,7 +128,7 @@ Sidemenu Styles
     transition: all 0.1s ease;
 }
 
-@media (max-height: 720px) {
+@include media-breakpoint-down(sm) {
     .sidemenu-link {
         font-size: 12px;
     }

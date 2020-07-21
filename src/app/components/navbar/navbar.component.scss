@@ -15,6 +15,11 @@ Navbar Styles
     background-color: rgb(68, 84, 105);
 }
 
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .clean-navbar.fixed-bottom, .clean-navbar.fixed-top {
     box-shadow: none;
 }
@@ -34,6 +39,7 @@ Navbar Styles
     border-color: rgba(0, 0, 0, 0);
     padding-bottom: 10px;
     padding-top: 10px;
+    outline: none;
 }
 .fas.fa-bars.navbar-toggler-icon-2 {
     color: #fff;
@@ -62,6 +68,15 @@ Navbar Styles
     .container, .container-lg, .container-md, .container-sm {
         max-width: 1140px;
     }
+}
+
+.nav-control-button {
+    outline: none;
+    transition: all 0.5s ease;
+}
+.nav-control-button:hover {
+    transform: scale(1.4);
+    transition: all 0.5s ease;
 }
 
 /*
@@ -151,26 +166,15 @@ Nav Dropdown
     }
 }
 
-/*
-Navlink Underline Animation
- */
-@include media-breakpoint-up(lg) {
-    .nav-link.animation {
-        position: relative;
-    }
+.back-button {
+    padding: .25rem .75rem;
+    font-size: 1.50rem;
+    line-height: 1;
+    background-color: transparent;
+    border: none;
 
-    .nav-link.animation:before {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 1px;
-        bottom: 2px;
-        left: 0;
-        background-color: #fff;
-        transition: width 0.3s ease;
-    }
+}
 
-    .nav-link.animation:hover:before {
-        width: 100%;
-    }
+.back-button-icon {
+    color: #fff;
 }

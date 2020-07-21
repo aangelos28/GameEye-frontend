@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import { Location } from '@angular/common';
 import {SidemenuComponent} from "../sidemenu/sidemenu.component";
 
 @Component({
@@ -10,8 +11,12 @@ export class NavbarComponent implements OnInit {
 
     @ViewChild(SidemenuComponent) sidemenu: SidemenuComponent;
 
-    constructor() {}
+    constructor(private location: Location) {}
 
     ngOnInit(): void {
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }
