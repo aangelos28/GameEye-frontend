@@ -29,6 +29,11 @@
                     <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-cog"></i>Settings</a>
                 </span>
             </div>
+            <div matRipple>
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link" routerLink="test"><i class="sidemenu-link-icon fas fa-code"></i>Test</a>
+                </span>
+            </div>
             <div matRipple style="margin-top: 40px;" >
                 <span class="sidemenu-item login-item" [class.hidden]="!isSidemenuVisible" *ngIf="!auth.loggedIn">
                     <a class="sidemenu-link" (click)="auth.login()"><i class="sidemenu-link-icon fas fa-sign-in-alt"></i>Log In</a>

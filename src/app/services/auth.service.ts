@@ -29,7 +29,9 @@ export class AuthService {
     // from: Convert that resulting promise into an observable
     isAuthenticated$ = this.auth0Client$.pipe(
         concatMap((client: Auth0Client) => from(client.isAuthenticated())),
-        tap(res => this.loggedIn = res)
+        tap(res => {
+            this.loggedIn = res;
+        })
     );
     handleRedirectCallback$ = this.auth0Client$.pipe(
         concatMap((client: Auth0Client) => from(client.handleRedirectCallback()))
@@ -40,6 +42,7 @@ export class AuthService {
     userProfile$ = this.userProfileSubject$.asObservable();
     // Create a local property for login status
     loggedIn: boolean = null;
+    accessToken: string = null;
 
     constructor(private router: Router) {
         // On initial load, check authentication state with authorization server
@@ -58,12 +61,19 @@ export class AuthService {
         );
     }
 
+    getAccessToken$(): Observable<any> {
+        return this.auth0Client$.pipe(
+            concatMap((client: Auth0Client) => from(client.getTokenSilently({audience: "/api"})))
+        );
+    }
+
     private localAuthSetup() {
         // This should only be called on app initialization
         // Set up local authentication streams
         const checkAuth$ = this.isAuthenticated$.pipe(
             concatMap((loggedIn: boolean) => {
                 if (loggedIn) {
+                    this.setSession();
                     // If authenticated, get user and set in app
                     // NOTE: you could pass options here if needed
                     return this.getUser$();
@@ -75,7 +85,7 @@ export class AuthService {
         checkAuth$.subscribe();
     }
 
-    login(redirectPath: string = '/') {
+    public login(redirectPath: string = '/') {
         // A desired redirect path can be passed to login method
         // (e.g., from a route guard)
         // Ensure Auth0 client instance exists
@@ -110,13 +120,14 @@ export class AuthService {
             // Subscribe to authentication completion observable
             // Response will be an array of user and login status
             authComplete$.subscribe(([user, loggedIn]) => {
+                this.setSession();
                 // Redirect to target route after callback processing
                 this.router.navigate([targetRoute]);
             });
         }
     }
 
-    logout() {
+    public logout() {
         // Ensure Auth0 client instance exists
         this.auth0Client$.subscribe((client: Auth0Client) => {
             // Call method to log out
@@ -127,4 +138,10 @@ export class AuthService {
         });
     }
 
+    public setSession() {
+        this.getAccessToken$().subscribe(token => {
+            this.accessToken = token;
+            localStorage.setItem("access_token", this.accessToken);
+        });
+    }
 }

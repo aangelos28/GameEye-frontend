@@ -14,6 +14,9 @@ import { AccountComponent } from './components/account/account.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./interceptors/auth/auth.interceptor";
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -23,17 +26,19 @@ import { TitlebarComponent } from './components/titlebar/titlebar.component';
     AccountComponent,
     DashboardComponent,
     HeaderComponent,
-    TitlebarComponent
+    TitlebarComponent,
+    TestComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MatSidenavModule,
         MatRippleModule
     ],
-  providers: [],
+  providers: [HttpClientModule, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

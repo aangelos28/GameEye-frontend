@@ -20,6 +20,7 @@ Sidemenu Styles
     background-color: rgb(68, 84, 105);
     border: 1px solid rgba(0, 0, 0, .2);
     transition: width 0.5s ease;
+    overflow-y: scroll;
 }
 .sidemenu.hidden {
     width: 0;
@@ -27,7 +28,7 @@ Sidemenu Styles
 }
 @include media-breakpoint-down(sm) {
     .sidemenu {
-        width: 70%;
+        width: 80%;
     }
 }
 
