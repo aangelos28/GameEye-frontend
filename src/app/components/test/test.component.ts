@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {share} from "rxjs/operators";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-test',
@@ -12,13 +13,11 @@ import {share} from "rxjs/operators";
 export class TestComponent implements OnInit {
 
     public companies$: Observable<any>;
-    public accessToken: string;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(public authService: AuthService, private httpClient: HttpClient) {
     }
 
     ngOnInit(): void {
         this.companies$ = this.httpClient.get(environment.backendUrl + "/private/companies").pipe(share());
-        this.accessToken = localStorage.getItem("access_token");
     }
 }

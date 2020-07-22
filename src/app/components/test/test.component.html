@@ -3,11 +3,15 @@
 <body>
     <div class="main container">
         <h1>Access Token</h1>
-        <h3>You can use this token to make REST API calls</h3>
-        <pre><code>{{ accessToken }}</code></pre>
+        <h3>You can use this token to make REST API calls.</h3>
+        <pre *ngIf="authService.accessToken$ | async as accessToken"><code>{{ accessToken }}</code></pre>
+        <hr>
+        <h1>Id Token Claims</h1>
+        <h3>Information contained inside your ID token.</h3>
+        <pre *ngIf="authService.idTokenClaims$ | async as idTokenClaims"><code>{{ idTokenClaims | json }}</code></pre>
         <hr>
         <h1>Test Response From Server</h1>
-        <h3>If you see this you are authenticated properly</h3>
+        <h3>If you see the text below you are authenticated properly.</h3>
         <pre *ngIf="companies$ | async as companies"><code>{{ companies | json }}</code></pre>
     </div>
 </body>

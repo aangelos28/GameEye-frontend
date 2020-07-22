@@ -6,23 +6,25 @@ import {
     HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AuthService} from "../../services/auth.service";
+import {switchMap} from "rxjs/operators";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor() {
+    constructor(private authService: AuthService) {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const accessToken = localStorage.getItem("access_token");
+        return this.authService.accessToken$.pipe(switchMap((accessToken: string) => {
+            if (accessToken) {
+                const authRequest = request.clone({
+                    headers: request.headers.set("Authorization", "Bearer " + accessToken)
+                });
 
-        if (accessToken) {
-            const authRequest = request.clone({
-                headers: request.headers.set("Authorization", "Bearer " + accessToken)
-            });
-
-            return next.handle(authRequest);
-        }
-        return next.handle(request);
+                return next.handle(authRequest);
+            }
+            return next.handle(request);
+        }));
     }
 }

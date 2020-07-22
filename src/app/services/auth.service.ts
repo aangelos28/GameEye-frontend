@@ -29,21 +29,24 @@ export class AuthService {
     // from: Convert that resulting promise into an observable
     isAuthenticated$ = this.auth0Client$.pipe(
         concatMap((client: Auth0Client) => from(client.isAuthenticated())),
-        tap(res => {
-            this.loggedIn = res;
-        })
+        tap(res => this.loggedIn = res)
     );
     handleRedirectCallback$ = this.auth0Client$.pipe(
         concatMap((client: Auth0Client) => from(client.handleRedirectCallback()))
+    );
+    accessToken$ = this.auth0Client$.pipe(
+        concatMap((client: Auth0Client) => from(client.getTokenSilently({audience: "/api"})))
+    );
+    idTokenClaims$ = this.auth0Client$.pipe(
+        concatMap((client: Auth0Client) => from(client.getIdTokenClaims()))
     );
 
     // Create subject and public observable of user profile data
     private userProfileSubject$ = new BehaviorSubject<any>(null);
     userProfile$ = this.userProfileSubject$.asObservable();
-    // Create a local property for login status
-    loggedIn: boolean = null;
-    accessToken: string = null;
 
+    // Local login variables
+    public loggedIn: boolean = null;
     constructor(private router: Router) {
         // On initial load, check authentication state with authorization server
         // Set up local auth streams if user is already authenticated
@@ -61,19 +64,12 @@ export class AuthService {
         );
     }
 
-    getAccessToken$(): Observable<any> {
-        return this.auth0Client$.pipe(
-            concatMap((client: Auth0Client) => from(client.getTokenSilently({audience: "/api"})))
-        );
-    }
-
     private localAuthSetup() {
         // This should only be called on app initialization
         // Set up local authentication streams
         const checkAuth$ = this.isAuthenticated$.pipe(
             concatMap((loggedIn: boolean) => {
                 if (loggedIn) {
-                    this.setSession();
                     // If authenticated, get user and set in app
                     // NOTE: you could pass options here if needed
                     return this.getUser$();
@@ -120,7 +116,6 @@ export class AuthService {
             // Subscribe to authentication completion observable
             // Response will be an array of user and login status
             authComplete$.subscribe(([user, loggedIn]) => {
-                this.setSession();
                 // Redirect to target route after callback processing
                 this.router.navigate([targetRoute]);
             });
@@ -135,13 +130,6 @@ export class AuthService {
                 client_id: "aMoXHlnW7aHir2Bk7RN4G6x4c9s3x1bg",
                 returnTo: `${window.location.href}`
             });
-        });
-    }
-
-    public setSession() {
-        this.getAccessToken$().subscribe(token => {
-            this.accessToken = token;
-            localStorage.setItem("access_token", this.accessToken);
         });
     }
 }
