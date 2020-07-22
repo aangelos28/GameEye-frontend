@@ -5,7 +5,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 
 import {from, of, Observable, BehaviorSubject, combineLatest, throwError} from 'rxjs';
-import {tap, catchError, concatMap, shareReplay} from 'rxjs/operators';
+import {tap, catchError, concatMap, shareReplay, share} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,8 @@ export class AuthService {
         createAuth0Client({
             domain: "dev-cx4ng9g0.us.auth0.com",
             client_id: "aMoXHlnW7aHir2Bk7RN4G6x4c9s3x1bg",
-            redirect_uri: `${window.location.origin}`
+            redirect_uri: `${window.location.origin}`,
+            cacheLocation: "localstorage"
         })
     ) as Observable<Auth0Client>).pipe(
         shareReplay(1), // Every subscription receives the same shared value
