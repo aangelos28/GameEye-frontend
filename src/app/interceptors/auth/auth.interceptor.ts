@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         return this.authService.accessToken$.pipe(switchMap((accessToken: string) => {
-            console.log(accessToken);
             if (accessToken) {
                 const authRequest = request.clone({
                     headers: request.headers.set("Authorization", "Bearer " + accessToken)
