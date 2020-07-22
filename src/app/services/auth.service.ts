@@ -16,8 +16,7 @@ export class AuthService {
         createAuth0Client({
             domain: "dev-cx4ng9g0.us.auth0.com",
             client_id: "aMoXHlnW7aHir2Bk7RN4G6x4c9s3x1bg",
-            redirect_uri: `${window.location.origin}`,
-            cacheLocation: "localstorage"
+            redirect_uri: `${window.location.origin}`
         })
     ) as Observable<Auth0Client>).pipe(
         shareReplay(1), // Every subscription receives the same shared value
@@ -36,10 +35,12 @@ export class AuthService {
         concatMap((client: Auth0Client) => from(client.handleRedirectCallback()))
     );
     accessToken$ = this.auth0Client$.pipe(
-        concatMap((client: Auth0Client) => from(client.getTokenSilently({audience: "/api"})))
+        concatMap((client: Auth0Client) => from(client.getTokenSilently({audience: "/api"}))),
+        share()
     );
     idTokenClaims$ = this.auth0Client$.pipe(
-        concatMap((client: Auth0Client) => from(client.getIdTokenClaims()))
+        concatMap((client: Auth0Client) => from(client.getIdTokenClaims())),
+        share()
     );
 
     // Create subject and public observable of user profile data
