@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-sidemenu',
@@ -10,7 +12,7 @@ export class SidemenuComponent implements OnInit {
 
     public isSidemenuVisible: boolean = false;
 
-    constructor(public auth: AuthService) {
+    constructor(public auth: AuthService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -24,5 +26,11 @@ export class SidemenuComponent implements OnInit {
         if (this.isSidemenuVisible) {
             this.toggle();
         }
+    }
+
+    logout(): void {
+        this.auth.logoutFirebase().then(val =>
+            this.router.navigate(["login"])
+        )
     }
 }

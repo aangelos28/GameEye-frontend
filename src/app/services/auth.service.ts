@@ -6,6 +6,7 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 
 import {from, of, Observable, BehaviorSubject, combineLatest, throwError} from 'rxjs';
 import {tap, catchError, concatMap, shareReplay, share} from 'rxjs/operators';
+import {AngularFireAuth} from "@angular/fire/auth";
 
 @Injectable({
     providedIn: 'root'
@@ -49,12 +50,20 @@ export class AuthService {
 
     // Local login variables
     public loggedIn: boolean = null;
-    constructor(private router: Router) {
+    constructor(public firebase: AngularFireAuth, private router: Router) {
         // On initial load, check authentication state with authorization server
         // Set up local auth streams if user is already authenticated
         this.localAuthSetup();
         // Handle redirect from Auth0 login
         this.handleAuthCallback();
+    }
+
+    public loginFirebase(email: string, password: string) {
+        return this.firebase.signInWithEmailAndPassword(email, password);
+    }
+
+    public logoutFirebase() {
+        return this.firebase.signOut();
     }
 
     // When calling, options can be passed if desired

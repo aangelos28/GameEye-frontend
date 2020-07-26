@@ -1,0 +1,32 @@
+<app-titlebar [titletext]="'Login to GameEye'" [titleiconfacode]="'fas fa-sign-in-alt'"></app-titlebar>
+
+<body class="no-scroll">
+    <div class="main container">
+        <div class="login-container container">
+            <form class="login-form">
+                <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 30px;">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="emailFormControl" class="login-form-input">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Please enter a valid email address.
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        Email is <strong>required</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 10px;">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [formControl]="passwordFormControl" class="login-form-input">
+                    <mat-error *ngIf="passwordFormControl.hasError('minlength') && !emailFormControl.hasError('required')">
+                        Password must be at least 8 characters.
+                    </mat-error>
+                    <mat-error *ngIf="passwordFormControl.hasError('required')">
+                        Password is <strong>required</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <a class="reset-password-link" href="#">Forgot password</a>
+                <button mat-raised-button color="primary" class="submitButton" (click)="login()">Login</button>
+            </form>
+        </div>
+    </div>
+</body>

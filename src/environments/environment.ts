@@ -4,7 +4,15 @@
 
 export const environment = {
     production: false,
-    backendUrl: "http://localhost:8070/api"
+    backendUrl: "http://localhost:8070/api",
+    firebase: {
+        apiKey: "AIzaSyCg05oQfz18IpyfVKLq2UxYvJD6x8RI47g",
+        authDomain: 'localhost:4200/login',
+        databaseURL: '<your-database-URL>',
+        projectId: "gameeye-8eb07",
+        storageBucket: '<your-storage-bucket>',
+        messagingSenderId: "558929409481"
+    }
 };
 
 /*

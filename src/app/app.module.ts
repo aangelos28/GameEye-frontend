@@ -17,6 +17,13 @@ import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./interceptors/auth/auth.interceptor";
 import { TestComponent } from './components/test/test.component';
+import { LoginComponent } from './components/login/login.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 @NgModule({
   declarations: [
@@ -27,16 +34,24 @@ import { TestComponent } from './components/test/test.component';
     DashboardComponent,
     HeaderComponent,
     TitlebarComponent,
-    TestComponent
+    TestComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MatSidenavModule,
-        MatRippleModule
+        MatRippleModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule
     ],
   providers: [HttpClientModule, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

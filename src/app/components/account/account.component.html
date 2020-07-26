@@ -3,6 +3,6 @@
 <body>
     <div class="main container">
         <h1>Account details</h1>
-        <pre *ngIf="auth.userProfile$ | async as profile"><code>{{ profile | json }}</code></pre>
+        <pre *ngIf="auth.firebase.user | async as user"><code>{{ user.toJSON() | json }}</code></pre>
     </div>
 </body>
