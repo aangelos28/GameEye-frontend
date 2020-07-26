@@ -37,4 +37,10 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["dashboard"])
         );
     }
+
+    public loginMicrosoft(): void {
+        this.auth.loginFirebaseMicrosoft().then(val =>
+            this.router.navigate(["dashboard"])
+        );
+    }
 }

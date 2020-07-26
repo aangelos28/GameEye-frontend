@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AngularFireAuth} from "@angular/fire/auth";
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import * as firebase from 'firebase';
+import OAuthProvider = firebase.auth.OAuthProvider;
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,10 @@ export class AuthService {
 
     public loginFirebaseGoogle() {
         return this.firebase.signInWithRedirect(new GoogleAuthProvider());
+    }
+
+    public loginFirebaseMicrosoft() {
+        return this.firebase.signInWithRedirect(new OAuthProvider("microsoft.com"));
     }
 
     public logoutFirebase() {
