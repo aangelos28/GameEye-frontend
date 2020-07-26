@@ -24,10 +24,16 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    public login(): void {
+    public loginEmailPassword(): void {
         const email = this.emailFormControl.value;
         const password = this.passwordFormControl.value;
-        this.auth.loginFirebase(email, password).then(cred =>
+        this.auth.loginFirebaseEmailPassword(email, password).then(cred =>
+            this.router.navigate(["dashboard"])
+        );
+    }
+
+    public loginGoogle(): void {
+        this.auth.loginFirebaseGoogle().then(val =>
             this.router.navigate(["dashboard"])
         );
     }

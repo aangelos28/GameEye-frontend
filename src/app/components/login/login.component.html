@@ -25,8 +25,12 @@
                     </mat-error>
                 </mat-form-field>
                 <a class="reset-password-link" href="#">Forgot password</a>
-                <button mat-raised-button color="primary" class="submitButton" (click)="login()">Login</button>
+                <button mat-raised-button color="primary" class="submitButton" (click)="loginEmailPassword()">Login</button>
             </form>
+            <hr>
+            <div class="providers-container">
+                <button mat-raised-button color="primary" class="submitButton" (click)="loginGoogle()">Login with Google</button>
+            </div>
         </div>
     </div>
 </body>
