@@ -24,6 +24,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatSnackBarModule,
+        MatTabsModule
     ],
   providers: [HttpClientModule, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

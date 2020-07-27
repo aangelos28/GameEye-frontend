@@ -13,19 +13,23 @@ export class AuthService {
     constructor(public firebase: AngularFireAuth, private router: Router) {
     }
 
-    public loginFirebaseEmailPassword(email: string, password: string) {
+    public loginFirebaseEmailPassword(email: string, password: string): Promise<any> {
         return this.firebase.signInWithEmailAndPassword(email, password);
     }
 
-    public loginFirebaseGoogle() {
+    public loginFirebaseGoogle(): Promise<any> {
         return this.firebase.signInWithRedirect(new GoogleAuthProvider());
     }
 
-    public loginFirebaseMicrosoft() {
+    public loginFirebaseMicrosoft(): Promise<any> {
         return this.firebase.signInWithRedirect(new OAuthProvider("microsoft.com"));
     }
 
-    public logoutFirebase() {
+    public logoutFirebase(): Promise<any> {
         return this.firebase.signOut();
+    }
+
+    public createAccount(email: string, password: string): Promise<any> {
+        return this.firebase.createUserWithEmailAndPassword(email, password);
     }
 }

@@ -1,7 +1,7 @@
 <app-titlebar [titletext]="'Test Page'" [titleiconfacode]="'fas fa-code'"></app-titlebar>
 
 <body>
-    <div class="main container">
+    <div class="main container page">
         <h1>ID Token</h1>
         <h3>You can use this token to make REST API calls.</h3>
         <pre *ngIf="auth.firebase.idToken | async as idToken"><code>{{ idToken }}</code></pre>
