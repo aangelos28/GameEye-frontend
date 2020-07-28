@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import {share} from "rxjs/operators";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../../authentication/services/auth.service";
 
 @Component({
   selector: 'app-test',

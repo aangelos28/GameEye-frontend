@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Location } from '@angular/common';
 import {SidemenuComponent} from "../sidemenu/sidemenu.component";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../../authentication/services/auth.service";
 import {AngularFireAuth} from "@angular/fire/auth";
 
 @Component({
