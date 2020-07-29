@@ -8,13 +8,6 @@
     min-height: 500px;
 }
 
-@include media-breakpoint-down(sm) {
-    .login-container {
-        border: 0;
-        top: 50%;
-    }
-}
-
 .login-form {
     margin-left: 20px;
     margin-right: 20px;

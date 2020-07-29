@@ -32,4 +32,12 @@ export class AuthService {
     public createAccount(email: string, password: string): Promise<any> {
         return this.firebase.createUserWithEmailAndPassword(email, password);
     }
+
+    public getUserEmail(): Promise<string> {
+        return new Promise(resolve => {
+            this.firebase.user.subscribe(user => {
+                resolve(user.email);
+            })
+        });
+    }
 }

@@ -38,18 +38,37 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    get emailLogin() { return this.loginForm.get("email"); }
-    get passwordLogin() { return this.loginForm.get("password"); }
-    get emailSignup() { return this.signupForm.get("email"); }
-    get passwordSignup() { return this.signupForm.get("password"); }
+    get emailLogin() {
+        return this.loginForm.get("email");
+    }
+
+    get passwordLogin() {
+        return this.loginForm.get("password");
+    }
+
+    get emailSignup() {
+        return this.signupForm.get("email");
+    }
+
+    get passwordSignup() {
+        return this.signupForm.get("password");
+    }
 
     public loginEmailPassword(): void {
         const email = this.emailLogin.value;
         const password = this.passwordLogin.value;
 
-        this.auth.loginFirebaseEmailPassword(email, password).then(cred =>
-            this.router.navigate(["dashboard"])
-        ).catch(err =>
+        this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
+            this.auth.firebase.user.subscribe(user => {
+                if (user.emailVerified) {
+                    this.router.navigate(["dashboard"]);
+                } else {
+                    user.sendEmailVerification().then(() =>
+                        this.router.navigate(["verifyEmail"])
+                    );
+                }
+            })
+        }).catch(err =>
             this.snackBar.open("Invalid login credentials. Either your email or password are wrong.", "X", {
                 duration: 5000,
                 panelClass: ["error-snackbar", "mat-warn"]
@@ -74,7 +93,20 @@ export class LoginComponent implements OnInit {
         const email = this.emailSignup.value;
         const password = this.passwordSignup.value;
 
+        console.log("Try to sign up.");
+
         // TODO handle promise
-        this.auth.createAccount(email, password);
+        this.auth.createAccount(email, password).then(val =>
+            this.auth.firebase.user.subscribe(user => {
+                user.sendEmailVerification().then(() =>
+                    this.router.navigate(["verifyEmail"])
+                )
+            })
+        ).catch(err =>
+            this.snackBar.open("Failed to create account.\n" + err, "X", {
+                duration: 8000,
+                panelClass: ["error-snackbar", "mat-warn"]
+            })
+        )
     }
 }

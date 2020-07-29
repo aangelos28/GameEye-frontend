@@ -29,6 +29,7 @@ export class SidemenuComponent implements OnInit {
     }
 
     logout(): void {
+        this.toggle();
         this.auth.logoutFirebase().then(val =>
             this.router.navigate(["login"])
         )

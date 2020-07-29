@@ -11,13 +11,16 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {LoginComponent} from "./components/login/login.component";
 import {SharedModule} from "../shared/shared.module";
+import {EmailVerificationComponent} from "./components/email-verification/email-verification.component";
 
 @NgModule({
     declarations: [
-        LoginComponent
+        LoginComponent,
+        EmailVerificationComponent
     ],
     exports: [
-        LoginComponent
+        LoginComponent,
+        EmailVerificationComponent
     ],
     imports: [
         CommonModule,
