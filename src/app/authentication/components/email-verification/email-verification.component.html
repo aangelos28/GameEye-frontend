@@ -6,9 +6,9 @@
             <h1>Please verify your email.</h1>
             <h3>A confirmation link has been sent to <b>{{this.email | async}}</b>.<br> Once you have verified your email you will be able to log in.</h3>
             <h4>If you have not received an email please click the button below to resend it:</h4>
-            <button mat-raised-button color="primary" class="resendVerificationButton" (click)="resendConfirmationEmail()">Resend Confirmation</button>
+            <button mat-raised-button color="primary" (click)="resendConfirmationEmail()">Resend Confirmation</button>
             <hr>
-            <button mat-raised-button color="primary" class="backToLoginButton" (click)="navigateToLogin()">Back to Login</button>
+            <button mat-stroked-button color="primary" (click)="navigateToLogin()">Back to Login</button>
         </div>
     </div>
 </body>

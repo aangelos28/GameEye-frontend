@@ -10,6 +10,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {AngularFireModule} from "@angular/fire";
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
     declarations: [
@@ -23,7 +26,10 @@ import {SharedModule} from "./shared/shared.module";
         BrowserAnimationsModule,
         AngularFireModule.initializeApp(environment.firebase),
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        CoreModule
+        CoreModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

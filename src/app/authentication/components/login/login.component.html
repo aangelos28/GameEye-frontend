@@ -26,8 +26,8 @@
                                 Password is <strong>required</strong>.
                             </mat-error>
                         </mat-form-field>
-                        <a class="reset-password-link" href="#">Forgot password</a>
-                        <button mat-raised-button color="primary" class="submitButton loginButton" [disabled]="!loginForm.valid">Login</button>
+                        <a class="reset-password-link" routerLink="/resetPassword">Forgot password</a>
+                        <button mat-raised-button color="primary" class="submit-button login-button" [disabled]="!loginForm.valid">Login</button>
                     </form>
                 </mat-tab>
                 <mat-tab label="Sign Up">
@@ -52,8 +52,7 @@
                                 Password is <strong>required</strong>.
                             </mat-error>
                         </mat-form-field>
-                        <!--<a class="reset-password-link" href="#">Forgot password</a>-->
-                        <button mat-raised-button color="primary" class="submitButton loginButton" [disabled]="!signupForm.valid">Sign Up</button>
+                        <button mat-raised-button color="primary" class="submit-button login-button" [disabled]="!signupForm.valid">Sign Up</button>
                     </form>
                 </mat-tab>
             </mat-tab-group>

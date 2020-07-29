@@ -12,15 +12,19 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {LoginComponent} from "./components/login/login.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmailVerificationComponent} from "./components/email-verification/email-verification.component";
+import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
     declarations: [
         LoginComponent,
-        EmailVerificationComponent
+        EmailVerificationComponent,
+        ResetPasswordComponent
     ],
     exports: [
         LoginComponent,
-        EmailVerificationComponent
+        EmailVerificationComponent,
+        ResetPasswordComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +36,8 @@ import {EmailVerificationComponent} from "./components/email-verification/email-
         MatInputModule,
         MatButtonModule,
         MatSnackBarModule,
-        MatTabsModule
+        MatTabsModule,
+        RouterModule
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })

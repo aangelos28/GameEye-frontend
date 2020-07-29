@@ -11,6 +11,7 @@ import {
 } from "@angular/fire/auth-guard";
 import {EmailVerificationComponent} from "./authentication/components/email-verification/email-verification.component";
 import {EmailVerificationGuard} from "./authentication/guards/email-verification.guard";
+import {ResetPasswordComponent} from "./authentication/components/reset-password/reset-password.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(["dashboard"]);
@@ -41,11 +42,18 @@ const routes: Routes = [
         data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
-        path: '**',
+        path: 'resetPassword',
+        component: ResetPasswordComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: {authGuardPipe: redirectLoggedInToDashboard}
+    },
+    {
+        path: 'login',
         component: LoginComponent,
         canActivate: [AngularFireAuthGuard],
         data: {authGuardPipe: redirectLoggedInToDashboard}
-    }
+    },
+    {path: "**", redirectTo: 'login'}
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@ export class EmailVerificationGuard implements CanActivate {
 
         return this.authService.firebaseAuth.user.pipe(
             take(1),
-            map(user => user.emailVerified),
+            map(user => user && user.emailVerified),
             tap(emailVerified => {
                 if (!emailVerified) {
                     this.router.navigate(["verifyEmail"]);

@@ -43,4 +43,8 @@ export class AccountService {
             })
         });
     }
+
+    public sendPasswordResetEmailAsync(email: string): Promise<any> {
+        return this.authService.firebaseAuth.sendPasswordResetEmail(email);
+    }
 }

@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
     }
 
     public loginEmailPassword(): void {
-        const email = this.emailLogin.value;
-        const password = this.passwordLogin.value;
+        const email: string = this.emailLogin.value;
+        const password: string = this.passwordLogin.value;
 
         this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
             this.auth.firebaseAuth.user.subscribe(user => {
