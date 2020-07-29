@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {AccountService} from "../../services/account/account.service";
 
 @Component({
     selector: 'app-email-verification',
@@ -10,9 +11,10 @@ import {Router} from "@angular/router";
 })
 export class EmailVerificationComponent implements OnInit {
 
-    email: Promise<string> = this.authService.getUserEmail();
+    public email: Promise<string> = this.accountService.getUserEmailAsync();
 
-    constructor(public authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
+    constructor(private accountService: AccountService, private authService: AuthService, private router: Router,
+                private snackBar: MatSnackBar) {
     }
 
     public ngOnInit(): void {
@@ -24,7 +26,7 @@ export class EmailVerificationComponent implements OnInit {
     }
 
     public resendConfirmationEmail(): void {
-        this.authService.firebase.user.subscribe(user => {
+        this.accountService.user.subscribe(user => {
             user.sendEmailVerification().then(() =>
                 this.snackBar.open("Confirmation email resent. Please check your inbox.", "X", {
                     duration: 10000,
@@ -40,8 +42,10 @@ export class EmailVerificationComponent implements OnInit {
     }
 
     public navigateToLogin(): void {
-        this.router.navigate(["login"]).then(() =>
-            window.location.reload()
-        )
+        this.authService.logoutFirebase().then(() =>
+            this.router.navigate(["login"]).then(() =>
+                window.location.reload()
+            )
+        );
     }
 }

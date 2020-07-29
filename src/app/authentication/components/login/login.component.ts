@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         const password = this.passwordLogin.value;
 
         this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
-            this.auth.firebase.user.subscribe(user => {
+            this.auth.firebaseAuth.user.subscribe(user => {
                 if (user.emailVerified) {
                     this.router.navigate(["dashboard"]);
                 } else {
@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
         this.auth.loginFirebaseGoogle().then(val =>
             this.router.navigate(["dashboard"])
         )
-
     }
 
     public loginMicrosoft(): void {
@@ -92,9 +91,9 @@ export class LoginComponent implements OnInit {
     public signUp(): void {
         const email = this.emailSignup.value;
         const password = this.passwordSignup.value;
-        
+
         this.auth.createAccount(email, password).then(val =>
-            this.auth.firebase.user.subscribe(user => {
+            this.auth.firebaseAuth.user.subscribe(user => {
                 user.sendEmailVerification().then(() =>
                     this.router.navigate(["verifyEmail"])
                 )

@@ -1,13 +1,13 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light fixed-top clean-navbar shadow-sm">
     <div class="container navbar-container">
-        <button *ngIf="auth.user | async" (click)="this.goBack()" class="back-button nav-control-button">
+        <button *ngIf="isLoggedIn && !isInDashboard" (click)="this.goBack()" class="back-button nav-control-button">
             <i class="fas fa-angle-left back-button-icon"></i>
         </button>
         <a class="navbar-brand logo mx-auto" routerLink="dashboard">
             <img src="/assets/logos/GameEyeLogoWhite.png" alt="GameEye">
         </a>
-        <button *ngIf="auth.user | async" (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
+        <button *ngIf="isLoggedIn" (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
             <i class="fas fa-bars navbar-toggler-icon-2"></i>
         </button>
     </div>
