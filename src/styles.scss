@@ -12,7 +12,41 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$GameEyeFrontend-primary: mat-palette($mat-indigo);
+/* For use in src/lib/core/theming/_palette.scss */
+$gameeye-pallete: (
+    50 : #e9eaed,
+    100 : #c7ccd2,
+    200 : #a2aab4,
+    300 : #7c8796,
+    400 : #606e80,
+    500 : #445469,
+    600 : #3e4d61,
+    700 : #354356,
+    800 : #2d3a4c,
+    900 : #1f293b,
+    A100 : #80aeff,
+    A200 : #4d8dff,
+    A400 : #1a6dff,
+    A700 : #015cff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$GameEyeFrontend-primary: mat-palette($gameeye-pallete);
 $GameEyeFrontend-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -45,4 +79,25 @@ body {
     color: #212529;
     text-align: left;
     background-color: #e4e4e4;
+}
+
+.page {
+    padding-top: 160px;
+}
+
+// Snackbars
+.error-snackbar {
+    color: red;
+}
+
+.error-snackbar button {
+    color: red;
+}
+
+.success-snackbar {
+    color: green;
+}
+
+.success-snackbar button {
+    color: green;
 }

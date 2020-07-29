@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "gameeye-8eb07": {
+      "hosting": {
+        "GameEyeFrontend": [
+          "gameeye-8eb07"
+        ]
+      }
+    }
+  }
+}

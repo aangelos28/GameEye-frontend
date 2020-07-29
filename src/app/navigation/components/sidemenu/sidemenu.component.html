@@ -1,0 +1,44 @@
+<!-- Sidemenu -->
+<div class="sidemenu-wrapper">
+    <div class="sidemenu-overlay" (click)="toggleOverlay()" [class.hidden]="!isSidemenuVisible"></div>
+    <div id="sidemenu" class="sidemenu shadow-lg" [class.hidden]="!isSidemenuVisible">
+        <img class="sidemenu-logo" [class.hidden]="!isSidemenuVisible" src="/assets/logos/GameEyeLogoFull.png" alt="GameEye logo">
+        <div class="sidemenu-content">
+            <div matRipple>
+                <span class="sidemenu-item top" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link" routerLink="dashboard" (click)="toggle()"><i class="sidemenu-link-icon fas fa-home"></i>Dashboard</a>
+                </span>
+            </div>
+            <div matRipple>
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-list"></i>My Watchlist</a>
+                </span>
+            </div>
+            <div matRipple>
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-star"></i>Top Games</a>
+                </span>
+            </div>
+            <div matRipple *ngIf="isLoggedIn">
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link" routerLink="account" (click)="toggle()"><i class="sidemenu-link-icon fa fa-user"></i>My Account</a>
+                </span>
+            </div>
+            <div matRipple>
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-cog"></i>Settings</a>
+                </span>
+            </div>
+            <div matRipple>
+                <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
+                    <a class="sidemenu-link" routerLink="test" (click)="toggle()"><i class="sidemenu-link-icon fas fa-code"></i>Test</a>
+                </span>
+            </div>
+            <div matRipple style="margin-top: 40px;">
+                <span class="sidemenu-item logout-item" [class.hidden]="!isSidemenuVisible" *ngIf="isLoggedIn">
+                    <a class="sidemenu-link" (click)="logout()"><i class="sidemenu-link-icon fas fa-sign-out-alt"></i>Log Out</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
