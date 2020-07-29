@@ -92,10 +92,7 @@ export class LoginComponent implements OnInit {
     public signUp(): void {
         const email = this.emailSignup.value;
         const password = this.passwordSignup.value;
-
-        console.log("Try to sign up.");
-
-        // TODO handle promise
+        
         this.auth.createAccount(email, password).then(val =>
             this.auth.firebase.user.subscribe(user => {
                 user.sendEmailVerification().then(() =>
