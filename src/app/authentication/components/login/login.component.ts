@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         const password: string = this.passwordLogin.value;
 
         this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
-            this.auth.firebaseAuth.user.subscribe(user => {
+            this.auth.firebaseAuth.currentUser.then(user => {
                 if (user.emailVerified) {
                     this.router.navigate(["dashboard"]);
                 } else {
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
         const password = this.passwordSignup.value;
 
         this.auth.createAccount(email, password).then(val =>
-            this.auth.firebaseAuth.user.subscribe(user => {
+            this.auth.firebaseAuth.currentUser.then(user => {
                 user.sendEmailVerification().then(() =>
                     this.router.navigate(["verifyEmail"])
                 )

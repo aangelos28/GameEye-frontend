@@ -9,38 +9,36 @@ import {map, take} from "rxjs/operators";
 })
 export class AccountService {
 
-    public user: Observable<firebase.User> = this.authService.firebaseAuth.user;
+    public user: firebase.User = null;
+    private user$: Observable<firebase.User> = this.authService.firebaseAuth.user;
 
     constructor(public authService: AuthService) {
+        this.user$.subscribe(user =>
+            this.user = user
+        );
     }
 
     public getUserEmailAsync(): Promise<string> {
         return new Promise(resolve => {
-            this.user.subscribe(user => {
-                resolve(user.email);
-            })
+            resolve(this.user.email);
         });
     }
 
     public getEmailVerifiedAsync(): Promise<boolean> {
         return new Promise(resolve => {
-            this.user.subscribe(user => {
-                resolve(user.emailVerified);
-            })
+            resolve(this.user.emailVerified);
         });
     }
 
     public isLoggedInAndVerified(): Observable<boolean> {
-        return this.user.pipe(
+        return this.user$.pipe(
             map(user => user != null && user.emailVerified)
         )
     }
 
     public getIdTokenAsync(): Promise<string> {
         return new Promise(resolve => {
-            this.user.subscribe(user => {
-                resolve(user.getIdToken());
-            })
+            resolve(this.user.getIdToken());
         });
     }
 

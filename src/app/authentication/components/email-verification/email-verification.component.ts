@@ -26,19 +26,17 @@ export class EmailVerificationComponent implements OnInit {
     }
 
     public resendConfirmationEmail(): void {
-        this.accountService.user.subscribe(user => {
-            user.sendEmailVerification().then(() =>
-                this.snackBar.open("Confirmation email resent. Please check your inbox.", "X", {
-                    duration: 10000,
-                    panelClass: ["success-snackbar"]
-                })
-            ).catch(err =>
-                this.snackBar.open("Failed to resend confirmation email.\n" + err, "X", {
-                    duration: 10000,
-                    panelClass: ["error-snackbar"]
-                })
-            )
-        });
+        this.accountService.user.sendEmailVerification().then(() =>
+            this.snackBar.open("Confirmation email resent. Please check your inbox.", "X", {
+                duration: 10000,
+                panelClass: ["success-snackbar"]
+            })
+        ).catch(err =>
+            this.snackBar.open("Failed to resend confirmation email.\n" + err, "X", {
+                duration: 10000,
+                panelClass: ["error-snackbar"]
+            })
+        );
     }
 
     public navigateToLogin(): void {
