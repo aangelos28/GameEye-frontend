@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth/auth.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
-import {AccountService} from "../../services/account/account.service";
+import {AuthService} from '../../services/auth/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {AccountService} from '../../services/account/account.service';
 
 @Component({
     selector: 'app-email-verification',
@@ -20,28 +20,28 @@ export class EmailVerificationComponent implements OnInit {
     public ngOnInit(): void {
         this.email.then(verified => {
             if (verified) {
-                this.router.navigate(["dashboard"]);
+                this.router.navigate(['dashboard']);
             }
-        })
+        });
     }
 
     public resendConfirmationEmail(): void {
         this.accountService.user.sendEmailVerification().then(() =>
-            this.snackBar.open("Confirmation email resent. Please check your inbox.", "X", {
+            this.snackBar.open('Confirmation email resent. Please check your inbox.', 'X', {
                 duration: 10000,
-                panelClass: ["success-snackbar"]
+                panelClass: ['success-snackbar']
             })
         ).catch(err =>
-            this.snackBar.open("Failed to resend confirmation email.\n" + err, "X", {
+            this.snackBar.open('Failed to resend confirmation email.\n' + err, 'X', {
                 duration: 10000,
-                panelClass: ["error-snackbar"]
+                panelClass: ['error-snackbar']
             })
         );
     }
 
     public navigateToLogin(): void {
         this.authService.logoutFirebase().then(() =>
-            this.router.navigate(["login"]).then(() =>
+            this.router.navigate(['login']).then(() =>
                 window.location.reload()
             )
         );

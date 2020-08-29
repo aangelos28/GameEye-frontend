@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
-import {share} from "rxjs/operators";
-import {AuthService} from "../../../authentication/services/auth/auth.service";
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {share} from 'rxjs/operators';
+import {AuthService} from '../../../authentication/services/auth/auth.service';
 
 @Component({
   selector: 'app-test',
@@ -18,6 +18,6 @@ export class TestComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.companies$ = this.httpClient.get(environment.backendUrl + "/private/companies").pipe(share());
+        this.companies$ = this.httpClient.get(environment.backendUrl + '/private/companies').pipe(share());
     }
 }

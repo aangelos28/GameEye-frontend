@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthService} from "../../services/auth/auth.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-login',
@@ -11,22 +11,22 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class LoginComponent implements OnInit {
     loginForm = new FormGroup({
-        "email": new FormControl('', [
+        email: new FormControl('', [
             Validators.required,
             Validators.email
         ]),
-        "password": new FormControl('', [
+        password: new FormControl('', [
             Validators.required,
             Validators.minLength(8)
         ])
     });
 
     signupForm = new FormGroup({
-        "email": new FormControl('', [
+        email: new FormControl('', [
             Validators.required,
             Validators.email
         ]),
-        "password": new FormControl('', [
+        password: new FormControl('', [
             Validators.required,
             Validators.minLength(8)
         ])
@@ -38,20 +38,24 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    // tslint:disable-next-line:typedef
     get emailLogin() {
-        return this.loginForm.get("email");
+        return this.loginForm.get('email');
     }
 
+    // tslint:disable-next-line:typedef
     get passwordLogin() {
-        return this.loginForm.get("password");
+        return this.loginForm.get('password');
     }
 
+    // tslint:disable-next-line:typedef
     get emailSignup() {
-        return this.signupForm.get("email");
+        return this.signupForm.get('email');
     }
 
+    // tslint:disable-next-line:typedef
     get passwordSignup() {
-        return this.signupForm.get("password");
+        return this.signupForm.get('password');
     }
 
     public loginEmailPassword(): void {
@@ -61,30 +65,30 @@ export class LoginComponent implements OnInit {
         this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
             this.auth.firebaseAuth.currentUser.then(user => {
                 if (user.emailVerified) {
-                    this.router.navigate(["dashboard"]);
+                    this.router.navigate(['dashboard']);
                 } else {
                     user.sendEmailVerification().then(() =>
-                        this.router.navigate(["verifyEmail"])
+                        this.router.navigate(['verifyEmail'])
                     );
                 }
-            })
+            });
         }).catch(err =>
-            this.snackBar.open("Invalid login credentials. Either your email or password are wrong.", "X", {
+            this.snackBar.open('Invalid login credentials. Either your email or password are wrong.', 'X', {
                 duration: 5000,
-                panelClass: ["error-snackbar", "mat-warn"]
+                panelClass: ['error-snackbar', 'mat-warn']
             })
         );
     }
 
     public loginGoogle(): void {
         this.auth.loginFirebaseGoogle().then(val =>
-            this.router.navigate(["dashboard"])
-        )
+            this.router.navigate(['dashboard'])
+        );
     }
 
     public loginMicrosoft(): void {
         this.auth.loginFirebaseMicrosoft().then(val =>
-            this.router.navigate(["dashboard"])
+            this.router.navigate(['dashboard'])
         );
     }
 
@@ -95,14 +99,14 @@ export class LoginComponent implements OnInit {
         this.auth.createAccount(email, password).then(val =>
             this.auth.firebaseAuth.currentUser.then(user => {
                 user.sendEmailVerification().then(() =>
-                    this.router.navigate(["verifyEmail"])
-                )
+                    this.router.navigate(['verifyEmail'])
+                );
             })
         ).catch(err =>
-            this.snackBar.open("Failed to create account.\n" + err, "X", {
+            this.snackBar.open('Failed to create account.\n' + err, 'X', {
                 duration: 8000,
-                panelClass: ["error-snackbar", "mat-warn"]
+                panelClass: ['error-snackbar', 'mat-warn']
             })
-        )
+        );
     }
 }

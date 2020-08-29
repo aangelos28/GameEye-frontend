@@ -6,13 +6,13 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {HttpClientModule} from "@angular/common/http";
-import {AngularFireModule} from "@angular/fire";
-import {CoreModule} from "./core/core.module";
-import {SharedModule} from "./shared/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatButtonModule} from "@angular/material/button";
+import {HttpClientModule} from '@angular/common/http';
+import {AngularFireModule} from '@angular/fire';
+import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     declarations: [

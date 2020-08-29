@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from "../../../authentication/services/auth/auth.service";
-import {Router} from "@angular/router";
-import {AccountService} from "../../../authentication/services/account/account.service";
-import {Subscription} from "rxjs";
+import {AuthService} from '../../../authentication/services/auth/auth.service';
+import {Router} from '@angular/router';
+import {AccountService} from '../../../authentication/services/account/account.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-sidemenu',
@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
 })
 export class SidemenuComponent implements OnInit, OnDestroy {
 
-    public isSidemenuVisible: boolean = false;
+    public isSidemenuVisible = false;
 
     public isLoggedIn: boolean = null;
 
@@ -43,7 +43,7 @@ export class SidemenuComponent implements OnInit, OnDestroy {
     logout(): void {
         this.toggle();
         this.authService.logoutFirebase().then(val =>
-            this.router.navigate(["login"])
-        )
+            this.router.navigate(['login'])
+        );
     }
 }

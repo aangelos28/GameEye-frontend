@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {AngularFireAuth} from "@angular/fire/auth";
+import {AngularFireAuth} from '@angular/fire/auth';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import * as firebase from 'firebase';
 import OAuthProvider = firebase.auth.OAuthProvider;
@@ -21,7 +21,7 @@ export class AuthService {
     }
 
     public loginFirebaseMicrosoft(): Promise<any> {
-        return this.firebaseAuth.signInWithRedirect(new OAuthProvider("microsoft.com"));
+        return this.firebaseAuth.signInWithRedirect(new OAuthProvider('microsoft.com'));
     }
 
     public logoutFirebase(): Promise<any> {
