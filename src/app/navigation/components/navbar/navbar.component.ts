@@ -32,8 +32,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }));
     }
 
-    // tslint:disable-next-line:typedef
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 

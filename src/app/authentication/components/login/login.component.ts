@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, Form, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -38,23 +38,19 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    // tslint:disable-next-line:typedef
-    get emailLogin() {
+    get emailLogin(): AbstractControl {
         return this.loginForm.get('email');
     }
 
-    // tslint:disable-next-line:typedef
-    get passwordLogin() {
-        return this.loginForm.get('password');
+    get passwordLogin(): FormControl {
+        return this.loginForm.get('password') as FormControl;
     }
 
-    // tslint:disable-next-line:typedef
-    get emailSignup() {
+    get emailSignup(): AbstractControl {
         return this.signupForm.get('email');
     }
 
-    // tslint:disable-next-line:typedef
-    get passwordSignup() {
+    get passwordSignup(): AbstractControl {
         return this.signupForm.get('password');
     }
 
