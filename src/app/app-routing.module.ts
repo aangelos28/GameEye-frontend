@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {AccountComponent} from "./core/components/account/account.component";
-import {DashboardComponent} from "./core/components/dashboard/dashboard.component";
-import {TestComponent} from "./core/components/test/test.component";
-import {LoginComponent} from "./authentication/components/login/login.component";
+import {AccountComponent} from './core/components/account/account.component';
+import {DashboardComponent} from './core/components/dashboard/dashboard.component';
+import {TestComponent} from './core/components/test/test.component';
+import {LoginComponent} from './authentication/components/login/login.component';
 import {
     AngularFireAuthGuard,
     redirectLoggedInTo,
     redirectUnauthorizedTo
-} from "@angular/fire/auth-guard";
-import {EmailVerificationComponent} from "./authentication/components/email-verification/email-verification.component";
-import {EmailVerificationGuard} from "./authentication/guards/email-verification.guard";
-import {ResetPasswordComponent} from "./authentication/components/reset-password/reset-password.component";
+} from '@angular/fire/auth-guard';
+import {EmailVerificationComponent} from './authentication/components/email-verification/email-verification.component';
+import {EmailVerificationGuard} from './authentication/guards/email-verification.guard';
+import {ResetPasswordComponent} from './authentication/components/reset-password/reset-password.component';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(["dashboard"]);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
     {
@@ -53,7 +53,7 @@ const routes: Routes = [
         canActivate: [AngularFireAuthGuard],
         data: {authGuardPipe: redirectLoggedInToDashboard}
     },
-    {path: "**", redirectTo: 'login'}
+    {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({

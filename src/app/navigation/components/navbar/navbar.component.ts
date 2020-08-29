@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {SidemenuComponent} from "../sidemenu/sidemenu.component";
-import {Subscription} from "rxjs";
-import {AccountService} from "../../../authentication/services/account/account.service";
-import {Router} from "@angular/router";
+import {SidemenuComponent} from '../sidemenu/sidemenu.component';
+import {Subscription} from 'rxjs';
+import {AccountService} from '../../../authentication/services/account/account.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -28,11 +28,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
         ));
 
         this.subscriptions.add(this.router.events.subscribe(val => {
-            this.isInDashboard = this.location.path() == "/dashboard";
+            this.isInDashboard = this.location.path() === '/dashboard';
         }));
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 

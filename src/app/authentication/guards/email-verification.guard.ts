@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from "../services/auth/auth.service";
-import {map, take, tap} from "rxjs/operators";
-import {emailVerified} from "@angular/fire/auth-guard";
+import {AuthService} from '../services/auth/auth.service';
+import {map, take, tap} from 'rxjs/operators';
+import {emailVerified} from '@angular/fire/auth-guard';
 
 @Injectable({
     providedIn: 'root'
@@ -20,11 +20,12 @@ export class EmailVerificationGuard implements CanActivate {
         return this.authService.firebaseAuth.user.pipe(
             take(1),
             map(user => user && user.emailVerified),
+
             tap(emailVerified => {
                 if (!emailVerified) {
-                    this.router.navigate(["verifyEmail"]);
+                    this.router.navigate(['verifyEmail']);
                 }
             })
-        )
+        );
     }
 }
