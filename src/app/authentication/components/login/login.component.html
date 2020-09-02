@@ -54,8 +54,8 @@
                         </mat-form-field>
                         <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 10px;">
                             <mat-label>Confirm Password</mat-label>
-                            <input matInput type="password" formControlName="password" class="login-form-input">
-                            <mat-error *ngIf="passwordSignup.hasError('password')">
+                            <input matInput type="password" formControlName="confirmPassword" class="login-form-input" [errorStateMatcher]="errorMatcher">
+                            <mat-error *ngIf="signupForm.hasError('passwordMismatch')">
                                 Please enter the same password.
                             </mat-error>
                         </mat-form-field>

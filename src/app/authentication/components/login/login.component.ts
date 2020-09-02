@@ -1,16 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, Form, FormControl, FormGroup, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    Validators,
+    ValidationErrors, FormGroupDirective, NgForm
+} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ErrorStateMatcher} from "@angular/material/core";
 
-const PasswordValidator: ValidatorFn = (fg: FormGroup) => {
-   const password = fg.get('password').value;
-   const confirmPassword = fg.get('confirmPassword').value;
-   return password !== null && confirmPassword !== null && password === confirmPassword
-        ? null
-        : { range: true };
-};
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const invalidCtrl = !!(control && control.touched && control.invalid && control.parent.dirty);
+        const invalidParent = !!(control && control.touched && control.parent && control.parent.invalid && control.parent.dirty);
+
+        return (invalidCtrl || invalidParent);
+    }
+}
 
 @Component({
     selector: 'app-login',
@@ -18,14 +26,16 @@ const PasswordValidator: ValidatorFn = (fg: FormGroup) => {
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup;
-    loginForm: FormGroup;
-    signupForm: FormGroup;
+    public loginForm: FormGroup;
+    public signupForm: FormGroup;
+    public errorMatcher: CustomErrorStateMatcher;
 
     constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
+        this.errorMatcher = new CustomErrorStateMatcher();
+
         this.loginForm = new FormGroup( {
             email: new FormControl('', [
                 Validators.required,
@@ -46,19 +56,16 @@ export class LoginComponent implements OnInit {
                 Validators.required,
                 Validators.minLength(8)
             ]),
-            confirmPassword: new FormControl('', [
-                Validators.required,
-                PasswordValidator,
-            ])
-        });
+            confirmPassword: new FormControl('')
+        }, {validators: LoginComponent.passwordConfirmValidation});
     }
 
     get emailLogin(): AbstractControl {
         return this.loginForm.get('email');
     }
 
-    get passwordLogin(): FormControl {
-        return this.loginForm.get('password') as FormControl;
+    get passwordLogin(): AbstractControl {
+        return this.loginForm.get('password');
     }
 
     get emailSignup(): AbstractControl {
@@ -67,6 +74,10 @@ export class LoginComponent implements OnInit {
 
     get passwordSignup(): AbstractControl {
         return this.signupForm.get('password');
+    }
+
+    get confirmPasswordSignup(): AbstractControl {
+        return this.signupForm.get('confirmPassword');
     }
 
     public loginEmailPassword(): void {
@@ -120,4 +131,12 @@ export class LoginComponent implements OnInit {
             })
         );
     }
+
+    private static passwordConfirmValidation(fg: FormGroup): ValidationErrors | null {
+        const password = fg.get('password').value;
+        const confirmPassword = fg.get('confirmPassword').value;
+        let x = (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
+        console.log(x);
+        return x;
+    };
 }
