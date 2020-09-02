@@ -1,8 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, Form, FormControl, FormGroup, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+
+const PasswordValidator: ValidatorFn = (fg: FormGroup) => {
+   const password = fg.get('password').value;
+   const confirmPassword = fg.get('confirmPassword').value;
+   return password !== null && confirmPassword !== null && password === confirmPassword
+        ? null
+        : { range: true };
+};
 
 @Component({
     selector: 'app-login',
@@ -10,32 +18,39 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginForm = new FormGroup({
-        email: new FormControl('', [
-            Validators.required,
-            Validators.email
-        ]),
-        password: new FormControl('', [
-            Validators.required,
-            Validators.minLength(8)
-        ])
-    });
-
-    signupForm = new FormGroup({
-        email: new FormControl('', [
-            Validators.required,
-            Validators.email
-        ]),
-        password: new FormControl('', [
-            Validators.required,
-            Validators.minLength(8)
-        ])
-    });
+    form: FormGroup;
+    loginForm: FormGroup;
+    signupForm: FormGroup;
 
     constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
+        this.loginForm = new FormGroup( {
+            email: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(8)
+            ])
+        });
+
+        this.signupForm = new FormGroup( {
+            email: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(8)
+            ]),
+            confirmPassword: new FormControl('', [
+                Validators.required,
+                PasswordValidator,
+            ])
+        });
     }
 
     get emailLogin(): AbstractControl {
