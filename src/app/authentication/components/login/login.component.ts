@@ -135,8 +135,6 @@ export class LoginComponent implements OnInit {
     private static passwordConfirmValidation(fg: FormGroup): ValidationErrors | null {
         const password = fg.get('password').value;
         const confirmPassword = fg.get('confirmPassword').value;
-        let x = (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
-        console.log(x);
-        return x;
+        return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
     };
 }
