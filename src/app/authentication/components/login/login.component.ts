@@ -9,7 +9,7 @@ import {
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ErrorStateMatcher} from "@angular/material/core";
+import {ErrorStateMatcher} from '@angular/material/core';
 
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,6 +29,12 @@ export class LoginComponent implements OnInit {
     public loginForm: FormGroup;
     public signupForm: FormGroup;
     public errorMatcher: CustomErrorStateMatcher;
+
+    static passwordConfirmValidation(fg: FormGroup): ValidationErrors | null {
+        const password = fg.get('password').value;
+        const confirmPassword = fg.get('confirmPassword').value;
+        return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
+    }
 
     constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
     }
@@ -131,10 +137,4 @@ export class LoginComponent implements OnInit {
             })
         );
     }
-
-    private static passwordConfirmValidation(fg: FormGroup): ValidationErrors | null {
-        const password = fg.get('password').value;
-        const confirmPassword = fg.get('confirmPassword').value;
-        return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
-    };
 }
