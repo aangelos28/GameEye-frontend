@@ -52,6 +52,13 @@
                                 Password is <strong>required</strong>.
                             </mat-error>
                         </mat-form-field>
+                        <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 10px;">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput type="password" formControlName="confirmPassword" class="login-form-input" [errorStateMatcher]="errorMatcher">
+                            <mat-error *ngIf="signupForm.hasError('passwordMismatch')">
+                                Please enter the same password.
+                            </mat-error>
+                        </mat-form-field>
                         <button mat-raised-button color="primary" class="submit-button login-button" [disabled]="!signupForm.valid">Sign Up</button>
                     </form>
                 </mat-tab>
