@@ -3,7 +3,7 @@
 <body>
     <div class="main container page">
         <div class="login-container container">
-            <mat-tab-group mat-align-tabs="center">
+            <mat-tab-group mat-align-tabs="center" dynamicHeight>
                 <mat-tab label="Login">
                     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginEmailPassword()">
                         <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 30px;">
