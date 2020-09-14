@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -9,7 +9,7 @@ import {AccountService} from '../../services/account/account.service';
     templateUrl: './email-verification.component.html',
     styleUrls: ['./email-verification.component.scss']
 })
-export class EmailVerificationComponent implements OnInit {
+export class EmailVerificationComponent implements OnInit, AfterViewInit {
 
     public email: Promise<string> = this.accountService.getUserEmailAsync();
 
@@ -23,6 +23,10 @@ export class EmailVerificationComponent implements OnInit {
                 this.router.navigate(['dashboard']);
             }
         });
+    }
+
+    public ngAfterViewInit(): void {
+        this.accountService.user.sendEmailVerification();
     }
 
     public resendConfirmationEmail(): void {

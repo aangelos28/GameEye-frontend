@@ -95,9 +95,7 @@ export class LoginComponent implements OnInit {
                 if (user.emailVerified) {
                     this.router.navigate(['dashboard']);
                 } else {
-                    user.sendEmailVerification().then(() =>
-                        this.router.navigate(['verifyEmail'])
-                    );
+                    this.router.navigate(['verifyEmail']);
                 }
             });
         }).catch(err =>
