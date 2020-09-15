@@ -9,17 +9,16 @@ import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire';
 import {CoreModule} from './core/core.module';
-import {SharedModule} from './shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {NavigationModule} from "./navigation/navigation.module";
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
-        SharedModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
@@ -29,7 +28,8 @@ import {MatButtonModule} from '@angular/material/button';
         CoreModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatButtonModule
+        MatButtonModule,
+        NavigationModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

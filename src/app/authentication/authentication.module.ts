@@ -10,10 +10,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {LoginComponent} from './components/login/login.component';
-import {SharedModule} from '../shared/shared.module';
 import {EmailVerificationComponent} from './components/email-verification/email-verification.component';
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import {RouterModule} from '@angular/router';
+import {NavigationModule} from '../navigation/navigation.module';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,6 @@ import {RouterModule} from '@angular/router';
     ],
     imports: [
         CommonModule,
-        SharedModule,
         AngularFireAuthModule,
         MatFormFieldModule,
         FormsModule,
@@ -37,7 +36,8 @@ import {RouterModule} from '@angular/router';
         MatButtonModule,
         MatSnackBarModule,
         MatTabsModule,
-        RouterModule
+        RouterModule,
+        NavigationModule
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })
