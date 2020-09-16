@@ -11,7 +11,6 @@ Navbar Styles
 .navbar {
     height: max-content;
     padding: 0.3rem;
-    flex-wrap: wrap;
     background-color: rgb(68, 84, 105);
 }
 
@@ -25,18 +24,20 @@ Navbar Styles
 }
 
 .navbar-brand {
-    margin-right: 2rem;
+    margin-right: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
     transition: 0.5s ease;
 }
 .navbar-brand:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
     transition: 0.5s ease;
 }
 .navbar-brand.logo:focus, .navbar-brand.logo:hover {
     color: #ffffff;
 }
 .navbar-brand.logo > img {
-    width: 60px;
+    width: 50px;
 }
 
 .navbar-toggler {
@@ -53,24 +54,26 @@ Navbar Styles
 .nav-control-button {
     outline: none;
     transition: all 0.5s ease;
+    font-size: 1.25rem;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .nav-control-button:hover {
-    transform: scale(1.4);
+    transform: scale(1.3);
     transition: all 0.5s ease;
 }
 
 .back-button {
     padding: .25rem .75rem;
-    font-size: 1.50rem;
+    font-size: 1.5rem;
     line-height: 1;
     background-color: transparent;
     border: none;
 }
 
-#hideArrow
+.hide-icon
 {
     padding: .25rem .75rem;
-    font-size: 1.50rem;
     line-height: 1;
     opacity: 0.0;
 }

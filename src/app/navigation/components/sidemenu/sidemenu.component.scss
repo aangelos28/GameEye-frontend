@@ -12,7 +12,7 @@ Sidemenu Styles
 .sidemenu {
     top: 0;
     height: 100%;
-    width: 30%;
+    width: 25%;
     margin-right: -20px;
     position: fixed;
     right: 0;
@@ -25,6 +25,11 @@ Sidemenu Styles
 .sidemenu.hidden {
     width: 0;
     transition: width 0.5s ease;
+}
+@include media-breakpoint-down(md) {
+    .sidemenu {
+        width: 30%;
+    }
 }
 @include media-breakpoint-down(sm) {
     .sidemenu {

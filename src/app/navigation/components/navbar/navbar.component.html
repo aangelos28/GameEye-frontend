@@ -1,18 +1,21 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light fixed-top clean-navbar shadow-sm">
     <div class="container navbar-container">
-        <button *ngIf="isLoggedIn && !isInDashboard; else elseBlock" (click)="this.goBack()" class="back-button nav-control-button">
+        <button *ngIf="isLoggedIn && !isInDashboard; else backArrowElse" (click)="this.goBack()" class="back-button nav-control-button">
             <i class="fas fa-angle-left back-button-icon"></i>
         </button>
-        <ng-template #elseBlock>
-            <i id="hideArrow" class="fas fa-angle-left"></i>
+        <ng-template #backArrowElse>
+            <div class="hide-icon"></div>
         </ng-template>
-        <a class="navbar-brand logo mx-auto" routerLink="dashboard">
+        <a class="navbar-brand logo" routerLink="dashboard">
             <img src="/assets/logos/GameEyeLogoWhite.png" alt="GameEye">
         </a>
-        <button *ngIf="isLoggedIn" (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
+        <button *ngIf="isLoggedIn; else menuElse" (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
             <i class="fas fa-bars navbar-toggler-icon-2"></i>
         </button>
+        <ng-template #menuElse>
+            <div class="hide-icon"></div>
+        </ng-template>
     </div>
 </nav>
 
