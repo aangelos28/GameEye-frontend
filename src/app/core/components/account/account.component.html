@@ -15,12 +15,12 @@
                 <br>
                 <mat-form-field class="account-form-field" appearance="outline">
                     <mat-label id="name-label">Name</mat-label>
-                    <input matInput [readonly]="!inEditMode" formControlName="name" id="name-input" class="account-form-input">
+                    <input matInput [readonly]="!inEditMode" formControlName="name" id="name-input" class="account-form-input" placeholder="Specify your name...">
                 </mat-form-field>
                 <br>
                 <mat-form-field class="account-form-field" appearance="outline">
                     <mat-label id="email-label">Email</mat-label>
-                    <input matInput [readonly]="!inEditMode" formControlName="email" id="email-input" class="account-form-input">
+                    <input matInput [readonly]="!inEditMode" formControlName="email" id="email-input" class="account-form-input" placeholder="Specify your email...">
                     <mat-error *ngIf="emailField.hasError('email')">
                         Please enter a valid email address.
                     </mat-error>
