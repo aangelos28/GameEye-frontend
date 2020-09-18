@@ -2,6 +2,32 @@
 
 <body>
     <div class="main container page">
-        <pre *ngIf="auth.firebaseAuth.user | async as user"><code>{{ user.toJSON() | json }}</code></pre>
+        <h2 class="section-header">Basic Information</h2>
+        <button *ngIf="!inEditMode" mat-stroked-button color="primary" class="edit-button" (click)="toggleEditMode()">Edit</button>
+        <button *ngIf="inEditMode" mat-stroked-button color="warn" class="edit-button" (click)="toggleEditMode()">Cancel</button>
+        <hr>
+        <div>
+            <form [formGroup]="basicInfoForm" (ngSubmit)="basicInfoSaveChanges()">
+                <mat-form-field class="account-form-field" appearance="outline">
+                    <mat-label id="id-label">Id</mat-label>
+                    <input matInput formControlName="userId" id="id-input" class="account-form-input">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="account-form-field" appearance="outline">
+                    <mat-label id="name-label">Name</mat-label>
+                    <input matInput [readonly]="!inEditMode" formControlName="name" id="name-input" class="account-form-input">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="account-form-field" appearance="outline">
+                    <mat-label id="email-label">Email</mat-label>
+                    <input matInput [readonly]="!inEditMode" formControlName="email" id="email-input" class="account-form-input">
+                    <mat-error *ngIf="emailField.hasError('email')">
+                        Please enter a valid email address.
+                    </mat-error>
+                </mat-form-field>
+                <br><br>
+                <button *ngIf="inEditMode" [disabled]="!basicInfoChanged || !basicInfoForm.valid" mat-flat-button color="primary" class="save-button">Save Changes</button>
+            </form>
+        </div>
     </div>
 </body>

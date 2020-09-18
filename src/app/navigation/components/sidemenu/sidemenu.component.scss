@@ -26,9 +26,10 @@ Sidemenu Styles
     width: 0;
     transition: width 0.5s ease;
 }
+
 @include media-breakpoint-down(md) {
     .sidemenu {
-        width: 30%;
+        width: 40%;
     }
 }
 @include media-breakpoint-down(sm) {

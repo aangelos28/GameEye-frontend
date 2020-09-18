@@ -5,6 +5,9 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {TestComponent} from './components/test/test.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {AuthenticationModule} from '../authentication/authentication.module';
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     declarations: [
@@ -20,7 +23,10 @@ import {AuthenticationModule} from '../authentication/authentication.module';
     imports: [
         CommonModule,
         NavigationModule,
-        AuthenticationModule
+        AuthenticationModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule
     ]
 })
 export class CoreModule {}

@@ -1,0 +1,43 @@
+// Bootstrap Styles
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+.section-header {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.edit-button {
+    float: right;
+}
+
+.save-button {
+    height: 50px;
+    transition: all 0.2s ease;
+}
+
+.account-form-field {
+    width: 50%;
+}
+
+.account-form-input {
+    font-size: 20px;
+}
+
+@include media-breakpoint-down(md) {
+    .account-form-field {
+        width: 80%;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .account-form-field {
+        width: 100%;
+    }
+    .save-button {
+        width: 100%;
+    }
+}
+
+
