@@ -2,6 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../authentication/services/auth/auth.service';
 import {Subscription} from 'rxjs';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from 'firebase';
+import {MatDialog} from '@angular/material/dialog';
+import {ErrorDialogComponent} from '../error-dialog/error-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-account',
@@ -20,11 +24,13 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     private subscriptions = new Subscription();
 
-    constructor(public authService: AuthService) {
+    private user: User;
+
+    constructor(public authService: AuthService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
-        this.basicInfoForm = new FormGroup( {
+        this.basicInfoForm = new FormGroup({
             userId: new FormControl({value: '', disabled: true}),
             email: new FormControl('', [Validators.email]),
             name: new FormControl('')
@@ -38,6 +44,8 @@ export class AccountComponent implements OnInit, OnDestroy {
             this.emailField.setValue(this._email);
             this.userIdField.setValue(this._userId);
             this.nameField.setValue(this._name);
+
+            this.user = user;
         }));
 
         // Basic info text box change events
@@ -63,7 +71,45 @@ export class AccountComponent implements OnInit, OnDestroy {
     }
 
     public basicInfoSaveChanges(): void {
-        // TODO Implement
+        // TODO implement reauthentication
+
+        const newEmail: string = this.emailField.value;
+        const newName: string = this.nameField.value;
+
+        let emailPromise: Promise<void>;
+        let namePromise: Promise<void>;
+
+        let success = true;
+
+        if (newEmail !== this._email) {
+            emailPromise = this.user.updateEmail(newEmail).then(() => {
+                this._email = newEmail;
+                this.emailField.setValue(newEmail);
+            }).catch(err => {
+                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                success = false;
+            });
+        }
+        if (newName !== this._name) {
+            namePromise = this.user.updateProfile({displayName: newName}).then(() => {
+                this._name = newName;
+                this.nameField.setValue(newName);
+            }).catch(err => {
+                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                success = false;
+            });
+        }
+
+        Promise.all([emailPromise, namePromise]).then(() => {
+            if (!success) { return; }
+
+            console.log('Resolved');
+            this.toggleEditMode();
+            this.snackBar.open('Updated profile information', 'X', {
+                duration: 5000,
+                panelClass: ['success-snackbar']
+            });
+        });
     }
 
     public basicInfoChangedEvent(): void {
@@ -89,8 +135,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     get name(): string {
         if (this._name) {
             return this._name;
-        }
-        else {
+        } else {
             return 'Unspecified';
         }
     }

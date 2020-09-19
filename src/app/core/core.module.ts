@@ -8,6 +8,8 @@ import {AuthenticationModule} from '../authentication/authentication.module';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import {MatButtonModule} from '@angular/material/button';
         AuthenticationModule,
         MatInputModule,
         ReactiveFormsModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogModule,
+        MatSnackBarModule
     ]
 })
 export class CoreModule {}
