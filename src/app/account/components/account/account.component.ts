@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../../authentication/services/auth/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {Subscription} from 'rxjs';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from 'firebase';
 import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../error-dialog/error-dialog.component';
+import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {RedirectDataService} from '../../../shared/services/redirect-data.service';
 
 @Component({
     selector: 'app-account',
@@ -26,7 +28,8 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     private user: User;
 
-    constructor(public authService: AuthService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+    constructor(public authService: AuthService, private router: Router, private redirectData: RedirectDataService,
+                public dialog: MatDialog, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -55,6 +58,16 @@ export class AccountComponent implements OnInit, OnDestroy {
         this.subscriptions.add(this.emailField.valueChanges.subscribe(() => {
             this.basicInfoChangedEvent();
         }));
+
+        // Apply redirect params, if any
+        if (this.redirectData.data) {
+            if (this.redirectData.data.redirectUri === '/account') {
+                console.log(this.redirectData.data);
+                this.inEditMode = window.history.state.inEditMode;
+                this._email = window.history.state.email;
+                this.emailField.setValue(this._email);
+            }
+        }
     }
 
     ngOnDestroy(): void {
@@ -86,7 +99,11 @@ export class AccountComponent implements OnInit, OnDestroy {
                 this._email = newEmail;
                 this.emailField.setValue(newEmail);
             }).catch(err => {
-                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                if (err.code === 'auth/requires-recent-login') {
+                    this.handleReauth();
+                } else {
+                    this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                }
                 success = false;
             });
         }
@@ -101,7 +118,9 @@ export class AccountComponent implements OnInit, OnDestroy {
         }
 
         Promise.all([emailPromise, namePromise]).then(() => {
-            if (!success) { return; }
+            if (!success) {
+                return;
+            }
 
             console.log('Resolved');
             this.toggleEditMode();
@@ -110,6 +129,25 @@ export class AccountComponent implements OnInit, OnDestroy {
                 panelClass: ['success-snackbar']
             });
         });
+    }
+
+    private handleReauth(): void {
+        this.redirectData.reset();
+
+        if (this.user.providerId === 'password') {
+            this.redirectData.data.redirectUri = this.router.url;
+            this.redirectData.data.redirectParams = {
+                inEditMode: this.inEditMode,
+                email: this.email
+            };
+            this.router.navigate(['reauth']);
+        }
+        else if (this.user.providerId === 'google.com') {
+            // TODO Handle Google reauth
+        }
+        else if (this.user.providerId === 'microsoft.com') {
+            // TODO Handle Microsoft reauth
+        }
     }
 
     public basicInfoChangedEvent(): void {

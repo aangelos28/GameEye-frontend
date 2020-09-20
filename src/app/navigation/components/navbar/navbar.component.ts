@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {SidemenuComponent} from '../sidemenu/sidemenu.component';
 import {Subscription} from 'rxjs';
-import {AccountService} from '../../../authentication/services/account/account.service';
+import {AccountService} from '../../../account/services/account/account.service';
 import {Router} from '@angular/router';
 
 @Component({

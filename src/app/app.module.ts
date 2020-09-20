@@ -12,14 +12,12 @@ import {CoreModule} from './core/core.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {NavigationModule} from "./navigation/navigation.module";
-import { ErrorDialogComponent } from './core/components/error-dialog/error-dialog.component';
+import {NavigationModule} from './navigation/navigation.module';
 import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        ErrorDialogComponent
+        AppComponent
     ],
     imports: [
         BrowserModule,
