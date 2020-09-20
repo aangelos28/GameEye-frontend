@@ -12,6 +12,8 @@ export class AccountService {
     public user: firebase.User = null;
     private user$: Observable<firebase.User> = this.authService.firebaseAuth.user;
 
+    public idToken: string;
+
     constructor(public authService: AuthService) {
         this.user$.subscribe(user =>
             this.user = user

@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
-
 import {AngularFireAuth} from '@angular/fire/auth';
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
-import * as firebase from 'firebase';
-import OAuthProvider = firebase.auth.OAuthProvider;
+import {auth, User} from 'firebase';
 
 @Injectable({
     providedIn: 'root'
@@ -17,11 +14,11 @@ export class AuthService {
     }
 
     public loginFirebaseGoogle(): Promise<any> {
-        return this.firebaseAuth.signInWithRedirect(new GoogleAuthProvider());
+        return this.firebaseAuth.signInWithRedirect(new auth.GoogleAuthProvider());
     }
 
     public loginFirebaseMicrosoft(): Promise<any> {
-        return this.firebaseAuth.signInWithRedirect(new OAuthProvider('microsoft.com'));
+        return this.firebaseAuth.signInWithRedirect(new auth.OAuthProvider('microsoft.com'));
     }
 
     public logoutFirebase(): Promise<any> {
@@ -30,5 +27,10 @@ export class AuthService {
 
     public createAccount(email: string, password: string): Promise<any> {
         return this.firebaseAuth.createUserWithEmailAndPassword(email, password);
+    }
+
+    public reauthEmailPassword(user: User, password: string): Promise<auth.UserCredential> {
+        const credential = auth.EmailAuthProvider.credential(user.email, password);
+        return user.reauthenticateWithCredential(credential);
     }
 }

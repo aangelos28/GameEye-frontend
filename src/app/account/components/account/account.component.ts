@@ -8,6 +8,7 @@ import {ErrorDialogComponent} from '../../../shared/components/error-dialog/erro
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {RedirectDataService} from '../../../shared/services/redirect-data.service';
+import {AccountService} from '../../services/account/account.service';
 
 @Component({
     selector: 'app-account',
@@ -28,8 +29,8 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     private user: User;
 
-    constructor(public authService: AuthService, private router: Router, private redirectData: RedirectDataService,
-                public dialog: MatDialog, private snackBar: MatSnackBar) {
+    constructor(public authService: AuthService, private accountService: AccountService, private router: Router,
+                private redirectData: RedirectDataService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -39,17 +40,14 @@ export class AccountComponent implements OnInit, OnDestroy {
             name: new FormControl('')
         });
 
-        this.subscriptions.add(this.authService.firebaseAuth.user.subscribe(user => {
-            this._userId = user.uid;
-            this._email = user.email;
-            this._name = user.displayName;
+        this.user = this.accountService.user;
+        this._userId = this.user.uid;
+        this._email = this.user.email;
+        this._name = this.user.displayName;
 
-            this.emailField.setValue(this._email);
-            this.userIdField.setValue(this._userId);
-            this.nameField.setValue(this._name);
-
-            this.user = user;
-        }));
+        this.emailField.setValue(this._email);
+        this.userIdField.setValue(this._userId);
+        this.nameField.setValue(this._name);
 
         // Basic info text box change events
         this.subscriptions.add(this.nameField.valueChanges.subscribe(() => {
@@ -133,20 +131,22 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     private handleReauth(): void {
         this.redirectData.reset();
-
-        if (this.user.providerId === 'password') {
+        console.log(this.user.providerId);
+        if (this.user.providerId === 'firebase') {
             this.redirectData.data.redirectUri = this.router.url;
             this.redirectData.data.redirectParams = {
                 inEditMode: this.inEditMode,
                 email: this.email
             };
             this.router.navigate(['reauth']);
-        }
-        else if (this.user.providerId === 'google.com') {
-            // TODO Handle Google reauth
-        }
-        else if (this.user.providerId === 'microsoft.com') {
-            // TODO Handle Microsoft reauth
+        } else {
+            this.user.getIdTokenResult().then(idTokenResult => {
+                if (idTokenResult.signInProvider === 'google.com') {
+                    // TODO Handle Google reauth
+                } else if (idTokenResult.signInProvider === 'microsoft.com') {
+                    // TODO handle Microsoft reauth
+                }
+            });
         }
     }
 
