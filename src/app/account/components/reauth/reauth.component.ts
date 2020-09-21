@@ -48,7 +48,7 @@ export class ReauthComponent implements OnInit {
         const password: string = this.password.value;
 
         this.authService.reauthEmailPassword(this.accountService.user, password).then(() => {
-            this.router.navigate([this.redirectRoute]);
+            this.router.navigate([this.redirectRoute], {queryParams: {r: true}});
         }).catch(err => {
             this.dialog.open(ErrorDialogComponent, {data: {text: 'Failed to verify your password. Please try again.'}});
         });

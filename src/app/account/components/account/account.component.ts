@@ -6,7 +6,7 @@ import {User} from 'firebase';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RedirectDataService} from '../../../shared/services/redirect-data.service';
 import {AccountService} from '../../services/account/account.service';
 
@@ -30,7 +30,8 @@ export class AccountComponent implements OnInit, OnDestroy {
     private user: User;
 
     constructor(public authService: AuthService, private accountService: AccountService, private router: Router,
-                private redirectData: RedirectDataService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+                private route: ActivatedRoute, private redirectData: RedirectDataService, public dialog: MatDialog,
+                private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -58,20 +59,33 @@ export class AccountComponent implements OnInit, OnDestroy {
         }));
 
         // Apply redirect params, if any
-        if (this.redirectData.data) {
-            if (this.redirectData.data.redirectUri === '/account') {
-                console.log(this.redirectData.data);
-                this.inEditMode = window.history.state.inEditMode;
-                this._email = window.history.state.email;
-                this.emailField.setValue(this._email);
+        this.subscriptions.add(this.route.queryParams.subscribe(params => {
+            if ((params.r === 'true' && this.redirectData.hasData()) || this.redirectData.isPersisted()) {
+                if (this.redirectData.isPersisted()) {
+                    this.redirectData.readFromLocalStorage();
+                }
+
+                if (this.redirectData.data.redirectUri === '/account') {
+                    console.log(this.redirectData.data);
+                    this.inEditMode = this.redirectData.data.redirectParams.inEditMode;
+                    this.emailField.setValue(this.redirectData.data.redirectParams.email);
+
+                    // Clear redirect parameters now that we read them
+                    this.redirectData.reset();
+
+                    this.basicInfoSaveChanges();
+                }
             }
-        }
+        }));
     }
 
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 
+    /**
+     * Toggles edit mode for basic information.
+     */
     public toggleEditMode(): void {
         this.inEditMode = !this.inEditMode;
 
@@ -81,9 +95,11 @@ export class AccountComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Saves changes to basic information made by the user.
+     * The user is prompted to reauthenticate if they have not logged in recently.
+     */
     public basicInfoSaveChanges(): void {
-        // TODO implement reauthentication
-
         const newEmail: string = this.emailField.value;
         const newName: string = this.nameField.value;
 
@@ -92,6 +108,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
         let success = true;
 
+        // Handle email change
         if (newEmail !== this._email) {
             emailPromise = this.user.updateEmail(newEmail).then(() => {
                 this._email = newEmail;
@@ -105,6 +122,8 @@ export class AccountComponent implements OnInit, OnDestroy {
                 success = false;
             });
         }
+
+        // Handle name change
         if (newName !== this._name) {
             namePromise = this.user.updateProfile({displayName: newName}).then(() => {
                 this._name = newName;
@@ -115,12 +134,12 @@ export class AccountComponent implements OnInit, OnDestroy {
             });
         }
 
+        // Wait for all changes to complete and then display message is successful
         Promise.all([emailPromise, namePromise]).then(() => {
             if (!success) {
                 return;
             }
 
-            console.log('Resolved');
             this.toggleEditMode();
             this.snackBar.open('Updated profile information', 'X', {
                 duration: 5000,
@@ -129,27 +148,39 @@ export class AccountComponent implements OnInit, OnDestroy {
         });
     }
 
+    /**
+     * Handles re-authenticating the user with email-password or various different
+     * third party providers.
+     * @private
+     */
     private handleReauth(): void {
         this.redirectData.reset();
-        console.log(this.user.providerId);
-        if (this.user.providerId === 'firebase') {
-            this.redirectData.data.redirectUri = this.router.url;
-            this.redirectData.data.redirectParams = {
-                inEditMode: this.inEditMode,
-                email: this.email
-            };
-            this.router.navigate(['reauth']);
-        } else {
-            this.user.getIdTokenResult().then(idTokenResult => {
+
+        // Set redirect data
+        this.redirectData.data.redirectUri = this.router.url;
+        this.redirectData.data.redirectParams = {
+            inEditMode: this.inEditMode,
+            email: this.emailField.value
+        };
+
+        this.user.getIdTokenResult().then(idTokenResult => {
+            if (idTokenResult.signInProvider === 'password') {
+                this.router.navigate(['reauth']);
+            } else {
                 if (idTokenResult.signInProvider === 'google.com') {
-                    // TODO Handle Google reauth
+                    this.redirectData.persistToLocalStorage();
+                    this.authService.reauthGoogle(this.user);
                 } else if (idTokenResult.signInProvider === 'microsoft.com') {
-                    // TODO handle Microsoft reauth
+                    this.redirectData.persistToLocalStorage();
+                    this.authService.reauthMicrosoft(this.user);
                 }
-            });
-        }
+            }
+        });
     }
 
+    /**
+     * Event called whenever a field in the basic information changes.
+     */
     public basicInfoChangedEvent(): void {
         this.basicInfoChanged = (this.emailField.value !== this._email) || (this.nameField.value !== this._name);
     }
@@ -174,7 +205,7 @@ export class AccountComponent implements OnInit, OnDestroy {
         if (this._name) {
             return this._name;
         } else {
-            return 'Unspecified';
+            return '';
         }
     }
 

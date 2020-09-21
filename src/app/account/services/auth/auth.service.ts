@@ -33,4 +33,12 @@ export class AuthService {
         const credential = auth.EmailAuthProvider.credential(user.email, password);
         return user.reauthenticateWithCredential(credential);
     }
+
+    public reauthGoogle(user: User): Promise<void> {
+        return user.reauthenticateWithRedirect(new auth.GoogleAuthProvider());
+    }
+
+    public reauthMicrosoft(user: User): Promise<void> {
+        return user.reauthenticateWithRedirect(new auth.OAuthProvider('microsoft.com'));
+    }
 }
