@@ -18,6 +18,7 @@ import {AccountComponent} from './components/account/account.component';
 import {SharedModule} from '../shared/shared.module';
 import {ReauthComponent} from './components/reauth/reauth.component';
 import {MatCardModule} from '@angular/material/card';
+import {ChangeEmailComponent} from './components/change-email/change-email.component';
 
 @NgModule({
     declarations: [
@@ -25,14 +26,16 @@ import {MatCardModule} from '@angular/material/card';
         EmailVerificationComponent,
         ResetPasswordComponent,
         AccountComponent,
-        ReauthComponent
+        ReauthComponent,
+        ChangeEmailComponent
     ],
     exports: [
         LoginComponent,
         EmailVerificationComponent,
         ResetPasswordComponent,
         AccountComponent,
-        ReauthComponent
+        ReauthComponent,
+        ChangeEmailComponent
     ],
     imports: [
         CommonModule,

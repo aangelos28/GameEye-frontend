@@ -3,6 +3,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {AccountService} from '../../services/account/account.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
     selector: 'app-email-verification',
@@ -14,7 +16,7 @@ export class EmailVerificationComponent implements OnInit, AfterViewInit {
     public email: Promise<string> = this.accountService.getUserEmailAsync();
 
     constructor(private accountService: AccountService, private authService: AuthService, private router: Router,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar, private dialog: MatDialog) {
     }
 
     public ngOnInit(): void {
@@ -36,11 +38,12 @@ export class EmailVerificationComponent implements OnInit, AfterViewInit {
                 panelClass: ['success-snackbar']
             })
         ).catch(err =>
-            this.snackBar.open('Failed to resend confirmation email.\n' + err, 'X', {
-                duration: 10000,
-                panelClass: ['error-snackbar']
-            })
+            this.dialog.open(ErrorDialogComponent, {data: {text: `Failed to resend confirmation email.\n${err}`}})
         );
+    }
+
+    public navigateToChangeEmail(): void {
+        this.router.navigate(['changeEmail']);
     }
 
     public navigateToLogin(): void {

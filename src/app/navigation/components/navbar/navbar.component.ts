@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     @ViewChild(SidemenuComponent) sidemenu: SidemenuComponent;
 
     public isLoggedIn: boolean = null;
-    public isInDashboard: boolean = null;
+    public isInStartingPage: boolean = null;
 
     private subscriptions = new Subscription();
 
@@ -28,7 +28,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         ));
 
         this.subscriptions.add(this.router.events.subscribe(val => {
-            this.isInDashboard = this.location.path() === '/dashboard';
+            const path = this.location.path();
+            this.isInStartingPage = (path === '/dashboard') || (path === '/login');
         }));
     }
 

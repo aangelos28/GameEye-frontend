@@ -16,7 +16,6 @@ import {AccountService} from '../../services/account/account.service';
 export class ReauthComponent implements OnInit {
 
     public reauthForm: FormGroup;
-    public errorMatcher: CustomErrorStateMatcher;
 
     // Redirection parameters
     private redirectRoute: string;
@@ -26,8 +25,6 @@ export class ReauthComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.errorMatcher = new CustomErrorStateMatcher();
-
         this.reauthForm = new FormGroup({
             password: new FormControl('', [
                 Validators.required,

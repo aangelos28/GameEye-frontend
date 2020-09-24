@@ -73,7 +73,6 @@ export class AccountComponent implements OnInit, OnDestroy {
                 }
 
                 if (this.redirectData.data.redirectUri === '/account') {
-                    console.log(this.redirectData.data);
                     this.emailInEditMode = this.redirectData.data.redirectParams.emailInEditMode;
                     this.emailField.setValue(this.redirectData.data.redirectParams.email);
 

@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light fixed-top clean-navbar shadow-sm">
     <div class="container navbar-container">
-        <button *ngIf="isLoggedIn && !isInDashboard; else backArrowElse" (click)="this.goBack()" class="back-button nav-control-button">
+        <button *ngIf="!isInStartingPage; else backArrowElse" (click)="this.goBack()" class="back-button nav-control-button">
             <i class="fas fa-angle-left back-button-icon"></i>
         </button>
         <ng-template #backArrowElse>
