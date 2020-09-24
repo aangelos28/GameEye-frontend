@@ -17,6 +17,7 @@ import {NavigationModule} from '../navigation/navigation.module';
 import {AccountComponent} from './components/account/account.component';
 import {SharedModule} from '../shared/shared.module';
 import {ReauthComponent} from './components/reauth/reauth.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import {ReauthComponent} from './components/reauth/reauth.component';
         MatTabsModule,
         RouterModule,
         NavigationModule,
-        SharedModule
+        SharedModule,
+        MatCardModule
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })

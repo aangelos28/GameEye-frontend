@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Subscription} from 'rxjs';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {User} from 'firebase';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
@@ -16,11 +16,20 @@ import {AccountService} from '../../services/account/account.service';
     styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit, OnDestroy {
-    public basicInfoForm: FormGroup;
+    // Form controls
+    public userIdField: FormControl;
+    public emailField: FormControl;
+    public nameField: FormControl;
 
-    public inEditMode: boolean;
-    public basicInfoChanged: boolean;
+    // Edit mode states
+    public nameInEditMode: boolean;
+    public emailInEditMode: boolean;
 
+    // Field change events
+    public nameChanged: boolean;
+    public emailChanged: boolean;
+
+    // Original account data
     private _userId: string;
     private _email: string;
     private _name: string;
@@ -35,11 +44,9 @@ export class AccountComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.basicInfoForm = new FormGroup({
-            userId: new FormControl({value: '', disabled: true}),
-            email: new FormControl('', [Validators.email]),
-            name: new FormControl('')
-        });
+        this.userIdField = new FormControl({value: '', disabled: true});
+        this.nameField = new FormControl('');
+        this.emailField = new FormControl('', [Validators.email]);
 
         this.user = this.accountService.user;
         this._userId = this.user.uid;
@@ -52,10 +59,10 @@ export class AccountComponent implements OnInit, OnDestroy {
 
         // Basic info text box change events
         this.subscriptions.add(this.nameField.valueChanges.subscribe(() => {
-            this.basicInfoChangedEvent();
+            this.nameChanged = (this.nameField.value !== this._name);
         }));
         this.subscriptions.add(this.emailField.valueChanges.subscribe(() => {
-            this.basicInfoChangedEvent();
+            this.emailChanged = (this.emailField.value !== this._email);
         }));
 
         // Apply redirect params, if any
@@ -67,13 +74,13 @@ export class AccountComponent implements OnInit, OnDestroy {
 
                 if (this.redirectData.data.redirectUri === '/account') {
                     console.log(this.redirectData.data);
-                    this.inEditMode = this.redirectData.data.redirectParams.inEditMode;
+                    this.emailInEditMode = this.redirectData.data.redirectParams.emailInEditMode;
                     this.emailField.setValue(this.redirectData.data.redirectParams.email);
 
                     // Clear redirect parameters now that we read them
                     this.redirectData.reset();
 
-                    this.basicInfoSaveChanges();
+                    this.saveEmailChanges();
                 }
             }
         }));
@@ -83,68 +90,59 @@ export class AccountComponent implements OnInit, OnDestroy {
         this.subscriptions.unsubscribe();
     }
 
-    /**
-     * Toggles edit mode for basic information.
-     */
-    public toggleEditMode(): void {
-        this.inEditMode = !this.inEditMode;
+    public toggleNameEditMode(): void {
+        this.nameInEditMode = !this.nameInEditMode;
 
-        if (!this.inEditMode) {
-            this.emailField.setValue(this._email);
+        if (!this.nameInEditMode) {
             this.nameField.setValue(this._name);
         }
     }
 
-    /**
-     * Saves changes to basic information made by the user.
-     * The user is prompted to reauthenticate if they have not logged in recently.
-     */
-    public basicInfoSaveChanges(): void {
-        const newEmail: string = this.emailField.value;
+    public saveNameChanges(): void {
         const newName: string = this.nameField.value;
 
-        let emailPromise: Promise<void>;
-        let namePromise: Promise<void>;
+        this.user.updateProfile({displayName: newName}).then(() => {
+            this._name = newName;
+            this.nameField.setValue(newName);
 
-        let success = true;
-
-        // Handle email change
-        if (newEmail !== this._email) {
-            emailPromise = this.user.updateEmail(newEmail).then(() => {
-                this._email = newEmail;
-                this.emailField.setValue(newEmail);
-            }).catch(err => {
-                if (err.code === 'auth/requires-recent-login') {
-                    this.handleReauth();
-                } else {
-                    this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
-                }
-                success = false;
-            });
-        }
-
-        // Handle name change
-        if (newName !== this._name) {
-            namePromise = this.user.updateProfile({displayName: newName}).then(() => {
-                this._name = newName;
-                this.nameField.setValue(newName);
-            }).catch(err => {
-                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
-                success = false;
-            });
-        }
-
-        // Wait for all changes to complete and then display message is successful
-        Promise.all([emailPromise, namePromise]).then(() => {
-            if (!success) {
-                return;
-            }
-
-            this.toggleEditMode();
-            this.snackBar.open('Updated profile information', 'X', {
+            this.snackBar.open('Updated name', 'X', {
                 duration: 5000,
                 panelClass: ['success-snackbar']
             });
+
+            this.toggleNameEditMode();
+        }).catch(err => {
+            this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+        });
+    }
+
+    public toggleEmailEditMode(): void {
+        this.emailInEditMode = !this.emailInEditMode;
+
+        if (!this.emailInEditMode) {
+            this.emailField.setValue(this._email);
+        }
+    }
+
+    public saveEmailChanges(): void {
+        const newEmail: string = this.emailField.value;
+
+        this.user.updateEmail(newEmail).then(() => {
+            this._email = newEmail;
+            this.emailField.setValue(newEmail);
+
+            this.snackBar.open('Updated email', 'X', {
+                duration: 5000,
+                panelClass: ['success-snackbar']
+            });
+
+            this.toggleEmailEditMode();
+        }).catch(err => {
+            if (err.code === 'auth/requires-recent-login') {
+                this.handleReauth();
+            } else {
+                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+            }
         });
     }
 
@@ -159,7 +157,7 @@ export class AccountComponent implements OnInit, OnDestroy {
         // Set redirect data
         this.redirectData.data.redirectUri = this.router.url;
         this.redirectData.data.redirectParams = {
-            inEditMode: this.inEditMode,
+            emailInEditMode: this.emailInEditMode,
             email: this.emailField.value
         };
 
@@ -176,40 +174,5 @@ export class AccountComponent implements OnInit, OnDestroy {
                 }
             }
         });
-    }
-
-    /**
-     * Event called whenever a field in the basic information changes.
-     */
-    public basicInfoChangedEvent(): void {
-        this.basicInfoChanged = (this.emailField.value !== this._email) || (this.nameField.value !== this._name);
-    }
-
-    get emailField(): AbstractControl {
-        return this.basicInfoForm.get('email');
-    }
-
-    get nameField(): AbstractControl {
-        return this.basicInfoForm.get('name');
-    }
-
-    get userIdField(): AbstractControl {
-        return this.basicInfoForm.get('userId');
-    }
-
-    get userId(): string {
-        return this._userId;
-    }
-
-    get name(): string {
-        if (this._name) {
-            return this._name;
-        } else {
-            return '';
-        }
-    }
-
-    get email(): string {
-        return this._email;
     }
 }

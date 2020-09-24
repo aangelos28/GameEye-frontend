@@ -9,16 +9,19 @@
 }
 
 .edit-button {
-    float: right;
+    margin-right: 10px !important;
 }
 
 .save-button {
-    height: 50px;
-    transition: all 0.2s ease;
-    margin-bottom: 40px;
+    margin-right: 10px !important;
+    margin-left: 10px;
 }
 
 .account-form-field {
+    width: 100%;
+}
+
+.account-form-field.aligned {
     width: 50%;
 }
 
@@ -26,19 +29,35 @@
     font-size: 20px;
 }
 
+.mat-card {
+    width: 50%;
+    transition: height 1s ease;
+}
+
+.mat-card-actions {
+    margin-top: -20px;
+}
+
 @include media-breakpoint-down(md) {
+    .mat-card {
+        width: 80%;
+    }
     .account-form-field {
+        width: 80%;
+    }
+    .account-form-field.aligned {
         width: 80%;
     }
 }
 
 @include media-breakpoint-down(sm) {
+    .mat-card {
+        width: 100%;
+    }
     .account-form-field {
         width: 100%;
     }
-    .save-button {
+    .account-form-field.aligned {
         width: 100%;
     }
 }
-
-
