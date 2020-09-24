@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Subscription} from 'rxjs';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {User} from 'firebase';
 import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RedirectDataService} from '../../../shared/services/redirect-data.service';
@@ -97,6 +97,9 @@ export class AccountComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Attempts to save the new name entered by the user.
+     */
     public saveNameChanges(): void {
         const newName: string = this.nameField.value;
 
@@ -111,7 +114,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
             this.toggleNameEditMode();
         }).catch(err => {
-            this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+            this.dialog.open(InfoDialogComponent, {data: {text: `${err}`}});
         });
     }
 
@@ -123,6 +126,9 @@ export class AccountComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Attempts to save the new email entered by the user.
+     */
     public saveEmailChanges(): void {
         const newEmail: string = this.emailField.value;
 
@@ -140,7 +146,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             if (err.code === 'auth/requires-recent-login') {
                 this.handleReauth();
             } else {
-                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                this.dialog.open(InfoDialogComponent, {data: {title: 'Error', text: `${err}`}});
             }
         });
     }
@@ -160,7 +166,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             email: this.emailField.value
         };
 
-        this.user.getIdTokenResult().then(idTokenResult => {
+        this.accountService.getIdTokenAsync().then(idTokenResult => {
             if (idTokenResult.signInProvider === 'password') {
                 this.router.navigate(['reauth']);
             } else {
@@ -173,5 +179,18 @@ export class AccountComponent implements OnInit, OnDestroy {
                 }
             }
         });
+    }
+
+    /**
+     * Sends email to reset password.
+     */
+    public resetPassword(): void {
+        this.accountService.sendPasswordResetEmailAsync(this.user.email).then(() =>
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Password Reset Email Sent',
+                    text: `An email has been sent to reset your password. Please check your inbox.`
+                }
+            }));
     }
 }

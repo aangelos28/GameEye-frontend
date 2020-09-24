@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Observable} from 'rxjs';
-import * as firebase from 'firebase';
-import {map, take} from 'rxjs/operators';
+import {auth, User} from 'firebase';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
 
-    public user: firebase.User = null;
-    private user$: Observable<firebase.User> = this.authService.firebaseAuth.user;
+    public user: User = null;
+    private user$: Observable<User> = this.authService.firebaseAuth.user;
 
     public idToken: string;
 
@@ -38,9 +38,15 @@ export class AccountService {
         );
     }
 
-    public getIdTokenAsync(): Promise<string> {
+    public getIdTokenStringAsync(): Promise<string> {
         return new Promise(resolve => {
             resolve(this.user.getIdToken());
+        });
+    }
+
+    public getIdTokenAsync(): Promise<auth.IdTokenResult> {
+        return new Promise(resolve => {
+            resolve(this.user.getIdTokenResult());
         });
     }
 

@@ -11,7 +11,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -101,7 +101,12 @@ export class LoginComponent implements OnInit {
                 }
             });
         }).catch(err =>
-            this.dialog.open(ErrorDialogComponent, {data: {text: 'Invalid login credentials. Either your email or password are wrong.'}})
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Error',
+                    text: 'Invalid login credentials. Either your email or password are wrong.'
+                }
+            })
         );
     }
 
@@ -128,7 +133,12 @@ export class LoginComponent implements OnInit {
                 );
             })
         ).catch(err =>
-            this.dialog.open(ErrorDialogComponent, {data: {text: `Invalid login credentials. Either your email or password are wrong.\n${err}`}})
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Error',
+                    text: `Invalid login credentials. Either your email or password are wrong.\n${err}`
+                }
+            })
         );
     }
 }

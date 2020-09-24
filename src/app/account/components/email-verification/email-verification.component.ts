@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {AccountService} from '../../services/account/account.service';
 import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 
 @Component({
     selector: 'app-email-verification',
@@ -33,12 +33,14 @@ export class EmailVerificationComponent implements OnInit, AfterViewInit {
 
     public resendConfirmationEmail(): void {
         this.accountService.user.sendEmailVerification().then(() =>
-            this.snackBar.open('Confirmation email resent. Please check your inbox.', 'X', {
-                duration: 10000,
-                panelClass: ['success-snackbar']
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Confirmation Email Resent',
+                    text: 'Confirmation email resent. Please check your inbox.'
+                }
             })
         ).catch(err =>
-            this.dialog.open(ErrorDialogComponent, {data: {text: `Failed to resend confirmation email.\n${err}`}})
+            this.dialog.open(InfoDialogComponent, {data: {title: 'Error', text: `Failed to resend confirmation email.\n${err}`}})
         );
     }
 

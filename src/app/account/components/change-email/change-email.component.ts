@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RedirectDataService} from '../../../shared/services/redirect-data.service';
 import {Subscription} from 'rxjs';
 import {User} from 'firebase';
-import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomErrorStateMatcher} from '../login/login.component';
 
@@ -32,7 +32,7 @@ export class ChangeEmailComponent implements OnInit, OnDestroy {
     static newEmailDifferentValidation(fg: FormGroup): ValidationErrors | null {
         const currentEmail = fg.get('currentEmail').value;
         const newEmail = fg.get('newEmail').value;
-        return (currentEmail !== null && newEmail !== null && currentEmail === newEmail) ?  {emailSame: true} : null;
+        return (currentEmail !== null && newEmail !== null && currentEmail === newEmail) ? {emailSame: true} : null;
     }
 
     ngOnInit(): void {
@@ -67,15 +67,17 @@ export class ChangeEmailComponent implements OnInit, OnDestroy {
         this.subscriptions.unsubscribe();
     }
 
+    /**
+     * Attempts to change the user's email to the new one they entered.
+     */
     public changeEmail(): void {
         this.user.updateEmail(this.newEmailField.value).then(() => {
-            console.log('Changed email!');
             this.router.navigate(['verifyEmail']);
         }).catch(err => {
             if (err.code === 'auth/requires-recent-login') {
                 this.handleReauth();
             } else {
-                this.dialog.open(ErrorDialogComponent, {data: {text: `${err}`}});
+                this.dialog.open(InfoDialogComponent, {data: {text: `${err}`}});
             }
         });
     }
@@ -94,7 +96,7 @@ export class ChangeEmailComponent implements OnInit, OnDestroy {
             email: this.newEmailField.value
         };
 
-        this.user.getIdTokenResult().then(idTokenResult => {
+        this.accountService.getIdTokenAsync().then(idTokenResult => {
             if (idTokenResult.signInProvider === 'password') {
                 this.router.navigate(['reauth']);
             } else {

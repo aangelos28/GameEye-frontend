@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ErrorDialogComponent } from './error-dialog.component';
+import { InfoDialogComponent } from './info-dialog.component';
 
 describe('ErrorDialogComponent', () => {
-  let component: ErrorDialogComponent;
-  let fixture: ComponentFixture<ErrorDialogComponent>;
+  let component: InfoDialogComponent;
+  let fixture: ComponentFixture<InfoDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorDialogComponent ]
+      declarations: [ InfoDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorDialogComponent);
+    fixture = TestBed.createComponent(InfoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

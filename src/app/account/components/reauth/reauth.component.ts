@@ -4,7 +4,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {CustomErrorStateMatcher} from '../login/login.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../../../shared/components/error-dialog/error-dialog.component';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 import {RedirectDataService} from '../../../shared/services/redirect-data.service';
 import {AccountService} from '../../services/account/account.service';
 
@@ -47,7 +47,7 @@ export class ReauthComponent implements OnInit {
         this.authService.reauthEmailPassword(this.accountService.user, password).then(() => {
             this.router.navigate([this.redirectRoute], {queryParams: {r: true}});
         }).catch(err => {
-            this.dialog.open(ErrorDialogComponent, {data: {text: 'Failed to verify your password. Please try again.'}});
+            this.dialog.open(InfoDialogComponent, {data: {title: 'Error', text: 'Failed to verify your password. Please try again.'}});
         });
     }
 }
