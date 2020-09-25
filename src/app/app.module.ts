@@ -12,7 +12,8 @@ import {CoreModule} from './core/core.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {NavigationModule} from "./navigation/navigation.module";
+import {NavigationModule} from './navigation/navigation.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import {NavigationModule} from "./navigation/navigation.module";
         ReactiveFormsModule,
         MatFormFieldModule,
         MatButtonModule,
-        NavigationModule
+        NavigationModule,
+        MatDialogModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

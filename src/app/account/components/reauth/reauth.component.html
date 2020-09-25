@@ -1,0 +1,21 @@
+<app-titlebar [titletext]="'Verify your password'" [titleiconfacode]="'fas fa-sign-in-alt'"></app-titlebar>
+
+<body>
+<div class="main container page">
+    <div class="login-container container">
+        <form class="login-form" [formGroup]="reauthForm" (ngSubmit)="reauthEmailPassword()">
+            <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 10px;">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" class="login-form-input">
+                <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+                    Password must be at least 8 characters.
+                </mat-error>
+                <mat-error *ngIf="password.hasError('required')">
+                    Password is <strong>required</strong>.
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="submit-button login-button" [disabled]="!reauthForm.valid">Verify</button>
+        </form>
+    </div>
+</div>
+</body>

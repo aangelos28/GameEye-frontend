@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {MatDialog} from '@angular/material/dialog';
+import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
 
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,16 +35,16 @@ export class LoginComponent implements OnInit {
     static passwordConfirmValidation(fg: FormGroup): ValidationErrors | null {
         const password = fg.get('password').value;
         const confirmPassword = fg.get('confirmPassword').value;
-        return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : { passwordMismatch: true };
+        return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : {passwordMismatch: true};
     }
 
-    constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
+    constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar, public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.errorMatcher = new CustomErrorStateMatcher();
 
-        this.loginForm = new FormGroup( {
+        this.loginForm = new FormGroup({
             email: new FormControl('', [
                 Validators.required,
                 Validators.email
@@ -53,7 +55,7 @@ export class LoginComponent implements OnInit {
             ])
         });
 
-        this.signupForm = new FormGroup( {
+        this.signupForm = new FormGroup({
             email: new FormControl('', [
                 Validators.required,
                 Validators.email
@@ -99,9 +101,11 @@ export class LoginComponent implements OnInit {
                 }
             });
         }).catch(err =>
-            this.snackBar.open('Invalid login credentials. Either your email or password are wrong.', 'X', {
-                duration: 5000,
-                panelClass: ['error-snackbar', 'mat-warn']
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Error',
+                    text: 'Invalid login credentials. Either your email or password are wrong.'
+                }
             })
         );
     }
@@ -129,9 +133,11 @@ export class LoginComponent implements OnInit {
                 );
             })
         ).catch(err =>
-            this.snackBar.open('Failed to create account.\n' + err, 'X', {
-                duration: 8000,
-                panelClass: ['error-snackbar', 'mat-warn']
+            this.dialog.open(InfoDialogComponent, {
+                data: {
+                    title: 'Error',
+                    text: `Invalid login credentials. Either your email or password are wrong.\n${err}`
+                }
             })
         );
     }

@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {share} from 'rxjs/operators';
-import {AuthService} from '../../../authentication/services/auth/auth.service';
+import {AuthService} from '../../../account/services/auth/auth.service';
 
 @Component({
   selector: 'app-test',

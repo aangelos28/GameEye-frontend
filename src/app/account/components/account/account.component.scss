@@ -1,0 +1,63 @@
+// Bootstrap Styles
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+.section-header {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.edit-button {
+    margin-right: 10px !important;
+}
+
+.save-button {
+    margin-right: 10px !important;
+    margin-left: 10px;
+}
+
+.account-form-field {
+    width: 100%;
+}
+
+.account-form-field.aligned {
+    width: 50%;
+}
+
+.account-form-input {
+    font-size: 20px;
+}
+
+.mat-card {
+    width: 50%;
+    transition: all 0.5s ease;
+}
+
+.mat-card-actions {
+    margin-top: -20px;
+}
+
+@include media-breakpoint-down(md) {
+    .mat-card {
+        width: 80%;
+    }
+    .account-form-field {
+        width: 80%;
+    }
+    .account-form-field.aligned {
+        width: 80%;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .mat-card {
+        width: 100%;
+    }
+    .account-form-field {
+        width: 100%;
+    }
+    .account-form-field.aligned {
+        width: 100%;
+    }
+}

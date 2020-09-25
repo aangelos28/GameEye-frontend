@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../../authentication/services/auth/auth.service';
+import {AuthService} from '../../../account/services/auth/auth.service';
 import {Router} from '@angular/router';
-import {AccountService} from '../../../authentication/services/account/account.service';
+import {AccountService} from '../../../account/services/account/account.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class SidemenuComponent implements OnInit, OnDestroy {
 
     public isSidemenuVisible = false;
 
-    public isLoggedIn: boolean = null;
+    public isLoggedInAndVerified: boolean = null;
 
     private subscriptions = new Subscription();
 
@@ -21,8 +21,8 @@ export class SidemenuComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.subscriptions.add(this.accountService.isLoggedInAndVerified().subscribe(loggedIn =>
-            this.isLoggedIn = loggedIn
+        this.subscriptions.add(this.accountService.isLoggedInAndVerified.subscribe(isLoggedInAndVerified =>
+            this.isLoggedInAndVerified = isLoggedInAndVerified
         ));
     }
 

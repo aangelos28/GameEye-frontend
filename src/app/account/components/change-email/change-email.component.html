@@ -1,0 +1,28 @@
+<app-titlebar [titletext]="'Change Email'" [titleiconfacode]="'fas fa-envelope'"></app-titlebar>
+
+<body>
+<div class="main container page">
+    <div class="login-container container">
+        <form class="login-form" [formGroup]="changeEmailForm" (ngSubmit)="changeEmail()">
+            <mat-form-field class="login-form-field" appearance="outline">
+                <mat-label id="id-label">Current Email</mat-label>
+                <input matInput formControlName="currentEmail" class="login-form-input">
+            </mat-form-field>
+            <mat-form-field class="login-form-field" appearance="outline" style="margin-top: 10px;">
+                <mat-label>New Email</mat-label>
+                <input matInput formControlName="newEmail" class="login-form-input" [errorStateMatcher]="errorMatcher">
+                <mat-error *ngIf="newEmailField.hasError('email')">
+                    A valid email address must be entered.
+                </mat-error>
+                <mat-error *ngIf="newEmailField.hasError('required')">
+                    New email address is <strong>required</strong>.
+                </mat-error>
+                <mat-error *ngIf="changeEmailForm.hasError('emailSame')">
+                    New email address must be different from current email address.
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="submit-button login-button" [disabled]="!changeEmailForm.valid">Submit</button>
+        </form>
+    </div>
+</div>
+</body>

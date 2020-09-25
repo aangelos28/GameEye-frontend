@@ -14,17 +14,28 @@ import {EmailVerificationComponent} from './components/email-verification/email-
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import {RouterModule} from '@angular/router';
 import {NavigationModule} from '../navigation/navigation.module';
+import {AccountComponent} from './components/account/account.component';
+import {SharedModule} from '../shared/shared.module';
+import {ReauthComponent} from './components/reauth/reauth.component';
+import {MatCardModule} from '@angular/material/card';
+import {ChangeEmailComponent} from './components/change-email/change-email.component';
 
 @NgModule({
     declarations: [
         LoginComponent,
         EmailVerificationComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        AccountComponent,
+        ReauthComponent,
+        ChangeEmailComponent
     ],
     exports: [
         LoginComponent,
         EmailVerificationComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        AccountComponent,
+        ReauthComponent,
+        ChangeEmailComponent
     ],
     imports: [
         CommonModule,
@@ -37,9 +48,11 @@ import {NavigationModule} from '../navigation/navigation.module';
         MatSnackBarModule,
         MatTabsModule,
         RouterModule,
-        NavigationModule
+        NavigationModule,
+        SharedModule,
+        MatCardModule
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })
-export class AuthenticationModule {
+export class AccountModule {
 }

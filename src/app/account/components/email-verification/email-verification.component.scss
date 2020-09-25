@@ -1,0 +1,10 @@
+#change-email-button {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 320px) {
+    #change-email-button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

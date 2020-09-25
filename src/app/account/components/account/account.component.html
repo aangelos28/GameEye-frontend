@@ -1,0 +1,50 @@
+<app-titlebar [titletext]="'My Account'" [titleiconfacode]="'fa fa-user'"></app-titlebar>
+
+<body>
+<div class="main container page">
+    <h2 class="section-header">Basic Information</h2>
+    <hr>
+    <div>
+        <mat-form-field class="account-form-field aligned" appearance="outline">
+            <mat-label id="id-label">Id</mat-label>
+            <input matInput [formControl]="userIdField" id="id-input" class="account-form-input">
+        </mat-form-field>
+        <br>
+        <mat-card [class.shadow-lg]="nameInEditMode">
+            <mat-form-field class="account-form-field" appearance="outline">
+                <mat-label id="name-label">Name</mat-label>
+                <input matInput [readonly]="!nameInEditMode" [formControl]="nameField" id="name-input" class="account-form-input"
+                       placeholder="Specify your name...">
+            </mat-form-field>
+            <mat-card-actions align="end">
+                <button *ngIf="!nameInEditMode" mat-flat-button color="primary" class="edit-button" (click)="toggleNameEditMode()">Edit</button>
+                <button *ngIf="nameInEditMode" mat-button color="warn" (click)="toggleNameEditMode()">Cancel</button>
+                <button *ngIf="nameInEditMode" mat-flat-button color="primary" class="save-button" [disabled]="!nameChanged" (click)="saveNameChanges()">Save
+                </button>
+            </mat-card-actions>
+        </mat-card>
+        <br>
+        <mat-card [class.shadow-lg]="emailInEditMode">
+            <mat-form-field class="account-form-field" appearance="outline">
+                <mat-label id="email-label">Email</mat-label>
+                <input matInput [readonly]="!emailInEditMode" [formControl]="emailField" id="email-input" class="account-form-input"
+                       placeholder="Specify your email...">
+                <mat-error *ngIf="emailField.hasError('email')">
+                    Please enter a valid email address.
+                </mat-error>
+            </mat-form-field>
+            <mat-card-actions align="end">
+                <button *ngIf="!emailInEditMode" mat-flat-button color="primary" class="edit-button" (click)="toggleEmailEditMode()">Edit</button>
+                <button *ngIf="emailInEditMode" mat-button color="warn" (click)="toggleEmailEditMode()">Cancel</button>
+                <button *ngIf="emailInEditMode" mat-flat-button color="primary" class="save-button" [disabled]="emailField.hasError('email') || !emailChanged"
+                        (click)="saveEmailChanges()">Save
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <br><br>
+    <h2 class="section-header">Security</h2>
+    <hr>
+    <button mat-stroked-button color="primary" (click)="resetPassword()">Reset Password</button>
+</div>
+</body>

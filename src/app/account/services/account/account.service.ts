@@ -1,21 +1,24 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {Observable} from 'rxjs';
-import * as firebase from 'firebase';
-import {map, take} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {auth, User} from 'firebase';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
 
-    public user: firebase.User = null;
-    private user$: Observable<firebase.User> = this.authService.firebaseAuth.user;
+    public user: User = null;
+    public user$: Observable<User> = this.authService.firebaseAuth.user;
+    public isLoggedInAndVerified: BehaviorSubject<boolean>;
 
     constructor(public authService: AuthService) {
-        this.user$.subscribe(user =>
-            this.user = user
-        );
+        this.isLoggedInAndVerified = new BehaviorSubject<boolean>(false);
+
+        this.user$.subscribe(user => {
+            this.user = user;
+            this.isLoggedInAndVerified.next(user !== null && user.emailVerified);
+        });
     }
 
     public getUserEmailAsync(): Promise<string> {
@@ -30,15 +33,15 @@ export class AccountService {
         });
     }
 
-    public isLoggedInAndVerified(): Observable<boolean> {
-        return this.user$.pipe(
-            map(user => user != null && user.emailVerified)
-        );
-    }
-
-    public getIdTokenAsync(): Promise<string> {
+    public getIdTokenStringAsync(): Promise<string> {
         return new Promise(resolve => {
             resolve(this.user.getIdToken());
+        });
+    }
+
+    public getIdTokenAsync(): Promise<auth.IdTokenResult> {
+        return new Promise(resolve => {
+            resolve(this.user.getIdTokenResult());
         });
     }
 

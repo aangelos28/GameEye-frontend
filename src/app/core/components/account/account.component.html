@@ -1,7 +1,0 @@
-<app-titlebar [titletext]="'My Account'" [titleiconfacode]="'fa fa-user'"></app-titlebar>
-
-<body>
-    <div class="main container page">
-        <pre *ngIf="auth.firebaseAuth.user | async as user"><code>{{ user.toJSON() | json }}</code></pre>
-    </div>
-</body>
