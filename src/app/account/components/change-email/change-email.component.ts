@@ -72,6 +72,7 @@ export class ChangeEmailComponent implements OnInit, OnDestroy {
      */
     public changeEmail(): void {
         this.user.updateEmail(this.newEmailField.value).then(() => {
+            this.authService.firebaseAuth.updateCurrentUser(this.user);
             this.router.navigate(['verifyEmail']);
         }).catch(err => {
             if (err.code === 'auth/requires-recent-login') {

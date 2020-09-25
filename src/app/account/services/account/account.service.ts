@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {auth, User} from 'firebase';
-import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -10,14 +9,16 @@ import {map} from 'rxjs/operators';
 export class AccountService {
 
     public user: User = null;
-    private user$: Observable<User> = this.authService.firebaseAuth.user;
-
-    public idToken: string;
+    public user$: Observable<User> = this.authService.firebaseAuth.user;
+    public isLoggedInAndVerified: BehaviorSubject<boolean>;
 
     constructor(public authService: AuthService) {
-        this.user$.subscribe(user =>
-            this.user = user
-        );
+        this.isLoggedInAndVerified = new BehaviorSubject<boolean>(false);
+
+        this.user$.subscribe(user => {
+            this.user = user;
+            this.isLoggedInAndVerified.next(user !== null && user.emailVerified);
+        });
     }
 
     public getUserEmailAsync(): Promise<string> {
@@ -30,12 +31,6 @@ export class AccountService {
         return new Promise(resolve => {
             resolve(this.user.emailVerified);
         });
-    }
-
-    public isLoggedInAndVerified(): Observable<boolean> {
-        return this.user$.pipe(
-            map(user => user != null && user.emailVerified)
-        );
     }
 
     public getIdTokenStringAsync(): Promise<string> {

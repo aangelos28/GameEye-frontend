@@ -142,6 +142,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             });
 
             this.toggleEmailEditMode();
+            this.authService.firebaseAuth.updateCurrentUser(this.user);
         }).catch(err => {
             if (err.code === 'auth/requires-recent-login') {
                 this.handleReauth();

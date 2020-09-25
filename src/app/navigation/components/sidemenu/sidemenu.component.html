@@ -19,7 +19,7 @@
                     <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-star"></i>Top Games</a>
                 </span>
             </div>
-            <div matRipple *ngIf="isLoggedIn">
+            <div matRipple *ngIf="isLoggedInAndVerified">
                 <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
                     <a class="sidemenu-link" routerLink="account" (click)="toggle()"><i class="sidemenu-link-icon fa fa-user"></i>My Account</a>
                 </span>
@@ -35,7 +35,7 @@
                 </span>
             </div>
             <div matRipple style="margin-top: 40px;">
-                <span class="sidemenu-item logout-item" [class.hidden]="!isSidemenuVisible" *ngIf="isLoggedIn">
+                <span class="sidemenu-item logout-item" [class.hidden]="!isSidemenuVisible" *ngIf="isLoggedInAndVerified">
                     <a class="sidemenu-link" (click)="logout()"><i class="sidemenu-link-icon fas fa-sign-out-alt"></i>Log Out</a>
                 </span>
             </div>

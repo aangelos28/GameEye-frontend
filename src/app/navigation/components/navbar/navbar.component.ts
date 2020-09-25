@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     @ViewChild(SidemenuComponent) sidemenu: SidemenuComponent;
 
-    public isLoggedIn: boolean = null;
+    public isLoggedInAndVerified: boolean = null;
     public isInStartingPage: boolean = null;
 
     private subscriptions = new Subscription();
@@ -23,8 +23,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.subscriptions.add(this.accountService.isLoggedInAndVerified().subscribe(loggedIn =>
-            this.isLoggedIn = loggedIn
+        this.subscriptions.add(this.accountService.isLoggedInAndVerified.subscribe(isLoggedInAndVerified =>
+            this.isLoggedInAndVerified = isLoggedInAndVerified
         ));
 
         this.subscriptions.add(this.router.events.subscribe(val => {
