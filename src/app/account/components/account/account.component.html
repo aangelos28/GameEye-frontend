@@ -10,7 +10,7 @@
             <input matInput [formControl]="userIdField" id="id-input" class="account-form-input">
         </mat-form-field>
         <br>
-        <mat-card>
+        <mat-card [class.shadow-lg]="nameInEditMode">
             <mat-form-field class="account-form-field" appearance="outline">
                 <mat-label id="name-label">Name</mat-label>
                 <input matInput [readonly]="!nameInEditMode" [formControl]="nameField" id="name-input" class="account-form-input"
@@ -24,7 +24,7 @@
             </mat-card-actions>
         </mat-card>
         <br>
-        <mat-card class="field-card">
+        <mat-card [class.shadow-lg]="emailInEditMode">
             <mat-form-field class="account-form-field" appearance="outline">
                 <mat-label id="email-label">Email</mat-label>
                 <input matInput [readonly]="!emailInEditMode" [formControl]="emailField" id="email-input" class="account-form-input"
