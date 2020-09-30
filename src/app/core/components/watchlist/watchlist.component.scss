@@ -1,0 +1,85 @@
+#G1
+{
+    background-image: url('https://www.extremetech.com/wp-content/uploads/2016/05/Doom-Feature.jpg');
+}
+
+#G2
+{
+    background-image: url('https://icdn2.digitaltrends.com/image/digitaltrends/nba-2k21-damian-lillard-440x292-c.jpg');
+}
+
+#G3
+{
+    background-image: url('https://sickr.files.wordpress.com/2020/08/fall_guys_logo.jpg');
+}
+
+#G4
+{
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/4/47/Tom_Clancy%27s_Rainbow_Six_Siege_cover_art.jpg');
+}
+
+#G5
+{
+    background-image: url('https://i.ytimg.com/vi/2xWRMn3_-xM/maxresdefault.jpg');
+}
+
+.gameThumb
+{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 15px;
+    border-radius: 0;
+    max-width: 65px;
+    max-height: 65px;
+}
+
+.gameCard
+{
+    justify-content: space-between;
+    box-shadow: 2.5px 2.5px 10px grey;
+    align-items: center;
+    display: flex;
+    padding: 13px 20px 13px 12px;
+    background-color: #1f293b;
+    margin-bottom: 10px;
+}
+
+::ng-deep .mat-badge-content {
+    position: relative;
+    text-align: center !important;
+    height: 20px !important;
+    width:  20px !important;
+    padding: 10px;
+    top: auto !important;
+    right: 5px !important;
+    font-size: large;
+    font-weight: normal;
+    display: table;
+    box-sizing: content-box;
+}
+
+.titleContainer
+{
+    justify-content: left;
+    align-items: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-size: x-large;
+    margin-bottom: 0;
+
+}
+
+.addButton
+{
+    box-shadow: 2.5px 2.5px 10px grey;
+    background-color: #1f293b;
+    position: fixed;
+    bottom: 25px;
+    right: 5%;
+    .mat-icon
+    {
+        font-size: x-large;
+    }
+}
