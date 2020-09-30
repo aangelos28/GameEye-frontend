@@ -1,3 +1,7 @@
+// Bootstrap Styles
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
 
 #G1
 {
@@ -24,7 +28,7 @@
     background-image: url('https://i.ytimg.com/vi/2xWRMn3_-xM/maxresdefault.jpg');
 }
 
-.gameThumb
+.game-thumb
 {
     background-position: center;
     background-repeat: no-repeat;
@@ -35,7 +39,7 @@
     max-height: 65px;
 }
 
-.gameCard
+.game-card
 {
     justify-content: space-between;
     box-shadow: 2.5px 2.5px 10px grey;
@@ -44,6 +48,7 @@
     padding: 13px 20px 13px 12px;
     background-color: #1f293b;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 ::ng-deep .mat-badge-content {
@@ -61,7 +66,7 @@
     box-sizing: content-box;
 }
 
-.titleContainer
+.title-container
 {
     justify-content: left;
     align-items: center;
@@ -70,10 +75,9 @@
     width: 100%;
     font-size: x-large;
     margin-bottom: 0;
-
 }
 
-.addButton
+.add-button
 {
     box-shadow: 2.5px 2.5px 10px grey;
     background-color: #1f293b;
@@ -83,5 +87,17 @@
     .mat-icon
     {
         font-size: x-large;
+    }
+    outline: none;
+}
+
+@include media-breakpoint-down(sm) {
+    ::ng-deep .mat-badge-content {
+        font-size: medium;
+    }
+
+    .title-container
+    {
+        font-size: large;
     }
 }
