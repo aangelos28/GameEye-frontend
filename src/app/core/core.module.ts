@@ -8,15 +8,23 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
     declarations: [
         DashboardComponent,
-        TestComponent
+        TestComponent,
+        WatchlistComponent
     ],
     exports: [
         DashboardComponent,
-        TestComponent
+        TestComponent,
+        WatchlistComponent
     ],
     imports: [
         CommonModule,
@@ -25,7 +33,11 @@ import {AccountModule} from '../account/account.module';
         MatInputModule,
         ReactiveFormsModule,
         MatButtonModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatCardModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatRippleModule
     ]
 })
 export class CoreModule {

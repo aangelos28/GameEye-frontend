@@ -14,6 +14,7 @@ import {EmailVerificationGuard} from './account/guards/email-verification.guard'
 import {ResetPasswordComponent} from './account/components/reset-password/reset-password.component';
 import {ReauthComponent} from './account/components/reauth/reauth.component';
 import {ChangeEmailComponent} from './account/components/change-email/change-email.component';
+import {WatchlistComponent} from './core/components/watchlist/watchlist.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -48,6 +49,12 @@ const routes: Routes = [
         component: ResetPasswordComponent,
         canActivate: [AngularFireAuthGuard],
         data: {authGuardPipe: redirectLoggedInToDashboard}
+    },
+    {
+        path: 'watchlist',
+        component: WatchlistComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
         path: 'login',
