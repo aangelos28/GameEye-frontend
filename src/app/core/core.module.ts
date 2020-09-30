@@ -9,6 +9,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
     declarations: [
@@ -28,7 +33,11 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
         MatInputModule,
         ReactiveFormsModule,
         MatButtonModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatCardModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatRippleModule
     ]
 })
 export class CoreModule {
