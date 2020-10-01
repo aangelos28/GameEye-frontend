@@ -49,6 +49,10 @@
     background-color: #1f293b;
     margin-bottom: 10px;
     cursor: pointer;
+    ::ng-deep .mat-ripple-element{
+        z-index:-1 !important;
+    }
+
 }
 
 ::ng-deep .mat-badge-content {
