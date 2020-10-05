@@ -1,0 +1,65 @@
+<app-titlebar [titletext]="'Settings'" [titleiconfacode]="'fa fa-user'"></app-titlebar>
+
+<body>
+<div class="main container page">
+    <pre *ngIf="auth.firebaseAuth.user | async as user"><code>{{ user.toJSON() | json }}</code></pre>
+</div>
+
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Content
+                <span class="content-list-section">
+                        <ul>
+                            <mat-checkbox>
+                                Show archived resources
+                            </mat-checkbox>
+                            <mat-checkbox>
+                                Show impact scores
+                                    <p>
+                                        Choose which impact scores to receive notifications of:
+                                        <mat-button-toggle-group appearance="legacy" name="fontStyle"
+                                                                 aria-label="Font Style" multiple="true">
+                                            <mat-button-toggle>1</mat-button-toggle>
+                                            <mat-button-toggle>2</mat-button-toggle>
+                                            <mat-button-toggle>3</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </p>
+                            </mat-checkbox>
+                        </ul>
+                    </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Notifications
+                <span class="notification-list-section">
+                        <ul>
+                            <mat-checkbox>
+                                Important updates
+                            </mat-checkbox>
+                            <mat-checkbox>
+                                New articles
+                            </mat-checkbox>
+                            <mat-checkbox>
+                                Reddit posts
+                            </mat-checkbox>
+                            <mat-checkbox>
+                                Images
+                            </mat-checkbox>
+                            <mat-checkbox>
+                                YouTube videos
+                            </mat-checkbox>
+                        </ul>
+                    </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion>
+</body>

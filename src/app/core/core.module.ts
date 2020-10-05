@@ -8,11 +8,16 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
+import {SettingsComponent} from './components/settings/settings.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
     declarations: [
         DashboardComponent,
-        TestComponent
+        TestComponent,
+        SettingsComponent
     ],
     exports: [
         DashboardComponent,
@@ -25,7 +30,10 @@ import {AccountModule} from '../account/account.module';
         MatInputModule,
         ReactiveFormsModule,
         MatButtonModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatButtonToggleModule
     ]
 })
 export class CoreModule {
