@@ -113,6 +113,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             });
 
             this.toggleNameEditMode();
+            this.authService.firebaseAuth.updateCurrentUser(this.user);
         }).catch(err => {
             this.dialog.open(InfoDialogComponent, {data: {text: `${err}`}});
         });
