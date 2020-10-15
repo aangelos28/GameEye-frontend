@@ -8,20 +8,23 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
-import {SettingsComponent} from './components/settings/settings.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
     declarations: [
         DashboardComponent,
         TestComponent,
-        SettingsComponent
+        WatchlistComponent
     ],
     exports: [
         DashboardComponent,
-        TestComponent
+        TestComponent,
+        WatchlistComponent
     ],
     imports: [
         CommonModule,
@@ -31,9 +34,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         ReactiveFormsModule,
         MatButtonModule,
         MatSnackBarModule,
-        MatExpansionModule,
-        MatCheckboxModule,
-        MatButtonToggleModule
+        MatCardModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatRippleModule
     ]
 })
 export class CoreModule {
