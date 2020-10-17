@@ -1,65 +1,33 @@
-<app-titlebar [titletext]="'Settings'" [titleiconfacode]="'fa fa-user'"></app-titlebar>
+<app-titlebar [titletext]="'Settings'" [titleiconfacode]="'fa fa-cog'"></app-titlebar>
 
 <body>
 <div class="main container page">
-    <pre *ngIf="auth.firebaseAuth.user | async as user"><code>{{ user.toJSON() | json }}</code></pre>
+    <h2 class="section-header">Content</h2>
+    <hr>
+    <mat-slide-toggle color="primary">Show impact scores</mat-slide-toggle>
+    <br><br><br>
+    <h2 class="section-header">Notifications</h2>
+    <hr>
+    <mat-slide-toggle checked color="primary">Receive notifications</mat-slide-toggle>
+    <br><br>
+    <ul>
+        <mat-checkbox disabled>Important updates</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="newsArticlesNotifications"
+                      (click)="newsArticlesCheckboxChanged($event)">News articles
+        </mat-checkbox>
+        <mat-checkbox disabled>Reddit posts</mat-checkbox>
+        <mat-checkbox disabled>Images</mat-checkbox>
+        <mat-checkbox disabled>YouTube videos</mat-checkbox>
+        <br>
+        <mat-slide-toggle color="primary">Notifications for impact scores:</mat-slide-toggle>
+        <p>
+            <mat-button-toggle-group appearance="legacy" name="fontStyle"
+                                     aria-label="Font Style" multiple="true" color="primary">
+                <mat-button-toggle color="primary">1</mat-button-toggle>
+                <mat-button-toggle color="primary">2</mat-button-toggle>
+                <mat-button-toggle color="primary">3</mat-button-toggle>
+            </mat-button-toggle-group>
+        </p>
+    </ul>
 </div>
-
-<mat-accordion>
-    <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Content
-                <span class="content-list-section">
-                        <ul>
-                            <mat-checkbox>
-                                Show archived resources
-                            </mat-checkbox>
-                            <mat-checkbox>
-                                Show impact scores
-                                    <p>
-                                        Choose which impact scores to receive notifications of:
-                                        <mat-button-toggle-group appearance="legacy" name="fontStyle"
-                                                                 aria-label="Font Style" multiple="true">
-                                            <mat-button-toggle>1</mat-button-toggle>
-                                            <mat-button-toggle>2</mat-button-toggle>
-                                            <mat-button-toggle>3</mat-button-toggle>
-                                        </mat-button-toggle-group>
-                                    </p>
-                            </mat-checkbox>
-                        </ul>
-                    </span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-    </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion>
-    <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Notifications
-                <span class="notification-list-section">
-                        <ul>
-                            <mat-checkbox>
-                                Important updates
-                            </mat-checkbox>
-                            <mat-checkbox>
-                                New articles
-                            </mat-checkbox>
-                            <mat-checkbox>
-                                Reddit posts
-                            </mat-checkbox>
-                            <mat-checkbox>
-                                Images
-                            </mat-checkbox>
-                            <mat-checkbox>
-                                YouTube videos
-                            </mat-checkbox>
-                        </ul>
-                    </span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-    </mat-expansion-panel>
-</mat-accordion>
 </body>

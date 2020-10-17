@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../account/services/auth/auth.service';
-import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+    newsArticlesNotifications = true;
+    constructor(public auth: AuthService) { }
 
-  constructor(public auth: AuthService, private accordion: MatAccordion) { }
+    ngOnInit(): void {
+    }
 
-  ngOnInit(): void {
-  }
+    newsArticlesCheckboxChanged(event: any): void
+    {
+        event.preventDefault();
+        this.newsArticlesNotifications = true;
+    }
 
 }
