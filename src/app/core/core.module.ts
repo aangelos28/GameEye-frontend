@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {TestComponent} from './components/test/test.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {MatInputModule} from '@angular/material/input';
@@ -17,12 +16,10 @@ import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
     declarations: [
-        DashboardComponent,
         TestComponent,
         WatchlistComponent
     ],
     exports: [
-        DashboardComponent,
         TestComponent,
         WatchlistComponent
     ],

@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
         this.subscriptions.add(this.router.events.subscribe(val => {
             const path = this.location.path();
-            this.isInStartingPage = (path === '/dashboard') || (path === '/login');
+            this.isInStartingPage = (path === '/watchlist') || (path === '/login');
         }));
     }
 

@@ -22,7 +22,7 @@ export class EmailVerificationComponent implements OnInit, AfterViewInit {
     public ngOnInit(): void {
         this.email.then(verified => {
             if (verified) {
-                this.router.navigate(['dashboard']);
+                this.router.navigate(['watchlist']);
             }
         });
     }

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AccountComponent} from './account/components/account/account.component';
-import {DashboardComponent} from './core/components/dashboard/dashboard.component';
 import {TestComponent} from './core/components/test/test.component';
 import {LoginComponent} from './account/components/login/login.component';
 import {
@@ -10,20 +9,21 @@ import {
     redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import {EmailVerificationComponent} from './account/components/email-verification/email-verification.component';
-import {EmailVerificationGuard} from './account/guards/email-verification.guard';
+import {EmailVerificationGuard} from './account/guards/email-verification/email-verification.guard';
 import {ResetPasswordComponent} from './account/components/reset-password/reset-password.component';
 import {ReauthComponent} from './account/components/reauth/reauth.component';
 import {ChangeEmailComponent} from './account/components/change-email/change-email.component';
 import {WatchlistComponent} from './core/components/watchlist/watchlist.component';
+import {UserCreatedGuard} from './account/guards/user-exists/user-created.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['watchlist']);
 
 const routes: Routes = [
     {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AngularFireAuthGuard, EmailVerificationGuard],
+        path: 'watchlist',
+        component: WatchlistComponent,
+        canActivate: [AngularFireAuthGuard, EmailVerificationGuard, UserCreatedGuard],
         data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
@@ -49,12 +49,6 @@ const routes: Routes = [
         component: ResetPasswordComponent,
         canActivate: [AngularFireAuthGuard],
         data: {authGuardPipe: redirectLoggedInToDashboard}
-    },
-    {
-        path: 'watchlist',
-        component: WatchlistComponent,
-        canActivate: [AngularFireAuthGuard],
-        data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
         path: 'login',

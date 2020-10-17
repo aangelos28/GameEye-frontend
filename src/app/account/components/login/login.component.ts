@@ -12,6 +12,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatDialog} from '@angular/material/dialog';
 import {InfoDialogComponent} from '../../../shared/components/error-dialog/info-dialog.component';
+import {RedirectDataService} from '../../../shared/services/redirect-data.service';
+import {AccountService} from '../../services/account/account.service';
 
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
         return (password !== null && confirmPassword !== null && password === confirmPassword) ? null : {passwordMismatch: true};
     }
 
-    constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar, public dialog: MatDialog) {
+    constructor(public auth: AuthService, private router: Router, private snackBar: MatSnackBar, public dialog: MatDialog,
+                private accountService: AccountService, private redirectDataService: RedirectDataService) {
     }
 
     ngOnInit(): void {
@@ -66,6 +69,8 @@ export class LoginComponent implements OnInit {
             ]),
             confirmPassword: new FormControl('')
         }, {validators: LoginComponent.passwordConfirmValidation});
+
+        this.redirectDataService.reset();
     }
 
     get emailLogin(): AbstractControl {
@@ -95,7 +100,10 @@ export class LoginComponent implements OnInit {
         this.auth.loginFirebaseEmailPassword(email, password).then(cred => {
             this.auth.firebaseAuth.currentUser.then(user => {
                 if (user.emailVerified) {
-                    this.router.navigate(['dashboard']);
+                    this.redirectDataService.data.checkCreateUserBackend = true;
+                    this.redirectDataService.persistToLocalStorage();
+
+                    this.router.navigate(['watchlist']);
                 } else {
                     this.router.navigate(['verifyEmail']);
                 }
@@ -111,14 +119,20 @@ export class LoginComponent implements OnInit {
     }
 
     public loginGoogle(): void {
+        this.redirectDataService.data.checkCreateUserBackend = true;
+        this.redirectDataService.persistToLocalStorage();
+
         this.auth.loginFirebaseGoogle().then(val =>
-            this.router.navigate(['dashboard'])
+            this.router.navigate(['watchlist'])
         );
     }
 
     public loginMicrosoft(): void {
+        this.redirectDataService.data.checkCreateUserBackend = true;
+        this.redirectDataService.persistToLocalStorage();
+
         this.auth.loginFirebaseMicrosoft().then(val =>
-            this.router.navigate(['dashboard'])
+            this.router.navigate(['watchlist'])
         );
     }
 
