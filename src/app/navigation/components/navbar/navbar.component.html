@@ -7,7 +7,7 @@
         <ng-template #backArrowElse>
             <div class="hide-icon"></div>
         </ng-template>
-        <a class="navbar-brand logo" routerLink="dashboard">
+        <a class="navbar-brand logo" routerLink="watchlist">
             <img src="/assets/logos/GameEyeLogoWhite.png" alt="GameEye">
         </a>
         <button *ngIf="isLoggedInAndVerified; else menuElse" (click)="this.sidemenu.toggle()" class="navbar-toggler nav-control-button">
