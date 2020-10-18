@@ -8,6 +8,7 @@ import {AuthService} from '../../../account/services/auth/auth.service';
 })
 export class SettingsComponent implements OnInit {
     newsArticlesNotifications = true;
+
     constructor(public auth: AuthService) { }
 
     ngOnInit(): void {

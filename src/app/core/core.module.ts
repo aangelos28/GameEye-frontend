@@ -10,7 +10,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import {SettingsComponent} from './components/settings/settings.component';
-import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
@@ -40,7 +39,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         ReactiveFormsModule,
         MatButtonModule,
         MatSnackBarModule,
-        MatExpansionModule,
         MatCheckboxModule,
         MatButtonToggleModule,
         MatCardModule,
