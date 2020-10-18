@@ -50,8 +50,9 @@
     border-bottom-left-radius: 10px;
     overflow: auto;
     text-align: left;
-    flex: 1;
+    flex-grow: 1;
     flex-direction: row;
+    transition: height 0.2s linear;
 }
 .autocompletion-suggestion {
     margin-top: 20px;
@@ -73,7 +74,7 @@
     display: inline-block;
     float: right;
     margin-right: 30px;
-    margin-top: -8px;
+    margin-top: -10px;
     font-size: 24px;
 }
 
