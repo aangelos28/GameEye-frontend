@@ -1,0 +1,22 @@
+<app-titlebar [titletext]="'Add Game to Watchlist'" [titleiconfacode]="'fas fa-gamepad'"></app-titlebar>
+
+<body>
+<div class="main container page">
+    <div id="search-box-container">
+        <mat-form-field id="search-box" class="shadow" appearance="fill">
+            <mat-icon matPrefix fontSet="fa" fontIcon="fa-search" id="search-box-icon" color="primary"></mat-icon>
+            <input matInput type="search" id="search-box-input"
+                   placeholder="Search for games...">
+        </mat-form-field>
+        <div id="autocompletion-container">
+            <div class="autocompletion-suggestion">
+                <i class="autocompletion-logo fas fa-gamepad"></i>
+                <h4 class="autocompletion-title">Fallout 3</h4>
+                <button mat-icon-button class="autocompletion-add">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,84 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
+
+#search-box-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#search-box {
+    font-size: 24px;
+    width: 80%;
+    background-color: #d9d9d9;
+}
+#search-box-icon {
+    font-size: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#search-box-input {
+    margin-left: 30px;
+    top: 50%;
+    transform: translateY(-40%);
+}
+@include media-breakpoint-down(sm) {
+    #search-box {
+        font-size: 20px;
+        width: 100%;
+    }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #1f293b;
+}
+::ng-deep input.mat-input-element {
+    color: black;
+}
+::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.3275em;
+}
+
+#autocompletion-container {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #253245;
+    z-index: -1;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: auto;
+    text-align: left;
+    flex: 1;
+    flex-direction: row;
+}
+.autocompletion-suggestion {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white;
+    border-bottom: 1px solid rgb(97, 97, 97);
+}
+.autocompletion-logo {
+    font-size: 20px;
+    margin-left: 20px;
+}
+.autocompletion-title {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+.autocompletion-add {
+    display: inline-block;
+    float: right;
+    margin-right: 30px;
+    margin-top: -8px;
+    font-size: 24px;
+}
+
+@include media-breakpoint-down(sm) {
+    #autocompletion-container {
+        width: 100%;
+    }
+}

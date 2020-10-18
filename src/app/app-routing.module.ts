@@ -15,6 +15,7 @@ import {ReauthComponent} from './account/components/reauth/reauth.component';
 import {ChangeEmailComponent} from './account/components/change-email/change-email.component';
 import {WatchlistComponent} from './core/components/watchlist/watchlist.component';
 import {UserCreatedGuard} from './account/guards/user-exists/user-created.guard';
+import {AddGameComponent} from './core/components/add-game/add-game.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['watchlist']);
@@ -24,6 +25,12 @@ const routes: Routes = [
         path: 'watchlist',
         component: WatchlistComponent,
         canActivate: [AngularFireAuthGuard, EmailVerificationGuard, UserCreatedGuard],
+        data: {authGuardPipe: redirectUnauthorizedToLogin}
+    },
+    {
+        path: 'add-game',
+        component: AddGameComponent,
+        canActivate: [AngularFireAuthGuard, EmailVerificationGuard],
         data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
