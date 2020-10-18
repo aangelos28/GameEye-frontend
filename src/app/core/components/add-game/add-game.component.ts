@@ -41,7 +41,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
             finalize(() => this.isLoadingSuggestions = false)
         ).subscribe((autocompletionSuggestions) => {
             this.autocompletionSuggestions = autocompletionSuggestions;
-            console.log(this.autocompletionSuggestions);
         }));
     }
 

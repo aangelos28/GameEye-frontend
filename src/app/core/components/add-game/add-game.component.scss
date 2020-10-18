@@ -22,12 +22,6 @@
     top: 50%;
     transform: translateY(-40%);
 }
-@include media-breakpoint-down(sm) {
-    #search-box {
-        font-size: 20px;
-        width: 100%;
-    }
-}
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     color: #1f293b;
@@ -79,7 +73,27 @@
 }
 
 @include media-breakpoint-down(sm) {
+    #search-box {
+        font-size: 20px;
+        width: 100%;
+    }
     #autocompletion-container {
         width: 100%;
+    }
+    .autocompletion-suggestion {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    .autocompletion-title {
+        font-size: 12px;
+        margin-left: 15px;
+    }
+    .autocompletion-logo {
+        font-size: 12px;
+        margin-left: 15px;
+    }
+    .autocompletion-add {
+        font-size: 16px;
+        margin-right: 10px;
     }
 }
