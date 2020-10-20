@@ -38,23 +38,40 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #253245;
+    background-color: #232f3e;
     z-index: -1;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    overflow: auto;
+    overflow: scroll;
     text-align: left;
     flex-grow: 1;
     flex-direction: row;
     transition: height 0.2s linear;
 }
+#autocompletion-container-spacer {
+    width: 100%;
+    padding-top: 1.3275em;
+    background-color: #202c39;
+}
 .autocompletion-suggestion {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 20px;
     color: white;
     border-bottom: 1px solid rgb(97, 97, 97);
+    transition: background-color 0.2s ease;
 }
-.autocompletion-logo {
+.autocompletion-suggestion:hover {
+    background-color: #344563;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-suggestion.in-watchlist {
+    background-color: #007864;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-suggestion.in-watchlist:hover {
+    background-color: #008d75;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-icon {
     font-size: 20px;
     margin-left: 20px;
 }
@@ -64,7 +81,7 @@
     font-weight: bold;
     margin-left: 30px;
 }
-.autocompletion-add {
+.autocompletion-action {
     display: inline-block;
     float: right;
     margin-right: 30px;
@@ -81,18 +98,17 @@
         width: 100%;
     }
     .autocompletion-suggestion {
-        margin-top: 15px;
-        margin-bottom: 10px;
+        padding-top: 15px;
     }
     .autocompletion-title {
         font-size: 12px;
         margin-left: 15px;
     }
     .autocompletion-logo {
-        font-size: 12px;
+        font-size: 10px;
         margin-left: 15px;
     }
-    .autocompletion-add {
+    .autocompletion-action {
         font-size: 16px;
         margin-right: 10px;
     }

@@ -1,4 +1,4 @@
-<app-titlebar [titletext]="'Add Game to Watchlist'" [titleiconfacode]="'fas fa-gamepad'"></app-titlebar>
+<app-titlebar [titletext]="'Add Games to Watchlist'" [titleiconfacode]="'fas fa-gamepad'"></app-titlebar>
 
 <body>
 <div class="main container page">
@@ -8,13 +8,20 @@
             <input matInput type="search" [formControl]="searchField" id="search-box-input"
                    placeholder="Search for games...">
         </mat-form-field>
-        <div *ngIf="autocompletionSuggestions.length > 0" id="autocompletion-container">
-            <div *ngFor="let suggestion of autocompletionSuggestions" class="autocompletion-suggestion">
-                <i class="autocompletion-logo fas fa-gamepad"></i>
+        <div *ngIf="gameSuggestions.length > 0" id="autocompletion-container">
+            <div id="autocompletion-container-spacer"></div>
+            <div *ngFor="let suggestion of gameSuggestions; index as i;" class="autocompletion-suggestion" [class.in-watchlist]="checkGameInWatchlist(i)">
+                <i class="autocompletion-icon fas fa-gamepad"></i>
                 <h4 class="autocompletion-title">{{suggestion.title}}</h4>
-                <button mat-icon-button class="autocompletion-add">
+
+                <button *ngIf="!checkGameInWatchlist(i); else elseMinus" mat-icon-button class="autocompletion-action" (click)="addGameToWatchlist(i)">
                     <i class="fas fa-plus"></i>
                 </button>
+                <ng-template #elseMinus>
+                    <button mat-icon-button class="autocompletion-action" (click)="removeGameFromWatchlist(i)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </ng-template>
             </div>
         </div>
     </div>
