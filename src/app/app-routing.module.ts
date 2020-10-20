@@ -29,7 +29,7 @@ const routes: Routes = [
         data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
-        path: 'add-game',
+        path: 'watchlist/add-game',
         component: AddGameComponent,
         canActivate: [AngularFireAuthGuard, EmailVerificationGuard],
         data: {authGuardPipe: redirectUnauthorizedToLogin}
