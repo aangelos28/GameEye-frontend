@@ -8,23 +8,30 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
-import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import {WatchlistComponent} from './components/watchlist/watchlist.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
-
+import {AddgameComponent} from './components/addgame/addgame.component';
+import {RouterModule} from '@angular/router';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {UpdatesComponent} from './components/updates/updates.component';
 
 @NgModule({
     declarations: [
         DashboardComponent,
         TestComponent,
-        WatchlistComponent
+        WatchlistComponent,
+        AddgameComponent,
+        UpdatesComponent
     ],
     exports: [
         DashboardComponent,
         TestComponent,
-        WatchlistComponent
+        WatchlistComponent,
+        AddgameComponent,
+        UpdatesComponent
     ],
     imports: [
         CommonModule,
@@ -37,7 +44,9 @@ import {MatRippleModule} from '@angular/material/core';
         MatCardModule,
         MatIconModule,
         MatBadgeModule,
-        MatRippleModule
+        MatRippleModule,
+        RouterModule,
+        MatAutocompleteModule,
     ]
 })
 export class CoreModule {
