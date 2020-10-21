@@ -10,6 +10,7 @@ export class RedirectDataService {
     private localStorageKey = 'redirectData';
 
     constructor() {
+        this.data = {};
     }
 
     /**

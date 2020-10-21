@@ -5,11 +5,6 @@
         <img class="sidemenu-logo" [class.hidden]="!isSidemenuVisible" src="/assets/logos/GameEyeLogoFull.png" alt="GameEye logo">
         <div class="sidemenu-content">
             <div matRipple>
-                <span class="sidemenu-item top" [class.hidden]="!isSidemenuVisible">
-                    <a class="sidemenu-link" routerLink="dashboard" (click)="toggle()"><i class="sidemenu-link-icon fas fa-home"></i>Dashboard</a>
-                </span>
-            </div>
-            <div matRipple>
                 <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
                     <a class="sidemenu-link" routerLink="watchlist" (click)="toggle()"><i class="sidemenu-link-icon fa fa-list"></i>My Watchlist</a>
                 </span>
@@ -26,7 +21,7 @@
             </div>
             <div matRipple>
                 <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
-                    <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-cog"></i>Settings</a>
+                    <a class="sidemenu-link" routerLink="settings" (click)="toggle()"><i class="sidemenu-link-icon fa fa-cog"></i>Settings</a>
                 </span>
             </div>
             <div matRipple>

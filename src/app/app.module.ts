@@ -14,10 +14,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {NavigationModule} from './navigation/navigation.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AddGameComponent } from './core/components/add-game/add-game.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        AddGameComponent
     ],
     imports: [
         BrowserModule,
@@ -31,7 +35,9 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatFormFieldModule,
         MatButtonModule,
         NavigationModule,
-        MatDialogModule
+        MatDialogModule,
+        MatInputModule,
+        MatIconModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

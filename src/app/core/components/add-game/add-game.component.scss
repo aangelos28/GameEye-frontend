@@ -1,0 +1,115 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
+
+#search-box-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#search-box {
+    font-size: 24px;
+    width: 80%;
+    background-color: #d9d9d9;
+}
+#search-box-icon {
+    font-size: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#search-box-input {
+    margin-left: 30px;
+    top: 50%;
+    transform: translateY(-40%);
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #1f293b;
+}
+::ng-deep input.mat-input-element {
+    color: black;
+}
+::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.3275em;
+}
+
+#autocompletion-container {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #232f3e;
+    z-index: -1;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: auto;
+    text-align: left;
+    flex-grow: 1;
+    flex-direction: row;
+    transition: height 0.2s linear;
+}
+#autocompletion-container-spacer {
+    width: 100%;
+    padding-top: 1.3275em;
+    background-color: #202c39;
+}
+.autocompletion-suggestion {
+    padding-top: 20px;
+    color: white;
+    border-bottom: 1px solid rgb(97, 97, 97);
+    transition: background-color 0.2s ease;
+}
+.autocompletion-suggestion:hover {
+    background-color: #344563;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-suggestion.in-watchlist {
+    background-color: #007864;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-suggestion.in-watchlist:hover {
+    background-color: #008d75;
+    transition: background-color 0.2s ease;
+}
+.autocompletion-icon {
+    font-size: 20px;
+    margin-left: 20px;
+}
+.autocompletion-title {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+.autocompletion-action {
+    display: inline-block;
+    float: right;
+    margin-right: 30px;
+    margin-top: -10px;
+    font-size: 24px;
+}
+
+@include media-breakpoint-down(sm) {
+    #search-box {
+        font-size: 20px;
+        width: 100%;
+    }
+    #autocompletion-container {
+        width: 100%;
+    }
+    .autocompletion-suggestion {
+        padding-top: 15px;
+    }
+    .autocompletion-title {
+        font-size: 12px;
+        margin-left: 15px;
+    }
+    .autocompletion-logo {
+        font-size: 10px;
+        margin-left: 15px;
+    }
+    .autocompletion-action {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+}

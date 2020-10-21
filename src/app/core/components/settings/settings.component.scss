@@ -1,0 +1,31 @@
+.mat-button-toggle-checked {
+    background-color: #3e4d61;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+mat-button-toggle-group {
+    margin-left: 12px;
+    position: relative;
+    top: 10px;
+}
+
+mat-button-toggle {
+    position: relative;
+    text-align: center !important;
+    height: 20px !important;
+    width:  20px !important;
+    padding: 10px;
+    top: auto !important;
+    font-size: large;
+    font-weight: normal;
+    display: table;
+}
+
+mat-checkbox {
+    display: block;
+}
