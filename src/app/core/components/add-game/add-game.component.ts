@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable, of, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {debounceTime, finalize, switchMap, tap} from 'rxjs/operators';
+import {catchError, debounceTime, finalize, switchMap, tap} from 'rxjs/operators';
 
 // HTTP response body from autocompletion endpoint
 interface GameSuggestion {
@@ -56,7 +56,9 @@ export class AddGameComponent implements OnInit, OnDestroy {
             tap(() => this.isLoadingSuggestions = true),
             switchMap((value) => {
                 if (value.length > 2) {
-                    return this.getAutocompletions(value);
+                    return this.getAutocompletions(value).pipe(
+                        catchError(err => of([]))
+                    );
                 } else {
                     return of([]);
                 }
@@ -64,6 +66,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
             finalize(() => this.isLoadingSuggestions = false)
         ).subscribe((autocompletionSuggestions) => {
             this.gameSuggestions = autocompletionSuggestions;
+            console.log(this.gameSuggestions);
         }));
 
         this.getWatchlistGames();
