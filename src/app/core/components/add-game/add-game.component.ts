@@ -55,7 +55,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
             debounceTime(300),
             tap(() => this.isLoadingSuggestions = true),
             switchMap((value) => {
-                if (value.length > 2) {
+                if (value.length > 2 && value.length < 64) {
                     return this.getAutocompletions(value).pipe(
                         catchError(err => of([]))
                     );
