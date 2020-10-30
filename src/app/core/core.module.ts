@@ -7,7 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
-import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import {WatchlistComponent} from './components/watchlist/watchlist.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -16,13 +16,19 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {RouterModule} from '@angular/router';
+import {UpdatesComponent} from './components/updates/updates.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ArticlesComponent } from './components/articles/articles.component';
 
 
 @NgModule({
     declarations: [
         TestComponent,
         WatchlistComponent,
-        SettingsComponent
+        SettingsComponent,
+        UpdatesComponent,
+        ArticlesComponent
     ],
     exports: [
         TestComponent,
@@ -42,7 +48,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         MatIconModule,
         MatBadgeModule,
         MatRippleModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        RouterModule,
+        MatGridListModule
     ]
 })
 export class CoreModule {

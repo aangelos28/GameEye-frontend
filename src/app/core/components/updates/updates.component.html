@@ -1,0 +1,69 @@
+<app-titlebar [titletext]="aGame?.title"></app-titlebar>
+<div class="main container page">
+    <mat-grid-list [cols]="2" rowHeight="2:0.75" gutterSize="1.75em">
+        <mat-grid-tile>
+            <mat-card>
+                <div class="row text-center ">
+              <div class="col-12">
+                  <mat-icon>source</mat-icon>
+              </div>
+              <div class="col-12">
+                  Important Updates
+              </div>
+                </div>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card matBadge="{{aGame.resourceNotifications.articles.count}}" matBadgeColor="warn" matBadgeSize="large"  matBadgeOverlap routerLink="articles">
+            <div class="row text-center">
+                <div class="col-12">
+                    <mat-icon>source</mat-icon>
+                </div>
+                <div class="col-12">
+                    News Articles
+                </div>
+            </div>
+        </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile><mat-card>
+            <div class="row text-center">
+                <div class="col-12">
+                    <mat-icon>source</mat-icon>
+                </div>
+                <div class="col-12">
+                    Tweets
+                </div>
+            </div>
+        </mat-card></mat-grid-tile>
+        <mat-grid-tile><mat-card>
+            <div class="row text-center ">
+                <div class="col-12">
+                    <mat-icon>source</mat-icon>
+                </div>
+                <div class="col-12">
+                    Reddit Posts
+                </div>
+            </div>
+        </mat-card></mat-grid-tile>
+        <mat-grid-tile><mat-card>
+            <div class="row text-center ">
+                <div class="col-12">
+                    <mat-icon>source</mat-icon>
+                </div>
+                <div class="col-12">
+                    Images
+                </div>
+            </div>
+        </mat-card></mat-grid-tile>
+        <mat-grid-tile><mat-card>
+            <div class="row text-center ">
+                <div class="col-12">
+                    <mat-icon>source</mat-icon>
+                </div>
+                <div class="col-12">
+                    YouTube Videos
+                </div>
+            </div>
+        </mat-card></mat-grid-tile>
+    </mat-grid-list>
+</div>
