@@ -1,7 +1,6 @@
-<app-titlebar [titletext]="'My Watchlist'" [titleiconfacode]="'fa fa-list'" xmlns="http://www.w3.org/1999/html"></app-titlebar>
-
+<app-titlebar [titletext]="'My Watchlist'" [titleiconfacode]="'fa fa-list'"></app-titlebar>
 <div class="main container page">
-    <div *ngIf="empty !== false; else noGames">
+    <div *ngIf="gamelist?.length !== 0; else noGames">
         <div *ngFor="let aGame of gamelist; let i = index" [attr.data-index]="i">
             <mat-card matRipple matRippleCentered matRippleColor="rgba(55, 72, 104, 0.8)" matBadge="{{aGame.notificationCount}}" [matBadgeHidden]="aGame.notificationCount<=0" matBadgeSize="medium" tabindex="0" class="game-card" routerLink="/updates/{{i}}">
                 <div *ngIf="aGame.logoUrl == ''; else elseBlock">

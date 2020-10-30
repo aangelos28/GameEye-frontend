@@ -20,6 +20,7 @@ import {RouterModule} from '@angular/router';
 import {UpdatesComponent} from './components/updates/updates.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ArticlesComponent } from './components/articles/articles.component';
+import { ImgTitlebarComponent } from './components/img-titlebar/img-titlebar.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ArticlesComponent } from './components/articles/articles.component';
         WatchlistComponent,
         SettingsComponent,
         UpdatesComponent,
-        ArticlesComponent
+        ArticlesComponent,
+        ImgTitlebarComponent
     ],
     exports: [
         TestComponent,

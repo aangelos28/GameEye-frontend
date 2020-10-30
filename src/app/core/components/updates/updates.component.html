@@ -1,6 +1,6 @@
-<app-titlebar [titletext]="aGame?.title"></app-titlebar>
+<app-img-titlebar titletext="{{aGame?.title}}" imageUrl="{{aGame?.logoUrl}}"></app-img-titlebar>
 <div class="main container page">
-    <mat-grid-list [cols]="2" rowHeight="2:0.75" gutterSize="1.75em">
+    <mat-grid-list [cols]="2" rowHeight="2:0.75" gutterSize="0.5em">
         <mat-grid-tile>
             <mat-card>
                 <div class="row text-center ">
@@ -14,7 +14,7 @@
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
-            <mat-card matBadge="{{aGame.resourceNotifications.articles.count}}" matBadgeColor="warn" matBadgeSize="large"  matBadgeOverlap routerLink="articles">
+            <mat-card matBadge="{{aGame?.notificationCount}}" matBadgeColor="warn" matBadgeSize="medium" routerLink="/articles/{{index}}">
             <div class="row text-center">
                 <div class="col-12">
                     <mat-icon>source</mat-icon>

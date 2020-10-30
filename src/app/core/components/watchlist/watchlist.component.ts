@@ -42,21 +42,12 @@ export class WatchlistComponent implements OnInit {
 
     game: Observable<any>;
     gamelist: Array<Games>;
-    empty: boolean;
 
     // tslint:disable-next-line:typedef
     private subToGames()
     {
         this.game = this.httpClient.get<Games[]>( '/private/watchlist');
         this.game.subscribe((data: Games[]) => this.gamelist = data);
-        if (!Array.isArray(this.gamelist))
-        {
-            this.empty = true;
-        }
-        else{
-           this.empty = false;
-        }
-
     }
     constructor(private httpClient: HttpClient){
     }
