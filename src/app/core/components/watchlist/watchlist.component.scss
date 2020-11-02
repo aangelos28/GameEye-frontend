@@ -3,18 +3,17 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 @import "../../../../../node_modules/bootstrap/scss/variables";
 
-#msgCenter
-{
+#msgCenter {
     text-align: center;
 }
-.game-thumb
-{
-    .mat-icon
-    {
+
+.game-thumb {
+    .mat-icon {
         font-size: 40px;
         display: flex;
         color: white;
     }
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,8 +23,7 @@
     max-height: 65px;
 }
 
-.game-card
-{
+.game-card {
     justify-content: space-between;
     box-shadow: 2.5px 2.5px 10px grey;
     align-items: center;
@@ -34,17 +32,33 @@
     background-color: #1f293b;
     margin-bottom: 10px;
     cursor: pointer;
-    ::ng-deep .mat-ripple-element{
-        z-index:-1 !important;
-    }
+    transition: background-color ease 0.3s;
 
+    ::ng-deep .mat-ripple-element {
+        z-index: -1 !important;
+    }
+}
+
+.game-card.delete-color {
+    background-color: #6f0000;
+    transition: background-color ease 0.3s;
+}
+
+.game-card:hover {
+    background-color: #2e3855;
+    transition: background-color ease 0.3s;
+}
+
+.game-card:hover.delete-color {
+    background-color: #b61818;
+    transition: background-color ease 0.3s;
 }
 
 ::ng-deep .mat-badge-content {
     position: relative;
     text-align: center !important;
     height: 18px !important;
-    width:  21px !important;
+    width: 21px !important;
     padding: 10px !important;
     top: auto !important;
     right: 5px !important;
@@ -55,8 +69,7 @@
     box-sizing: content-box;
 }
 
-.title-container
-{
+.title-container {
     justify-content: left;
     align-items: center;
     color: white;
@@ -66,42 +79,56 @@
     margin-bottom: 0;
 }
 
-.add-button
-{
+.add-button {
     box-shadow: 2.5px 2.5px 10px grey;
     background-color: #1f293b;
     position: fixed;
     bottom: 25px;
     right: 5%;
-    .mat-icon
-    {
+
+    .mat-icon {
         font-size: x-large;
     }
-    outline: none;
-}
-.delete-button
-{
-    visibility: visible!important;
-    box-shadow: 2.5px 2.5px 10px grey;
-    background-color: #1f293b;
-    position: fixed;
-    bottom: 100px;
-    right: 5%;
-    .mat-icon
-    {
-        font-size: x-large;
-    }
+
     outline: none;
 }
 
+.delete-button {
+    box-shadow: 2.5px 2.5px 10px grey;
+    position: fixed;
+    bottom: 100px;
+    right: 5%;
+
+    background-color: #af0000;
+
+    .mat-icon {
+        font-size: x-large;
+    }
+
+    outline: none;
+}
+
+.delete-button.finish {
+    box-shadow: 2.5px 2.5px 10px grey;
+    position: fixed;
+    bottom: 100px;
+    right: 5%;
+
+    background-color: #008d75;
+
+    .mat-icon {
+        font-size: x-large;
+    }
+
+    outline: none;
+}
 
 @include media-breakpoint-down(sm) {
     ::ng-deep .mat-badge-content {
         font-size: medium;
     }
 
-    .title-container
-    {
+    .title-container {
         font-size: large;
     }
 }

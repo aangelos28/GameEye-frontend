@@ -1,25 +1,35 @@
 <app-titlebar [titletext]="'My Watchlist'" [titleiconfacode]="'fa fa-list'"></app-titlebar>
 <div class="main container page">
-    <div *ngIf="gamelist?.length !== 0; else noGames">
-        <div *ngFor="let aGame of gamelist; let i = index" [attr.data-index]="i">
-            <mat-card matRipple matRippleCentered matRippleColor="rgba(55, 72, 104, 0.8)" matBadge="{{aGame.notificationCount}}" [matBadgeHidden]="aGame.notificationCount<=0" matBadgeSize="medium" tabindex="0" class="game-card" routerLink="/updates/{{i}}">
-                <div *ngIf="aGame.logoUrl == ''; else elseBlock">
-                    <div mat-card-avatar class="game-thumb"><mat-icon>videogame_asset</mat-icon></div>
-                 </div>
+    <div *ngIf="watchlistGames?.length !== 0; else noGamesWrapper">
+        <div *ngFor="let game of watchlistGames; let i = index" [attr.data-index]="i">
+            <mat-card matRipple matRippleCentered matRippleColor="rgba(55, 72, 104, 0.8)" matBadge="{{game.notificationCount}}"
+                      [matBadgeHidden]="game.notificationCount <= 0" matBadgeSize="medium" tabindex="0" class="game-card" [class.delete-color]="inDeleteMode"
+                      (click)="watchlistEntryClick(i)">
+                <div *ngIf="game.logoUrl == ''; else elseBlock">
+                    <div mat-card-avatar class="game-thumb">
+                        <mat-icon>videogame_asset</mat-icon>
+                    </div>
+                </div>
                 <ng-template #elseBlock>
-                    <img mat-card-avatar src="{{aGame.logoUrl}}" alt="game logo" class="game-thumb">
+                    <img mat-card-avatar src="{{game.logoUrl}}" alt="game logo" class="game-thumb">
                 </ng-template>
-                <mat-card-content class="title-container">{{aGame.title}}
+                <mat-card-content class="title-container">{{game.title}}
                 </mat-card-content>
             </mat-card>
         </div>
     </div>
-    <ng-template #noGames>
-        <p id="msgCenter">No Games To Display</p>
+    <ng-template #noGamesWrapper>
+        <app-spinner *ngIf="loading == true"></app-spinner>
+        <p id="msgCenter" *ngIf="watchlistGames?.length > 0">Your watchlist is empty.</p>
     </ng-template>
-    <a mat-fab color="primary" class="delete-button" routerLink="/updates/1">
+    <button mat-fab *ngIf="!inDeleteMode; else finishDelete" class="delete-button" (click)="toggleDeleteMode()">
         <mat-icon>delete</mat-icon>
-    </a>
+    </button>
+    <ng-template #finishDelete>
+        <button mat-fab class="delete-button finish" (click)="toggleDeleteMode()">
+            <mat-icon>checkmark</mat-icon>
+        </button>
+    </ng-template>
     <a mat-fab color="primary" class="add-button" routerLink="/watchlist/add-game">
         <mat-icon>add</mat-icon>
     </a>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Games} from '../watchlist/watchlist.component';
+import {Game} from '../watchlist/watchlist.component';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -14,7 +14,7 @@ export class UpdatesComponent implements OnInit {
 
     index: any;
     game: Observable<any>;
-    aGame: Games;
+    aGame: Game;
     gameUrl = '/private/watchlist/game/';
     temp: any;
 
@@ -25,8 +25,8 @@ export class UpdatesComponent implements OnInit {
     {
         this.temp = this.route.params.subscribe(params => { this.index = params.index; });
         this.gameUrl += this.index;
-        this.game = this.httpClient.get<Games>( this.gameUrl);
-        this.game.subscribe((data: Games) => this.aGame = data);
+        this.game = this.httpClient.get<Game>( this.gameUrl);
+        this.game.subscribe((data: Game) => this.aGame = data);
     }
 
 
