@@ -1,0 +1,31 @@
+// Bootstrap Styles
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+
+.titlebar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: 45px;
+    height: 40px;
+    background-color: #253245;
+    z-index: 10;
+}
+
+.title-text {
+    color: #fff;
+    top: 50%;
+    font-weight: bold;
+    font-size: 18px;
+    transform: translateY(50%);
+}
+
+.title-icon {
+    margin-right: 5px;
+    height: 24px;
+    width: 24px;
+    margin-top: -2px;
+}

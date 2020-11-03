@@ -3,64 +3,64 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 @import "../../../../../node_modules/bootstrap/scss/variables";
 
-#G1
-{
-    background-image: url('https://www.extremetech.com/wp-content/uploads/2016/05/Doom-Feature.jpg');
+#msgCenter {
+    text-align: center;
 }
 
-#G2
-{
-    background-image: url('https://icdn2.digitaltrends.com/image/digitaltrends/nba-2k21-damian-lillard-440x292-c.jpg');
+.game-card {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 13px 13px 13px 12px;
+    background-color: #1f293b;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color ease 0.3s;
+    font-size: 36px;
+    font-family: Lato, sans-serif;
+
+    ::ng-deep .mat-ripple-element {
+        z-index: -1 !important;
+    }
 }
 
-#G3
-{
-    background-image: url('https://sickr.files.wordpress.com/2020/08/fall_guys_logo.jpg');
-}
+.game-thumb {
+    .mat-icon {
+        font-size: 40px;
+        display: flex;
+        color: white;
+    }
 
-#G4
-{
-    background-image: url('https://upload.wikimedia.org/wikipedia/en/4/47/Tom_Clancy%27s_Rainbow_Six_Siege_cover_art.jpg');
-}
-
-#G5
-{
-    background-image: url('https://i.ytimg.com/vi/2xWRMn3_-xM/maxresdefault.jpg');
-}
-
-.game-thumb
-{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin-right: 15px;
-    border-radius: 0;
+    border-radius: 15%;
     max-width: 65px;
     max-height: 65px;
 }
 
-.game-card
-{
-    justify-content: space-between;
-    box-shadow: 2.5px 2.5px 10px grey;
-    align-items: center;
-    display: flex;
-    padding: 13px 20px 13px 12px;
-    background-color: #1f293b;
-    margin-bottom: 10px;
-    cursor: pointer;
-    ::ng-deep .mat-ripple-element{
-        z-index:-1 !important;
-    }
+.game-card.delete-color {
+    background-color: #6f0000;
+    transition: background-color ease 0.3s;
+}
 
+.game-card:hover {
+    background-color: #2e3855;
+    transition: background-color ease 0.3s;
+}
+
+.game-card:hover.delete-color {
+    background-color: #b61818;
+    transition: background-color ease 0.3s;
 }
 
 ::ng-deep .mat-badge-content {
     position: relative;
     text-align: center !important;
-    height: 20px !important;
-    width:  20px !important;
-    padding: 10px;
+    height: 18px !important;
+    width: 21px !important;
+    padding: 10px !important;
     top: auto !important;
     right: 5px !important;
     font-size: large;
@@ -70,8 +70,7 @@
     box-sizing: content-box;
 }
 
-.title-container
-{
+.title-container {
     justify-content: left;
     align-items: center;
     color: white;
@@ -81,18 +80,30 @@
     margin-bottom: 0;
 }
 
-.add-button
-{
-    box-shadow: 2.5px 2.5px 10px grey;
-    background-color: #1f293b;
-    position: fixed;
-    bottom: 25px;
+.action-button {
+    box-shadow: 0 0 3px grey;
     right: 5%;
-    .mat-icon
-    {
+    position: fixed;
+
+    .mat-icon {
         font-size: x-large;
     }
+
     outline: none;
+}
+
+.add-button {
+    bottom: 25px;
+    background-color: #1f293b;
+}
+
+.delete-button {
+    bottom: 100px;
+    background-color: #af0000;
+}
+
+.delete-button.finish {
+    background-color: #008d75;
 }
 
 @include media-breakpoint-down(sm) {
@@ -100,8 +111,7 @@
         font-size: medium;
     }
 
-    .title-container
-    {
+    .title-container {
         font-size: large;
     }
 }

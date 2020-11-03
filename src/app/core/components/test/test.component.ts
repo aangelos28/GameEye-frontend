@@ -14,6 +14,7 @@ export class TestComponent implements OnInit {
 
     public companies$: Observable<any>;
 
+
     constructor(public auth: AuthService, private httpClient: HttpClient) {
     }
 
