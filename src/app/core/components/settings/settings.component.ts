@@ -8,6 +8,8 @@ import {AuthService} from '../../../account/services/auth/auth.service';
 })
 export class SettingsComponent implements OnInit {
     newsArticlesNotifications = true;
+    receiveNotifications = true;
+    notifyOnlyIfImportant = true;
 
     constructor(public auth: AuthService) { }
 
