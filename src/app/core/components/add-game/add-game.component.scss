@@ -55,10 +55,13 @@
     background-color: #202c39;
 }
 .autocompletion-suggestion {
-    padding-top: 20px;
+    display: flex;
     color: white;
     border-bottom: 1px solid rgb(97, 97, 97);
+    padding-top: 12px;
+    padding-bottom: 12px;
     transition: background-color 0.2s ease;
+    align-items: center;
 }
 .autocompletion-suggestion:hover {
     background-color: #344563;
@@ -77,16 +80,14 @@
     margin-left: 20px;
 }
 .autocompletion-title {
-    display: inline-block;
     font-size: 22px;
     font-weight: bold;
     margin-left: 30px;
+    margin-bottom: 0;
 }
 .autocompletion-action {
-    display: inline-block;
-    float: right;
-    margin-right: 30px;
-    margin-top: -10px;
+    margin-left: auto;
+    margin-right: 15px;
     font-size: 24px;
 }
 
@@ -99,10 +100,11 @@
         width: 100%;
     }
     .autocompletion-suggestion {
-        padding-top: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
     .autocompletion-title {
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 15px;
     }
     .autocompletion-logo {
