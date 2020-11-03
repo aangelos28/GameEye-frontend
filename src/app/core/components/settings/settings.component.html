@@ -2,32 +2,24 @@
 
 <body>
 <div class="main container page">
-    <h2 class="section-header">Content</h2>
-    <hr>
-    <mat-slide-toggle color="primary">Show impact scores</mat-slide-toggle>
-    <br><br><br>
     <h2 class="section-header">Notifications</h2>
     <hr>
-    <mat-slide-toggle checked color="primary">Receive notifications</mat-slide-toggle>
+    <mat-slide-toggle color="primary">Receive notifications</mat-slide-toggle>
     <br><br>
     <ul>
-        <mat-checkbox disabled>Important updates</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="newsArticlesNotifications"
-                      (click)="newsArticlesCheckboxChanged($event)">News articles
-        </mat-checkbox>
-        <mat-checkbox disabled>Reddit posts</mat-checkbox>
-        <mat-checkbox disabled>Images</mat-checkbox>
-        <mat-checkbox disabled>YouTube videos</mat-checkbox>
+        <div>
+            <mat-checkbox *ngIf="receiveNotifications" [disabled]="receiveNotifications == true" color="primary">Important updates</mat-checkbox>
+            <mat-checkbox *ngIf="receiveNotifications" [disabled]="receiveNotifications == false" color="primary" [checked]="newsArticlesNotifications" [checked]="receiveNotifications"
+                          (click)="newsArticlesCheckboxChanged($event)">News articles
+            </mat-checkbox>
+            <mat-checkbox *ngIf="receiveNotifications" [disabled]="receiveNotifications == true" color="primary" [checked]="receiveNotifications == false">Reddit posts</mat-checkbox>
+            <mat-checkbox *ngIf="receiveNotifications" [disabled]="receiveNotifications == true" color="primary" [checked]="receiveNotifications == false">Images</mat-checkbox>
+            <mat-checkbox *ngIf="receiveNotifications" [disabled]="receiveNotifications == true" color="primary" [checked]="receiveNotifications == false">YouTube videos</mat-checkbox>
+        </div>
         <br>
-        <mat-slide-toggle color="primary">Notifications for impact scores:</mat-slide-toggle>
-        <p>
-            <mat-button-toggle-group appearance="legacy" name="fontStyle"
-                                     aria-label="Font Style" multiple="true" color="primary">
-                <mat-button-toggle color="primary">1</mat-button-toggle>
-                <mat-button-toggle color="primary">2</mat-button-toggle>
-                <mat-button-toggle color="primary">3</mat-button-toggle>
-            </mat-button-toggle-group>
-        </p>
+        <div>
+            <mat-slide-toggle *ngIf="notifyOnlyIfImportant" disabled color="primary">Notify only if important</mat-slide-toggle>
+        </div>
     </ul>
 </div>
 </body>
