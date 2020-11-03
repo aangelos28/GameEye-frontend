@@ -22,15 +22,15 @@
         <app-spinner *ngIf="loading == true"></app-spinner>
         <p id="msgCenter" *ngIf="watchlistGames?.length > 0">Your watchlist is empty.</p>
     </ng-template>
-    <button mat-fab *ngIf="!inDeleteMode; else finishDelete" class="delete-button" (click)="toggleDeleteMode()">
+    <button mat-fab *ngIf="!inDeleteMode; else finishDelete" class="action-button delete-button" (click)="toggleDeleteMode()">
         <mat-icon>delete</mat-icon>
     </button>
     <ng-template #finishDelete>
-        <button mat-fab class="delete-button finish" (click)="toggleDeleteMode()">
+        <button mat-fab class="action-button delete-button finish" (click)="toggleDeleteMode()">
             <mat-icon>checkmark</mat-icon>
         </button>
     </ng-template>
-    <a mat-fab color="primary" class="add-button" routerLink="/watchlist/add-game">
+    <a mat-fab color="primary" class="action-button add-button" routerLink="/watchlist/add-game">
         <mat-icon>add</mat-icon>
     </a>
 </div>

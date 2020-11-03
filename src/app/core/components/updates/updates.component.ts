@@ -1,36 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Game} from '../watchlist/watchlist.component';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-updates',
-  templateUrl: './updates.component.html',
-  styleUrls: ['./updates.component.scss']
+    selector: 'app-updates',
+    templateUrl: './updates.component.html',
+    styleUrls: ['./updates.component.scss']
 })
+export class UpdatesComponent implements OnInit, OnDestroy {
 
-export class UpdatesComponent implements OnInit {
+    public gameIndex: number;
+    public game: Game;
 
-    index: any;
-    game: Observable<any>;
-    aGame: Game;
-    gameUrl = '/private/watchlist/game/';
-    temp: any;
+    private subscriptions = new Subscription();
 
-
-    constructor(private route: ActivatedRoute, private httpClient: HttpClient) { }
-
-    private subToGame(): void
-    {
-        this.temp = this.route.params.subscribe(params => { this.index = params.index; });
-        this.gameUrl += this.index;
-        this.game = this.httpClient.get<Game>( this.gameUrl);
-        this.game.subscribe((data: Game) => this.aGame = data);
+    constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
     }
 
-
     ngOnInit(): void {
-        this.subToGame();
-     }
+        this.subscriptions.add(this.route.params.subscribe(params => {
+            this.gameIndex = params.index;
+            this.httpClient.get<Game>(`/private/watchlist/game/${this.gameIndex}`).subscribe(game => this.game = game);
+        }));
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
+    }
 }

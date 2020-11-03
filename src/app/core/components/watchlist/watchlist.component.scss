@@ -7,6 +7,23 @@
     text-align: center;
 }
 
+.game-card {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 13px 13px 13px 12px;
+    background-color: #1f293b;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color ease 0.3s;
+    font-size: 36px;
+    font-family: Lato, sans-serif;
+
+    ::ng-deep .mat-ripple-element {
+        z-index: -1 !important;
+    }
+}
+
 .game-thumb {
     .mat-icon {
         font-size: 40px;
@@ -21,22 +38,6 @@
     border-radius: 15%;
     max-width: 65px;
     max-height: 65px;
-}
-
-.game-card {
-    justify-content: space-between;
-    box-shadow: 2.5px 2.5px 10px grey;
-    align-items: center;
-    display: flex;
-    padding: 13px 13px 13px 12px;
-    background-color: #1f293b;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: background-color ease 0.3s;
-
-    ::ng-deep .mat-ripple-element {
-        z-index: -1 !important;
-    }
 }
 
 .game-card.delete-color {
@@ -79,48 +80,30 @@
     margin-bottom: 0;
 }
 
-.add-button {
-    box-shadow: 2.5px 2.5px 10px grey;
-    background-color: #1f293b;
-    position: fixed;
-    bottom: 25px;
+.action-button {
+    box-shadow: 0 0 3px grey;
     right: 5%;
+    position: fixed;
 
     .mat-icon {
         font-size: x-large;
     }
 
     outline: none;
+}
+
+.add-button {
+    bottom: 25px;
+    background-color: #1f293b;
 }
 
 .delete-button {
-    box-shadow: 2.5px 2.5px 10px grey;
-    position: fixed;
     bottom: 100px;
-    right: 5%;
-
     background-color: #af0000;
-
-    .mat-icon {
-        font-size: x-large;
-    }
-
-    outline: none;
 }
 
 .delete-button.finish {
-    box-shadow: 2.5px 2.5px 10px grey;
-    position: fixed;
-    bottom: 100px;
-    right: 5%;
-
     background-color: #008d75;
-
-    .mat-icon {
-        font-size: x-large;
-    }
-
-    outline: none;
 }
 
 @include media-breakpoint-down(sm) {
