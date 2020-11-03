@@ -12,7 +12,6 @@
     margin-top: 45px;
     height: 40px;
     background-color: #253245;
-    #text-align: center;
     z-index: 10;
 }
 
@@ -22,12 +21,6 @@
     font-weight: bold;
     font-size: 18px;
     transform: translateY(50%);
-}
-
-@include media-breakpoint-down(sm) {
-    .title-text {
-        font-size: 2.5vw;
-    }
 }
 
 .title-icon {

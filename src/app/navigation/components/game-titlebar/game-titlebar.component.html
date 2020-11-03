@@ -1,5 +1,11 @@
 <div class="titlebar shadow">
     <div class="container">
-        <p class="title-text"><img class="title-icon" src="{{imageUrl}}"> {{titleText}}</p>
+        <p class="title-text">
+            <img *ngIf="imageUrl; else gameIcon" class="title-icon" src="{{imageUrl}}" alt="G">
+            <ng-template #gameIcon>
+                <i class="title-icon fas fa-gamepad"></i>
+            </ng-template>
+            {{titleText}}
+        </p>
     </div>
 </div>
