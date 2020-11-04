@@ -11,7 +11,13 @@
     font-size: 24px;
     width: 80%;
     background-color: #d9d9d9;
+    transition: box-shadow 0.3s ease;
 }
+#search-box:focus-within {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    transition: box-shadow 0.3s ease;
+}
+
 #search-box-icon {
     font-size: 26px;
     top: 50%;
