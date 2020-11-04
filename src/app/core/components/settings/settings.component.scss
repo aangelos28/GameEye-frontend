@@ -3,22 +3,20 @@
     color: white;
 }
 
-ul {
-    list-style-type: none;
-    margin-top: 4px;
+#notificationIcon {
+    margin-right: 10px;
+    color: #1f293b;
 }
 
-mat-button-toggle-group {
-    margin-left: 12px;
-    position: relative;
-    top: 10px;
+#notificationSettings {
+    margin-left: 2em;
 }
 
 mat-button-toggle {
     position: relative;
     text-align: center !important;
     height: 20px !important;
-    width:  20px !important;
+    width: 20px !important;
     padding: 10px;
     top: auto !important;
     font-size: large;

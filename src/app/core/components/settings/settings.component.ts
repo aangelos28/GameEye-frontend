@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../account/services/auth/auth.service';
 
 @Component({
@@ -7,19 +7,22 @@ import {AuthService} from '../../../account/services/auth/auth.service';
     styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-    newsArticlesNotifications = true;
-    receiveNotifications = true;
-    notifyOnlyIfImportant = true;
+    // Notification settings
+    public receiveNotifications = true;
+    public newsArticleNotifications = true;
+    public redditPostNotifications = false;
+    public imageNotifications = false;
+    public youtubeNotifications = false;
+    public notifyOnlyIfImportant = false;
 
-    constructor(public auth: AuthService) { }
+    constructor(public auth: AuthService) {
+    }
 
     ngOnInit(): void {
     }
 
-    newsArticlesCheckboxChanged(event: any): void
-    {
-        event.preventDefault();
-        this.newsArticlesNotifications = true;
+    newsArticlesCheckboxChanged(e: any): void {
+        e.preventDefault();
+        this.newsArticleNotifications = true;
     }
-
 }

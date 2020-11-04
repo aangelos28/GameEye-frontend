@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {TestComponent} from './components/test/test.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {MatInputModule} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
@@ -52,7 +52,8 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
         MatRippleModule,
         MatSlideToggleModule,
         RouterModule,
-        MatGridListModule
+        MatGridListModule,
+        FormsModule
     ]
 })
 export class CoreModule {
