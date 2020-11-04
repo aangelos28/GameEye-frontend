@@ -21,6 +21,8 @@ import {UpdatesComponent} from './components/updates/updates.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {ArticlesComponent} from './components/articles/articles.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
+import {TopGamesComponent} from './components/top-games/top-games.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
         SettingsComponent,
         UpdatesComponent,
         ArticlesComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        TopGamesComponent
     ],
     exports: [
         TestComponent,
@@ -53,7 +56,8 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
         MatSlideToggleModule,
         RouterModule,
         MatGridListModule,
-        FormsModule
+        FormsModule,
+        MatTableModule
     ]
 })
 export class CoreModule {
