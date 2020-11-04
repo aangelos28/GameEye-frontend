@@ -7,7 +7,11 @@
     font-size: 25px;
     @media only screen and (max-width: 768px)
     {
-     font-size: 20px;
+     font-size: 15px;
+    }
+    .card-body
+    {
+        width: 100%;
     }
 }
 p{
@@ -23,13 +27,30 @@ i
     font-size: 50px;
     @media only screen and (max-width: 768px)
     {
-        font-size: 65px;
+        font-size: 55px;
+    }
+    .card-body
+    {
+        width: 100%;
     }
 }
 .col-12
 {
     align-items: center !important;
 
+}
+::ng-deep .mat-badge-content
+{
+    background-color: crimson;
+    align-items: center;
+    font-size: 18px;
+    font-weight: normal;
+    align-items: center;
+}
+.col-6
+{
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 
