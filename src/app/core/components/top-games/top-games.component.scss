@@ -1,0 +1,64 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
+
+
+#most-watched-games-table {
+    width: 100%;
+    background-color: #1f293b;
+    font-family: Lato, sans-serif;
+}
+
+::ng-deep .mat-header-cell {
+    font-size: 17px;
+    color: white;
+    font-weight: bold;
+}
+
+::ng-deep .mat-cell {
+    font-size: 16px;
+    color: white;
+}
+
+@include media-breakpoint-down(sm) {
+    ::ng-deep .mat-header-cell {
+        font-size: 12px;
+    }
+
+    ::ng-deep .mat-cell {
+        font-size: 12px;
+    }
+}
+
+::ng-deep .mat-header-cell.watchers-col {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 6em;
+}
+
+::ng-deep .mat-cell.watchers-col {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 6em;
+}
+
+@include media-breakpoint-down(sm) {
+    ::ng-deep .mat-header-cell.watchers-col {
+        padding-right: 2em;
+    }
+
+    ::ng-deep .mat-cell.watchers-col {
+        padding-right: 2em;
+    }
+}
+
+::ng-deep .mat-header-row {
+    border-color: #383e42;
+    background-color: #1d2334;
+}
+
+
+::ng-deep .mat-row {
+    border-color: #383e42;
+}
+

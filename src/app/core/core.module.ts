@@ -22,6 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {ArticlesComponent} from './components/articles/articles.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {TopGamesComponent} from './components/top-games/top-games.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {TopGamesComponent} from './components/top-games/top-games.component';
         MatSlideToggleModule,
         RouterModule,
         MatGridListModule,
-        FormsModule
+        FormsModule,
+        MatTableModule
     ]
 })
 export class CoreModule {

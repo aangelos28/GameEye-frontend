@@ -2,5 +2,27 @@
 
 <body>
 <div class="main container page">
+    <mat-table [dataSource]="mostWatchedGames" id="most-watched-games-table" class="mat-elevation-z8">
+        <!-- Rank Column -->
+        <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rank}} </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+        </ng-container>
+
+        <!-- Watchers Column -->
+        <ng-container matColumnDef="watchers">
+            <mat-header-cell class="watchers-col" *matHeaderCellDef> Watchers </mat-header-cell>
+            <mat-cell class="watchers-col" *matCellDef="let element"> {{element.watchers}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 </div>
 </body>
