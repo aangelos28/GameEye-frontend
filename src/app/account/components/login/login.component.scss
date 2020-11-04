@@ -1,16 +1,11 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
+
+
 .login-container {
     max-width: 500px;
     min-height: 500px;
-}
-
-.login-form {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.providers-container {
-    margin-left: 20px;
-    margin-right: 20px;
 }
 
 .login-form-field {
@@ -34,7 +29,7 @@
 }
 
 .login-button {
-    margin-top: 40px;
+    margin-top: 20px;
     transition: all 0.2s ease;
 }
 

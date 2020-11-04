@@ -1,3 +1,6 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -84,6 +87,13 @@ body {
 .page {
     padding-top: 120px;
     padding-bottom: 40px;
+}
+
+@include media-breakpoint-down(sm) {
+    .page {
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
 }
 
 // Snackbars
