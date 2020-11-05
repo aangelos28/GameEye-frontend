@@ -2,55 +2,79 @@
 {
     background-color: gray;
     color: white;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
     align-items: center;
     font-size: 25px;
     @media only screen and (max-width: 768px)
     {
      font-size: 15px;
+     margin-bottom: 10%;
     }
     .card-body
     {
         width: 100%;
     }
+    border-color: grey;
 }
 p{
     white-space: nowrap;
+    margin: 0px;
 }
 #news{
     background-color: #2d3a4c;
+    border-color: #2d3a4c;
 }
 i
 {
+    line-height: 1;
     display: contents;
-    text-align: center ;
+    text-align: center;
+    text-justify: auto;
     font-size: 50px;
     @media only screen and (max-width: 768px)
     {
         font-size: 55px;
     }
-    .card-body
-    {
-        width: 100%;
-    }
 }
 .col-12
 {
     align-items: center !important;
-
 }
-::ng-deep .mat-badge-content
+::ng-deep .mat-badge-large .mat-badge-content
 {
     background-color: crimson;
     align-items: center;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: normal;
     align-items: center;
 }
 .col-6
 {
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.col-md-10
+{
+    padding-left: 0px;
+}
+.col-md-2
+{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.col-lg-1
+{
+    padding: 0px 15px 0px 15px;
+    @media only screen and (max-width: 768px){
+        padding-bottom: 10px;
+    }
+}
+.col-lg-11
+{
+    padding: 0px 15px 0px 15px;
+    @media only screen and (max-width: 991px){
+        padding: 0px 0px 0px 0px;
+    }
 }
 
 

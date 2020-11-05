@@ -2,13 +2,13 @@
 <div class="main container page">
   <div class="row">
       <div class="col-6 col-md-12">
-          <div class="card shadow-sm" mat-ripple matRippleCentered>
+          <div class="card shadow" mat-ripple matRippleCentered>
               <div class="card-body">
                   <div class="row">
-                      <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                      <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                           <i class="fas fa-exclamation-circle"></i>
                       </div>
-                      <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                      <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                           <p>Important Updates</p>
                       </div>
                   </div>
@@ -16,14 +16,14 @@
           </div>
       </div>
       <div class="col-6 col-md-12">
-          <div matBadge="{{game?.notificationCount}}" matBadgeSize="medium" matBadgeHidden="{{game?.notificationCount > 0}}">
-          <div class="card shadow-sm" id="news" routerLink="/articles/{{gameIndex}}"mat-ripple matRippleCentered>
+          <div matBadge="0{{game?.notificationCount}}" matBadgeSize="large" matBadgeHidden="{{game?.notificationCount <= 0}}">
+          <div class="card shadow" id="news" routerLink="/articles/{{gameIndex}}" mat-ripple matRippleCentered>
           <div class="card-body">
               <div class="row">
-                  <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                  <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                       <i class="far fa-newspaper"></i>
                   </div>
-                  <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                  <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                       <p>News Articles</p>
                   </div>
               </div>
@@ -34,13 +34,13 @@
   </div>
     <div class="row">
         <div class="col-6 col-md-12">
-            <div class="card shadow-sm" mat-ripple matRippleCentered>
+            <div class="card shadow" mat-ripple matRippleCentered>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                        <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                             <i class="fab fa-twitter"></i>
                         </div>
-                        <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                        <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                             <p>Tweets</p>
                         </div>
                     </div>
@@ -48,13 +48,13 @@
             </div>
         </div>
         <div class="col-6 col-md-12">
-            <div class="card shadow-sm" mat-ripple matRippleCentered>
+            <div class="card shadow" mat-ripple matRippleCentered>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                        <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                             <i class="fab fa-reddit-alien"></i>
                         </div>
-                        <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                        <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                             <p>Reddit Posts</p>
                         </div>
                     </div>
@@ -64,13 +64,13 @@
     </div>
     <div class="row">
         <div class="col-6 col-md-12">
-            <div class="card shadow-sm" mat-ripple matRippleCentered>
+            <div class="card shadow" mat-ripple matRippleCentered>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                        <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                             <i class="far fa-images"></i>
                         </div>
-                        <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                        <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                             <p>Images</p>
                         </div>
                     </div>
@@ -78,13 +78,13 @@
             </div>
         </div>
         <div class="col-6 col-md-12">
-            <div class="card shadow-sm" mat-ripple matRippleCentered>
+            <div class="card shadow" mat-ripple matRippleCentered>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-center">
+                        <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                             <i class="fab fa-youtube"></i>
                         </div>
-                        <div class="col-12 col-md-10 d-flex justify-content-center justify-content-md-start">
+                        <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
                             <p>YouTube Videos</p>
                         </div>
                     </div>
