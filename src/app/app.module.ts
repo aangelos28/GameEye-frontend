@@ -17,8 +17,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddGameComponent } from './core/components/add-game/add-game.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { TopGamesComponent } from './core/components/top-games/top-games.component';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 @NgModule({
     declarations: [
@@ -31,7 +31,8 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
         HttpClientModule,
         BrowserAnimationsModule,
         AngularFireModule.initializeApp(environment.firebase),
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        AngularFireMessagingModule,
+        ServiceWorkerModule.register('global-sw.js', {enabled: true}),
         CoreModule,
         ReactiveFormsModule,
         MatFormFieldModule,
