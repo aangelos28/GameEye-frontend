@@ -1,0 +1,43 @@
+#head
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 25px auto 25px auto;
+    width: 90%;
+    height: 40vh;
+    border-radius: 25px;
+}
+#picture
+{
+    padding-top: 5%;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+p
+{
+   text-align: end;
+    .fa-exclamation-circle
+    {
+        font-size: 30px;
+        color: crimson;
+    }
+}
+.icon
+{
+    width: 50px;
+    height: auto;
+    padding-bottom: 2%;
+}
+.titles
+{
+    font-weight: bold;
+    color: #3e4d61;
+}
+.mat-divider
+{
+    border-top-color: #3e4d61;
+    padding-bottom: 2%;
+}

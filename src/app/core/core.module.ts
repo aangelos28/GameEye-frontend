@@ -23,6 +23,7 @@ import {ArticlesComponent} from './components/articles/articles.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {TopGamesComponent} from './components/top-games/top-games.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDivider, MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatTableModule} from '@angular/material/table';
         RouterModule,
         MatGridListModule,
         FormsModule,
-        MatTableModule
+        MatTableModule,
+        MatDividerModule
     ]
 })
 export class CoreModule {
