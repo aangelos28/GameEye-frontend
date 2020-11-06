@@ -1,37 +1,37 @@
 <app-game-titlebar titleText="{{game?.title}}" imageUrl="{{game?.logoUrl}}"></app-game-titlebar>
 <div class="main container page">
-  <div class="row">
-      <div class="col-6 col-md-12">
-          <div class="card shadow" mat-ripple matRippleCentered>
-              <div class="card-body">
-                  <div class="row">
-                      <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
-                          <i class="fas fa-exclamation-circle"></i>
-                      </div>
-                      <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
-                          <p>Important Updates</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="col-6 col-md-12">
-          <div matBadge="{{game?.notificationCount}}" matBadgeSize="large" matBadgeHidden="{{game?.notificationCount <= 0}}">
-          <div class="card shadow" id="news" routerLink="/articles/{{gameIndex}}" mat-ripple matRippleCentered>
-          <div class="card-body">
-              <div class="row">
-                  <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
-                      <i class="far fa-newspaper"></i>
-                  </div>
-                  <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
-                      <p>News Articles</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-6 col-md-12">
+            <div class="card shadow" mat-ripple matRippleCentered>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
+                            <p>Important Updates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-12">
+            <div matBadge="0{{game?.notificationCount}}" matBadgeSize="large" matBadgeHidden="{{game?.notificationCount <= 0}}">
+                <div class="card shadow" id="news" routerLink="/articles/{{gameIndex}}" mat-ripple matRippleCentered>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
+                                <i class="far fa-newspaper"></i>
+                            </div>
+                            <div class="col-12 col-md-10 col-lg-11 d-flex justify-content-center justify-content-md-start">
+                                <p>News Articles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-6 col-md-12">
             <div class="card shadow" mat-ripple matRippleCentered>
