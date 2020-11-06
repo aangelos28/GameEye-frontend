@@ -19,8 +19,10 @@
         </div>
     </div>
     <ng-template #noGamesWrapper>
-        <app-spinner *ngIf="loading == true"></app-spinner>
-        <p id="msgCenter" *ngIf="watchlistGames?.length == 0">Your watchlist is empty.</p>
+        <app-spinner *ngIf="loading == true; else emptyWatchlist"></app-spinner>
+        <ng-template #emptyWatchlist>
+            <p id="msgCenter">Your watchlist is empty.</p>
+        </ng-template>
     </ng-template>
     <button mat-fab *ngIf="!inDeleteMode; else finishDelete" class="action-button delete-button" (click)="toggleDeleteMode()">
         <mat-icon>delete</mat-icon>
