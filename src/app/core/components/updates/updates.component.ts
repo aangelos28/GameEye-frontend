@@ -10,7 +10,6 @@ import {Subscription} from 'rxjs';
     styleUrls: ['./updates.component.scss']
 })
 export class UpdatesComponent implements OnInit, OnDestroy {
-
     public gameIndex: number;
     public game: Game;
 

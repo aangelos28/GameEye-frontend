@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <ng-template #elseBlock>
-                    <img mat-card-avatar src="{{game.logoUrl}}" alt="game logo" class="game-thumb">
+                    <img mat-card-avatar [src]="game.logoUrl" alt="G" class="game-thumb" (error)="gameLogo.src = 'assets/images/videogame_asset-24px.svg'" #gameLogo>
                 </ng-template>
                 <mat-card-content class="title-container">{{game.title}}
                 </mat-card-content>

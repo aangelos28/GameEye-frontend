@@ -11,7 +11,7 @@
             </div>
             <div matRipple>
                 <span class="sidemenu-item" [class.hidden]="!isSidemenuVisible">
-                    <a class="sidemenu-link"><i class="sidemenu-link-icon fa fa-star"></i>Top Games</a>
+                    <a class="sidemenu-link" routerLink="top-games" (click)="toggle()"><i class="sidemenu-link-icon fa fa-star"></i>Top Games</a>
                 </span>
             </div>
             <div matRipple *ngIf="isLoggedInAndVerified">
