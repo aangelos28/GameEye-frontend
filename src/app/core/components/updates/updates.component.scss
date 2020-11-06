@@ -1,7 +1,7 @@
 .card {
     background-color: #5f5f5f;
     color: white;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
     align-items: center;
     font-size: 25px;
     cursor: pointer;
@@ -21,7 +21,7 @@
 
 p {
     white-space: nowrap;
-    margin: 0px;
+    margin: 0;
 }
 
 #news {
@@ -55,11 +55,18 @@ i {
     font-weight: normal;
 }
 
-.col-6 {
-    padding-left: 3%;
-    padding-right: 3%;
+.left {
+    @media only screen and (max-width: 768px) {
+        padding: 0 1.75% 0 3.25%;
+    }
 }
 
+
+.right {
+    @media only screen and (max-width: 768px) {
+        padding: 0 3.25% 0 1.75%;
+    }
+}
 .col-md-10 {
     padding-left: 0;
 }
