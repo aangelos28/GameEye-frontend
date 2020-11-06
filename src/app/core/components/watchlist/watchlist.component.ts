@@ -19,9 +19,14 @@ export interface ResourceNotifications {
     images: Images;
 }
 
+export interface GameNotificationCounts {
+    totalNotifications: number;
+    articleNotifications: number;
+}
+
 export interface Game {
     gameId: string;
-    notificationCount: number;
+    notificationCounts: GameNotificationCounts;
     resourceNotifications: ResourceNotifications;
     title: string;
     logoUrl: string;
@@ -36,12 +41,10 @@ interface WatchlistGameRequest {
     templateUrl: './watchlist.component.html',
     styleUrls: ['./watchlist.component.scss']
 })
-export class WatchlistComponent implements OnInit, OnDestroy {
+export class WatchlistComponent implements OnInit {
     public watchlistGames: Game[];
     public loading: boolean;
     public inDeleteMode: boolean;
-
-    private subscriptions = new Subscription();
 
     constructor(private router: Router, private httpClient: HttpClient) {
         this.watchlistGames = [];
@@ -51,17 +54,13 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Watchlist endpoint subscription
-        this.subscriptions.add(this.httpClient.get<Game[]>('/private/watchlist').pipe(
+        this.httpClient.get<Game[]>('/private/watchlist').pipe(
             retryWhen(errors => errors.pipe(delay(2000), take(10))),
             catchError(err => of([]))
         ).subscribe(watchlistGames => {
             this.watchlistGames = watchlistGames;
             this.loading = false;
-        }));
-    }
-
-    ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+        });
     }
 
     /**

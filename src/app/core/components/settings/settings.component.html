@@ -2,26 +2,31 @@
 
 <body>
 <div class="main container page">
-    <h2 class="section-header"><i id="notificationIcon" class="fas fa-bell"></i> Notifications</h2>
-    <hr>
-    <mat-slide-toggle color="primary" [(ngModel)]="receiveNotifications">Receive notifications</mat-slide-toggle>
-    <br><br>
-    <div id="notificationSettings">
-        <mat-checkbox color="primary" disabled>Important updates</mat-checkbox>
-        <mat-checkbox [disabled]="!receiveNotifications" color="primary" [checked]="newsArticleNotifications" (click)="newsArticlesCheckboxChanged($event)">
-            News articles
-        </mat-checkbox>
-        <mat-checkbox color="primary" [checked]="redditPostNotifications" disabled>
-            Reddit posts
-        </mat-checkbox>
-        <mat-checkbox color="primary" [checked]="imageNotifications" disabled>
-            Images
-        </mat-checkbox>
-        <mat-checkbox color="primary" [checked]="youtubeNotifications" disabled>
-            YouTube videos
-        </mat-checkbox>
-        <br>
-        <mat-slide-toggle color="primary" [disabled]="!receiveNotifications" [(ngModel)]="notifyOnlyIfImportant">Notify only if important</mat-slide-toggle>
+    <div *ngIf="!loading; else spinner">
+        <h2 class="section-header"><i id="notificationIcon" class="fas fa-bell"></i> Notifications</h2>
+        <hr>
+        <mat-slide-toggle color="primary" [(ngModel)]="settings.receiveNotifications">Receive notifications</mat-slide-toggle>
+        <br><br>
+        <div id="notificationSettings">
+            <mat-checkbox color="primary" disabled>Important updates</mat-checkbox>
+            <mat-checkbox [disabled]="!settings.receiveNotifications" color="primary" [checked]="settings.receiveArticleNotifications" (click)="newsArticlesCheckboxChanged($event)">
+                News articles
+            </mat-checkbox>
+            <mat-checkbox color="primary" [checked]="false" disabled>
+                Reddit posts
+            </mat-checkbox>
+            <mat-checkbox color="primary" [checked]="false" disabled>
+                Images
+            </mat-checkbox>
+            <mat-checkbox color="primary" [checked]="false" disabled>
+                YouTube videos
+            </mat-checkbox>
+            <br>
+            <mat-slide-toggle color="primary" [disabled]="!settings.receiveNotifications" [(ngModel)]="settings.notifyOnlyIfImportant">Notify only if important</mat-slide-toggle>
+        </div>
     </div>
-</div>
+    <ng-template #spinner>
+        <app-spinner></app-spinner>
+    </ng-template>
+    </div>
 </body>

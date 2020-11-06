@@ -1,5 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../account/services/auth/auth.service';
+import {HttpClient} from '@angular/common/http';
+import {catchError, delay, retryWhen, take} from 'rxjs/operators';
+import {of} from 'rxjs';
+
+export interface Settings {
+    receiveNotifications: boolean;
+    receiveArticleNotifications: boolean;
+    notifyOnlyIfImportant: boolean;
+}
 
 @Component({
     selector: 'app-settings',
@@ -8,21 +17,25 @@ import {AuthService} from '../../../account/services/auth/auth.service';
 })
 export class SettingsComponent implements OnInit {
     // Notification settings
-    public receiveNotifications = true;
-    public newsArticleNotifications = true;
-    public redditPostNotifications = false;
-    public imageNotifications = false;
-    public youtubeNotifications = false;
-    public notifyOnlyIfImportant = false;
+    public settings: Settings;
 
-    constructor(public auth: AuthService) {
+    public loading = true;
+
+    constructor(private httpClient: HttpClient) {
     }
 
     ngOnInit(): void {
+        // Get user notifications
+        this.httpClient.get<Settings>('/private/user/settings').pipe(
+            retryWhen(errors => errors.pipe(delay(500), take(10)))
+        ).subscribe(settings => {
+            this.settings = settings;
+            this.loading = false;
+        });
     }
 
     newsArticlesCheckboxChanged(e: any): void {
         e.preventDefault();
-        this.newsArticleNotifications = true;
+        this.settings.receiveArticleNotifications = true;
     }
 }
