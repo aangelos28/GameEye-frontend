@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {Game} from '../watchlist/watchlist.component';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -11,26 +11,23 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ArticlesComponent implements OnInit {
 
-    index: any;
-    game: Observable<any>;
+    gameIndex: number;
     aGame: Game;
-    gameUrl = '/private/watchlist/game/';
-    temp: any;
 
-    subToGame(): void
-    {
-        this.temp = this.route.params.subscribe(params => { this.index = params.index; });
-        this.gameUrl += this.index;
-        this.game = this.httpClient.get<Game>( this.gameUrl);
-        this.game.subscribe((data: Game) => this.aGame = data);
-    }
-
+    private subscriptions = new Subscription();
 
 
     constructor(private route: ActivatedRoute, private httpClient: HttpClient) {}
 
-ngOnInit(): void {
-        this.subToGame();
-  }
-
+    ngOnInit(): void {
+    this.subscriptions.add(this.route.params.subscribe(params => {
+        this.gameIndex = params.index;
+        this.httpClient.get<Game>(`/private/watchlist/game/${this.gameIndex}`).subscribe(game => this.aGame = game);
+    }));
+    }
+    // tslint:disable-next-line:use-lifecycle-interface
+    ngOnDestroy(): void
+    {
+        this.subscriptions.unsubscribe();
+    }
 }
