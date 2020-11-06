@@ -26,13 +26,13 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['watchlist']);
 
 const routes: Routes = [
     {
-        path: 'articles/:index',
+        path: 'articles/:gameId',
         component: ArticlesComponent,
         canActivate: [AngularFireAuthGuard, EmailVerificationGuard],
         data: {authGuardPipe: redirectUnauthorizedToLogin}
     },
     {
-        path: 'updates/:index',
+        path: 'updates/:gameId',
         component: UpdatesComponent,
         canActivate: [AngularFireAuthGuard, EmailVerificationGuard],
         data: {authGuardPipe: redirectUnauthorizedToLogin}

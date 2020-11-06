@@ -1,4 +1,5 @@
 <app-game-titlebar titleText="{{game?.title}}" imageUrl="{{game?.logoUrl}}"></app-game-titlebar>
+
 <div class="main container page">
     <div class="row">
         <div class="col-6 col-md-12 left">
@@ -17,7 +18,7 @@
         </div>
         <div class="col-6 col-md-12 right">
             <div matBadge="0{{game?.notificationCounts.articleNotifications}}" matBadgeSize="large" matBadgeHidden="{{game?.notificationCounts.articleNotifications <= 0}}">
-                <div class="card shadow" id="news" routerLink="/articles/{{gameIndex}}" mat-ripple matRippleCentered>
+                <div class="card shadow" id="news" routerLink="/articles/{{gameId}}" mat-ripple matRippleCentered>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">

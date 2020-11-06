@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
-import {catchError, debounceTime, delay, retryWhen, take} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {catchError, delay, retryWhen, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 export interface Articles {
@@ -70,7 +70,7 @@ export class WatchlistComponent implements OnInit {
      */
     public watchlistEntryClick(index: number): void {
         if (!this.inDeleteMode) {
-            this.router.navigate([`/updates/${index}`]);
+            this.router.navigate([`/updates/${this.watchlistGames[index].gameId}`]);
         } else {
             this.removeGameFromWatchlist(index);
         }
