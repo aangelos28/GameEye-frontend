@@ -5,11 +5,11 @@
     <div *ngIf="!loading; else spinner">
         <h2 class="section-header"><i id="notificationIcon" class="fas fa-bell"></i> Notifications</h2>
         <hr>
-        <mat-slide-toggle color="primary" [(ngModel)]="settings.receiveNotifications">Receive notifications</mat-slide-toggle>
+        <mat-slide-toggle color="primary" [(ngModel)]="notificationSettings.receiveNotifications" (change)="settingsChanged()">Receive notifications</mat-slide-toggle>
         <br><br>
         <div id="notificationSettings">
             <mat-checkbox color="primary" disabled>Important updates</mat-checkbox>
-            <mat-checkbox [disabled]="!settings.receiveNotifications" color="primary" [checked]="settings.receiveArticleNotifications" (click)="newsArticlesCheckboxChanged($event)">
+            <mat-checkbox [disabled]="!notificationSettings.receiveNotifications" color="primary" [checked]="notificationSettings.receiveArticleNotifications" (change)="settingsChanged()" (click)="newsArticlesCheckboxClicked($event)">
                 News articles
             </mat-checkbox>
             <mat-checkbox color="primary" [checked]="false" disabled>
@@ -22,7 +22,7 @@
                 YouTube videos
             </mat-checkbox>
             <br>
-            <mat-slide-toggle color="primary" [disabled]="!settings.receiveNotifications" [(ngModel)]="settings.notifyOnlyIfImportant">Notify only if important</mat-slide-toggle>
+            <mat-slide-toggle color="primary" [disabled]="!notificationSettings.receiveNotifications" [(ngModel)]="notificationSettings.notifyOnlyIfImportant" (change)="settingsChanged()">Notify only if important</mat-slide-toggle>
         </div>
     </div>
     <ng-template #spinner>
