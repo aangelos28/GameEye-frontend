@@ -17,6 +17,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddGameComponent } from './core/components/add-game/add-game.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { TopGamesComponent } from './core/components/top-games/top-games.component';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,7 @@ import {MatIconModule} from '@angular/material/icon';
         MatInputModule,
         MatIconModule
     ],
-    providers: [HttpClientModule],
+    providers: [HttpClientModule, {provide: LocationStrategy, useClass: HashLocationStrategy}],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

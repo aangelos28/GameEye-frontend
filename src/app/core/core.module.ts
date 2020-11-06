@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {TestComponent} from './components/test/test.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {MatInputModule} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AccountModule} from '../account/account.module';
@@ -21,6 +21,8 @@ import {UpdatesComponent} from './components/updates/updates.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {ArticlesComponent} from './components/articles/articles.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
+import {TopGamesComponent} from './components/top-games/top-games.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
         SettingsComponent,
         UpdatesComponent,
         ArticlesComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        TopGamesComponent
     ],
     exports: [
         TestComponent,
@@ -52,7 +55,9 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
         MatRippleModule,
         MatSlideToggleModule,
         RouterModule,
-        MatGridListModule
+        MatGridListModule,
+        FormsModule,
+        MatTableModule
     ]
 })
 export class CoreModule {

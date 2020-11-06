@@ -43,25 +43,13 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     private subscriptions = new Subscription();
 
-    private loading$: BehaviorSubject<boolean>;
-
     constructor(private router: Router, private httpClient: HttpClient) {
         this.watchlistGames = [];
-        this.loading = false;
-        this.loading$ = new BehaviorSubject<boolean>(false);
+        this.loading = true;
         this.inDeleteMode = false;
     }
 
     ngOnInit(): void {
-        // Loading indicator delay
-        this.loading$.next(true);
-        this.subscriptions.add(this.loading$.pipe(debounceTime(1000))
-            .subscribe(loading => {
-                if (this.loading === true) {
-                    this.loading = loading;
-                }
-            }));
-
         // Watchlist endpoint subscription
         this.subscriptions.add(this.httpClient.get<Game[]>('/private/watchlist').pipe(
             retryWhen(errors => errors.pipe(delay(2000), take(10))),
