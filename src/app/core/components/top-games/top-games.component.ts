@@ -24,7 +24,7 @@ export class TopGamesComponent implements OnInit {
 
     ngOnInit(): void {
         // Query top games endpoint
-        this.httpClient.post<MostWatchedGame[]>('/private/game/top', {maxResults: 25}).pipe(
+        this.httpClient.post<MostWatchedGame[]>('/private/game/top', {maxResults: 50}).pipe(
             retryWhen(errors => errors.pipe(delay(2000), take(5))),
             catchError(err => of([]))
         ).subscribe(games => {

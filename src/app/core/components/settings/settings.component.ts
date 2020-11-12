@@ -41,12 +41,4 @@ export class SettingsComponent implements OnInit {
             this.baseNotificationSettings = this.notificationSettings;
         }, error => this.notificationSettings = this.baseNotificationSettings);
     }
-
-    /**
-     * Prevents changing the news article checkbox value to false.
-     */
-    public newsArticlesCheckboxClicked(e: any): void {
-        e.preventDefault();
-        this.notificationSettings.receiveArticleNotifications = true;
-    }
 }

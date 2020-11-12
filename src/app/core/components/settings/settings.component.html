@@ -9,7 +9,7 @@
         <br><br>
         <div id="notificationSettings">
             <mat-checkbox color="primary" disabled>Important updates</mat-checkbox>
-            <mat-checkbox [disabled]="!notificationSettings.receiveNotifications" color="primary" [checked]="notificationSettings.receiveArticleNotifications" (change)="settingsChanged()" (click)="newsArticlesCheckboxClicked($event)">
+            <mat-checkbox color="primary" [checked]="notificationSettings.receiveArticleNotifications" disabled>
                 News articles
             </mat-checkbox>
             <mat-checkbox color="primary" [checked]="false" disabled>
