@@ -139,7 +139,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
      */
     private getAutocompletions(gameTitle: string): Observable<GameSuggestion[]> {
         const requestBody: AutocompletionRequest = {
-            gameTitle: gameTitle,
+            gameTitle,
             maxSuggestions: 10
         };
 
