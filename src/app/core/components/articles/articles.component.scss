@@ -1,13 +1,6 @@
-#head
+.container
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    margin: 25px auto 25px auto;
-    width: 90%;
-    height: 40vh;
-    border-radius: 25px;
+    margin-top: 2.5%;
 }
 #picture
 {
@@ -16,15 +9,14 @@
     min-width: 100%;
     min-height: 100%;
 }
-p
+
+.fa-exclamation-circle
 {
-   text-align: end;
-    .fa-exclamation-circle
-    {
+        line-height: 5px;
         font-size: 30px;
         color: crimson;
-    }
 }
+
 .icon
 {
     width: 50px;
