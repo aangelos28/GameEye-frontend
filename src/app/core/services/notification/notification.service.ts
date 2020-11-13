@@ -24,7 +24,7 @@ export class NotificationService {
             };
             this.httpClient.post<NotificationTokenRequest>('/private/user/notifications/register', request).subscribe(() => {
                 console.log('Token registered with backend');
-            })
+            });
         }, (error => {
             console.log(error);
         }));
