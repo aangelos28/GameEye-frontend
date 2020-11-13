@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
+import {BehaviorSubject, of, Subscription} from 'rxjs';
 import {catchError, debounceTime, delay, retryWhen, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {NotificationPermissionDialogComponent} from '../../../shared/components/notification-permission-dialog/notification-permission-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 export interface Articles {
     count: number;
@@ -36,7 +38,7 @@ interface WatchlistGameRequest {
     templateUrl: './watchlist.component.html',
     styleUrls: ['./watchlist.component.scss']
 })
-export class WatchlistComponent implements OnInit, OnDestroy {
+export class WatchlistComponent implements OnInit, OnDestroy, AfterViewInit {
     public watchlistGames: Game[];
     public loading: boolean;
     public inDeleteMode: boolean;
@@ -45,7 +47,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     private loading$: BehaviorSubject<boolean>;
 
-    constructor(private router: Router, private httpClient: HttpClient) {
+    constructor(private router: Router, private httpClient: HttpClient, private dialog: MatDialog) {
         this.watchlistGames = [];
         this.loading = false;
         this.loading$ = new BehaviorSubject<boolean>(false);
@@ -70,6 +72,12 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             this.watchlistGames = watchlistGames;
             this.loading = false;
         }));
+    }
+
+    ngAfterViewInit(): void {
+        if (Notification.permission !== 'granted' && localStorage.getItem('notificationDialogShown') !== 'true') {
+            this.dialog.open(NotificationPermissionDialogComponent);
+        }
     }
 
     ngOnDestroy(): void {

@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import { NotificationPermissionDialogComponent } from './shared/components/notification-permission-dialog/notification-permission-dialog.component';
 
 @NgModule({
     declarations: [
