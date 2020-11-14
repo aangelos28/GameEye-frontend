@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    backendUrl: 'http://localhost:8070/api',
+    backendUrl: 'http://192.168.1.4:8070/api',
     firebase: {
         apiKey: 'AIzaSyCg05oQfz18IpyfVKLq2UxYvJD6x8RI47g',
         authDomain: 'gameeye-8eb07.firebaseapp.com',
