@@ -14,19 +14,24 @@ export class NotificationService {
     constructor(private angularFireMessaging: AngularFireMessaging, private httpClient: HttpClient) {
     }
 
-    public requestNotificationPermission(): void {
-        this.angularFireMessaging.requestToken.subscribe(token => {
-            console.log(`Permission granted. Token: ${token}`);
+    public requestNotificationPermission(): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.angularFireMessaging.requestToken.subscribe(token => {
+                console.log(`Permission granted. Token: ${token}`);
 
-            // Register token in backend
-            const request: NotificationTokenRequest = {
-                notificationToken: token
-            };
-            this.httpClient.post<NotificationTokenRequest>('/private/user/notifications/register', request).subscribe(() => {
-                console.log('Token registered with backend');
-            });
-        }, (error => {
-            console.log(error);
-        }));
+                // Register token in backend
+                const request: NotificationTokenRequest = {
+                    notificationToken: token
+                };
+                this.httpClient.post('/private/user/notifications/register', request, {
+                    responseType: 'text'
+                })
+                    .subscribe(() => {
+                        resolve();
+                    });
+            }, (error => {
+                reject();
+            }));
+        });
     }
 }
