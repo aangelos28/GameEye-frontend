@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {delay, retryWhen, take} from 'rxjs/operators';
+import {NotificationService} from '../../services/notification/notification.service';
 
 export interface NotificationSettings {
     receiveNotifications: boolean;
@@ -48,7 +49,7 @@ export class SettingsComponent implements OnInit {
 
     public requestNotificationPermission(): void {
         this.notificationService.requestNotificationPermission()
-            .then(() => this.nnotificationsPermitted = Notification.permission === 'granted')
+            .then(() => this.notificationsPermitted = Notification.permission === 'granted')
             .catch(err => this.notificationsPermitted = Notification.permission === 'granted');
     }
 }

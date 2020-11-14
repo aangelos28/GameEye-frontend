@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {of, Subscription} from 'rxjs';
+import {of} from 'rxjs';
 import {catchError, delay, retryWhen, take} from 'rxjs/operators';
 
 interface MostWatchedGame {
@@ -18,6 +18,8 @@ export class TopGamesComponent implements OnInit {
     public displayedColumns: string[] = ['rank', 'title', 'watchers'];
     public mostWatchedGames: MostWatchedGame[];
 
+    public loading = true;
+
     constructor(private httpClient: HttpClient) {
         this.mostWatchedGames = [];
     }
@@ -33,6 +35,8 @@ export class TopGamesComponent implements OnInit {
             for (let i = 0; i < games.length; ++i) {
                 this.mostWatchedGames[i].rank = i + 1;
             }
+
+            this.loading = false;
         });
     }
 }

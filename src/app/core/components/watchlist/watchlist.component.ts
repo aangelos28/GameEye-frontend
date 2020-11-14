@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
-import {catchError, debounceTime, delay, retryWhen, take} from 'rxjs/operators';
+import {BehaviorSubject, of} from 'rxjs';
+import {catchError, delay, retryWhen, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {NotificationPermissionDialogComponent} from '../../../shared/components/notification-permission-dialog/notification-permission-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -51,7 +51,6 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
     constructor(private router: Router, private httpClient: HttpClient, private dialog: MatDialog) {
         this.watchlistGames = [];
         this.loading = false;
-        this.loading$ = new BehaviorSubject<boolean>(false);
         this.inDeleteMode = false;
     }
 

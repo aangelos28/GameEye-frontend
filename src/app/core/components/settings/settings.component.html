@@ -5,7 +5,7 @@
     <div *ngIf="!loading; else spinner">
         <h2 class="section-header"><i id="notificationIcon" class="fas fa-bell"></i> Notifications</h2>
         <hr>
-        <div *ngIf="receiveNotifications" id="notification-permission-banner" [class.not-allowed]="!notificationsPermitted">
+        <div *ngIf="notificationSettings.receiveNotifications" id="notification-permission-banner" [class.not-allowed]="!notificationsPermitted">
             <div *ngIf="notificationsPermitted; else notificationsNotPermitted" id="notifications-permitted">
                 <div class="banner-text-container">
                     <h3 class="banner-header">Notifications are permitted for this device</h3>

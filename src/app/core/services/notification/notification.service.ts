@@ -23,7 +23,7 @@ export class NotificationService {
                 const request: NotificationTokenRequest = {
                     notificationToken: token
                 };
-                this.httpClient.post('/private/user/notifications/register', request, {
+                this.httpClient.post('/private/user/notifications/token/register', request, {
                     responseType: 'text'
                 })
                     .subscribe(() => {
