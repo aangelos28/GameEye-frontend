@@ -1,35 +1,41 @@
-.container
-{
-    margin-top: 2.5%;
+#head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 25px auto 25px auto;
+    width: 90%;
+    height: 40vh;
+    border-radius: 25px;
 }
-#picture
-{
+
+#picture {
     padding-top: 5%;
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
 }
 
-.fa-exclamation-circle
-{
-        line-height: 5px;
+p {
+    text-align: end;
+
+    .fa-exclamation-circle {
         font-size: 30px;
         color: crimson;
 }
 
-.icon
-{
+.icon {
     width: 50px;
     height: auto;
     padding-bottom: 2%;
 }
-.titles
-{
+
+.titles {
     font-weight: bold;
     color: #3e4d61;
 }
-.mat-divider
-{
+
+.mat-divider {
     border-top-color: #3e4d61;
     padding-bottom: 2%;
 }

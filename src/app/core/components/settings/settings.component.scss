@@ -1,6 +1,52 @@
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/mixins";
+@import "~node_modules/bootstrap/scss/variables";
+
+
 .mat-button-toggle-checked {
     background-color: #3e4d61;
     color: white;
+}
+
+#notification-permission-banner {
+    display: flex;
+    width: 60%;
+    min-height: 60px;
+    background-color: #008D75;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+}
+#notification-permission-banner.not-allowed {
+    background-color: #6f0000;
+    transition: background-color 0.3s ease;
+}
+
+@include media-breakpoint-down(sm) {
+    #notification-permission-banner {
+        width: 100%;
+    }
+}
+
+.banner-text-container {
+    margin-left: 10px;
+}
+.banner-header {
+    color: #eaeaea;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0;
+}
+.banner-text {
+    color: #eaeaea;
+    margin-bottom: 0;
+}
+
+.permit-notifications-button {
+    color: #eaeaea;
+    margin-right: 10px;
 }
 
 #notificationIcon {

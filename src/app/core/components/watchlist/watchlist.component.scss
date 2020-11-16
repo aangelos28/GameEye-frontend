@@ -2,10 +2,6 @@
 @import "~node_modules/bootstrap/scss/mixins";
 @import "~node_modules/bootstrap/scss/variables";
 
-#msgCenter {
-    text-align: center;
-}
-
 .game-card {
     justify-content: space-between;
     align-items: center;
@@ -113,4 +109,10 @@
     .title-container {
         font-size: large;
     }
+}
+
+#watchlist-empty-message {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 30px;
 }

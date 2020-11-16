@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
-import {catchError, debounceTime, delay, retryWhen, take} from 'rxjs/operators';
+import {BehaviorSubject, of} from 'rxjs';
+import {catchError, delay, retryWhen, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {NotificationPermissionDialogComponent} from '../../../shared/components/notification-permission-dialog/notification-permission-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 export interface Articles {
     count: number;
@@ -19,9 +21,14 @@ export interface ResourceNotifications {
     images: Images;
 }
 
+export interface GameNotificationCounts {
+    totalNotifications: number;
+    articleNotifications: number;
+}
+
 export interface Game {
     gameId: string;
-    notificationCount: number;
+    notificationCounts: GameNotificationCounts;
     resourceNotifications: ResourceNotifications;
     title: string;
     logoUrl: string;
@@ -36,32 +43,32 @@ interface WatchlistGameRequest {
     templateUrl: './watchlist.component.html',
     styleUrls: ['./watchlist.component.scss']
 })
-export class WatchlistComponent implements OnInit, OnDestroy {
+export class WatchlistComponent implements OnInit, AfterViewInit {
     public watchlistGames: Game[];
     public loading: boolean;
     public inDeleteMode: boolean;
 
-    private subscriptions = new Subscription();
-
-    constructor(private router: Router, private httpClient: HttpClient) {
+    constructor(private router: Router, private httpClient: HttpClient, private dialog: MatDialog) {
         this.watchlistGames = [];
-        this.loading = true;
+        this.loading = false;
         this.inDeleteMode = false;
     }
 
     ngOnInit(): void {
         // Watchlist endpoint subscription
-        this.subscriptions.add(this.httpClient.get<Game[]>('/private/watchlist').pipe(
+        this.httpClient.get<Game[]>('/private/watchlist').pipe(
             retryWhen(errors => errors.pipe(delay(2000), take(10))),
             catchError(err => of([]))
         ).subscribe(watchlistGames => {
             this.watchlistGames = watchlistGames;
             this.loading = false;
-        }));
+        });
     }
 
-    ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+    ngAfterViewInit(): void {
+        if (Notification.permission !== 'granted' && localStorage.getItem('notificationDialogShown') !== 'true') {
+            this.dialog.open(NotificationPermissionDialogComponent);
+        }
     }
 
     /**
@@ -71,7 +78,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
      */
     public watchlistEntryClick(index: number): void {
         if (!this.inDeleteMode) {
-            this.router.navigate([`/updates/${index}`]);
+            this.router.navigate([`/updates/${this.watchlistGames[index].gameId}`]);
         } else {
             this.removeGameFromWatchlist(index);
         }

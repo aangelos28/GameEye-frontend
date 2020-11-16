@@ -5,10 +5,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ApiInterceptor} from './interceptors/api/api.interceptor';
+import {NotificationPermissionDialogComponent} from './components/notification-permission-dialog/notification-permission-dialog.component';
 
 @NgModule({
     declarations: [
-        InfoDialogComponent
+        InfoDialogComponent,
+        NotificationPermissionDialogComponent
     ],
     imports: [
         CommonModule,
@@ -16,7 +18,8 @@ import {ApiInterceptor} from './interceptors/api/api.interceptor';
         MatButtonModule
     ],
     exports: [
-        InfoDialogComponent
+        InfoDialogComponent,
+        NotificationPermissionDialogComponent
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,

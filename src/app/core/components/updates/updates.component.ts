@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
     styleUrls: ['./updates.component.scss']
 })
 export class UpdatesComponent implements OnInit, OnDestroy {
-    public gameIndex: number;
+    public gameId: string;
     public game: Game;
 
     private subscriptions = new Subscription();
@@ -20,8 +20,8 @@ export class UpdatesComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscriptions.add(this.route.params.subscribe(params => {
-            this.gameIndex = params.index;
-            this.httpClient.get<Game>(`/private/watchlist/game/${this.gameIndex}`).subscribe(game => this.game = game);
+            this.gameId = params.gameId;
+            this.httpClient.get<Game>(`/private/watchlist/game/${this.gameId}`).subscribe(game => this.game = game);
         }));
     }
 

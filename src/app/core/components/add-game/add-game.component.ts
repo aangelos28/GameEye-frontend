@@ -22,6 +22,12 @@ interface WatchlistGame {
     id: string;
 }
 
+// HTTP request body for autocompletion suggestions
+interface AutocompletionRequest {
+    gameTitle: string;
+    maxSuggestions: number;
+}
+
 @Component({
     selector: 'app-add-game',
     templateUrl: './add-game.component.html',
@@ -132,7 +138,11 @@ export class AddGameComponent implements OnInit, OnDestroy {
      * @private
      */
     private getAutocompletions(gameTitle: string): Observable<GameSuggestion[]> {
-        const requestBody = {gameTitle};
+        const requestBody: AutocompletionRequest = {
+            gameTitle,
+            maxSuggestions: 10
+        };
+
         return this.httpClient.post<GameSuggestion[]>('/private/game/complete', requestBody);
     }
 }

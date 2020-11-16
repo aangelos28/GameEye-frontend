@@ -2,8 +2,8 @@
 <div class="main container page">
     <div *ngIf="watchlistGames?.length !== 0; else noGamesWrapper">
         <div *ngFor="let game of watchlistGames; let i = index" [attr.data-index]="i">
-            <mat-card matRipple matRippleCentered matRippleColor="rgba(55, 72, 104, 0.8)" matBadge="{{game.notificationCount}}"
-                      [matBadgeHidden]="game.notificationCount <= 0" matBadgeSize="medium" tabindex="0" class="game-card" [class.delete-color]="inDeleteMode"
+            <mat-card matRipple matRippleCentered matRippleColor="rgba(55, 72, 104, 0.8)" matBadge="{{game.notificationCounts.totalNotifications}}"
+                      [matBadgeHidden]="game.notificationCounts.totalNotifications <= 0" matBadgeSize="medium" tabindex="0" class="game-card" [class.delete-color]="inDeleteMode"
                       (click)="watchlistEntryClick(i)">
                 <div *ngIf="game.logoUrl == ''; else elseBlock">
                     <div mat-card-avatar class="game-thumb">
@@ -21,7 +21,7 @@
     <ng-template #noGamesWrapper>
         <app-spinner *ngIf="loading == true; else emptyWatchlist"></app-spinner>
         <ng-template #emptyWatchlist>
-            <p id="msgCenter">Your watchlist is empty.</p>
+            <p id="watchlist-empty-message">Your watchlist is empty.</p>
         </ng-template>
     </ng-template>
     <button mat-fab *ngIf="!inDeleteMode; else finishDelete" class="action-button delete-button" (click)="toggleDeleteMode()">
