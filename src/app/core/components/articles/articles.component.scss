@@ -16,23 +16,30 @@
     min-height: 100%;
 }
 
-p {
-    text-align: end;
-
-    .fa-exclamation-circle {
-        font-size: 30px;
-        color: crimson;
+.icon-important {
+    font-size: 30px;
+    color: crimson;
 }
 
-.icon {
+.article-text-container {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.article-website-logo {
     width: 50px;
     height: auto;
     padding-bottom: 2%;
 }
 
-.titles {
+.article-title {
     font-weight: bold;
     color: #3e4d61;
+    margin-right: 10px;
+}
+
+.article-date {
+
 }
 
 .mat-divider {
