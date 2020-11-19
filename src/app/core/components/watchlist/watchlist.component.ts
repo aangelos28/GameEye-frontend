@@ -50,7 +50,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router, private httpClient: HttpClient, private dialog: MatDialog) {
         this.watchlistGames = [];
-        this.loading = false;
+        this.loading = true;
         this.inDeleteMode = false;
     }
 
