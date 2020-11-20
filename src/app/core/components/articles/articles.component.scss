@@ -1,11 +1,18 @@
 .icon-important {
     font-size: 30px;
     color: crimson;
+    line-height: 5px;
+}
+
+.article-container
+{
+   padding-top: 25px;
 }
 
 .article-text-container {
     align-items: center;
     justify-content: space-between;
+    line-height: 1px;
 }
 
 .article-website-logo {

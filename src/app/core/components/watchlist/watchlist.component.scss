@@ -50,7 +50,7 @@
     transition: background-color ease 0.3s;
 }
 
-::ng-deep .mat-badge-content {
+:host ::ng-deep .mat-badge-content {
     position: relative;
     text-align: center !important;
     height: 18px !important;
@@ -64,7 +64,10 @@
     background-color: crimson;
     box-sizing: content-box;
 }
-
+::ng-deep .mat-badge-medium .mat-badge-content
+{
+    line-height: unset!important;
+}
 .title-container {
     justify-content: left;
     align-items: center;

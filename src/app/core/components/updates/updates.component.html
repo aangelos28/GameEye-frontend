@@ -5,7 +5,7 @@
         <div class="col-6 col-md-12 left">
             <div class="card shadow" mat-ripple matRippleCentered>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row top">
                         <div class="col-12 col-md-2 col-lg-1 d-flex justify-content-center justify-content-md-center">
                             <i class="fas fa-exclamation-circle"></i>
                         </div>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-6 col-md-12 right">
-            <div matBadge="0{{game?.notificationCounts.articleNotifications}}" matBadgeSize="large" matBadgeHidden="{{game?.notificationCounts.articleNotifications <= 0}}">
+                <div matBadge="{{game?.notificationCounts.articleNotifications}}" matBadgeSize="large" matBadgePosition="above after">
                 <div class="card shadow" id="news" routerLink="/articles/{{gameId}}" mat-ripple matRippleCentered>
                     <div class="card-body">
                         <div class="row">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
     </div>
     <div class="row">

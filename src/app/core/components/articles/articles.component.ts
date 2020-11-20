@@ -49,4 +49,44 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
         this.httpClient.put('/private/user/notifications/articles/remove-all', request, {responseType: 'text'}).subscribe();
     }
+
+
+    /**
+     * Get the time since the date an Article was published
+     */
+    private getTimeSince(date: Date): string{
+        let howLongAgo = ' ago';
+        const today = new Date();
+
+
+        let milliSince = (today.getDate() - date.getDate()) / 1000;
+        const daySince = Math.floor(milliSince / 86400);
+        milliSince -= daySince * 86400;
+
+
+        const hourSince = Math.floor(milliSince / 3600) % 24;
+        milliSince -= hourSince * 3600;
+
+
+        const minSince = Math.floor(milliSince / 60) % 60;
+        milliSince -= minSince * 60;
+
+
+        if (daySince >= 1)
+        {
+            howLongAgo = daySince + ' days ' + howLongAgo;
+        }
+        else if (hourSince >= 1)
+        {
+            howLongAgo = hourSince + ' hours ' + howLongAgo;
+        }
+        else
+        {
+            howLongAgo = minSince + ' minutes ' + howLongAgo;
+        }
+
+
+        return howLongAgo;
+
+    }
 }
