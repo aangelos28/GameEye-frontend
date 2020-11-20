@@ -11,14 +11,8 @@ export interface Articles {
     articleIds: any[];
 }
 
-export interface Images {
-    count: number;
-    imageIds: any[];
-}
-
 export interface ResourceNotifications {
     articles: Articles;
-    images: Images;
 }
 
 export interface GameNotificationCounts {
