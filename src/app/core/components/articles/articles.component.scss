@@ -1,21 +1,3 @@
-#head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    margin: 25px auto 25px auto;
-    width: 90%;
-    height: 40vh;
-    border-radius: 25px;
-}
-
-#picture {
-    padding-top: 5%;
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%;
-}
-
 .icon-important {
     font-size: 30px;
     color: crimson;

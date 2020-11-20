@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Game} from '../watchlist/watchlist.component';
 import {ActivatedRoute} from '@angular/router';
@@ -47,6 +47,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             gameId: this.gameId
         };
 
-        this.httpClient.put('/private/user/notifications/articles/remove-all', {body: request, responseType: 'text'}).subscribe();
+        this.httpClient.put('/private/user/notifications/articles/remove-all', request, {responseType: 'text'}).subscribe();
     }
 }
