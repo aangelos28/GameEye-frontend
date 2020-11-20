@@ -47,6 +47,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             gameId: this.gameId
         };
 
-        this.httpClient.put('/private/user/notifications/articles/remove-all', request).subscribe();
+        this.httpClient.put('/private/user/notifications/articles/remove-all', {body: request, responseType: 'text'}).subscribe();
     }
 }
