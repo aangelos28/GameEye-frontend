@@ -13,7 +13,7 @@ interface ArticleNotificationsRequest {
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ArticlesComponent implements OnInit, OnDestroy {
     public gameId: string;
     public game: Game;
 
@@ -25,14 +25,13 @@ export class ArticlesComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
         this.subscriptions.add(this.route.params.subscribe(params => {
             this.gameId = params.gameId;
-            this.httpClient.get<Game>(`/private/watchlist/game/${this.gameId}`).subscribe(game => this.game = game);
+            this.httpClient.get<Game>(`/private/watchlist/game/${this.gameId}`).subscribe(game => {
+                this.game = game;
+                if (this.game.notificationCounts.totalNotifications > 0) {
+                    this.removeAllArticleNotifications();
+                }
+            });
         }));
-    }
-
-    ngAfterViewInit(): void {
-        if (this.game.notificationCounts.totalNotifications > 0) {
-            this.removeAllArticleNotifications();
-        }
     }
 
     ngOnDestroy(): void {
