@@ -1,15 +1,19 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {Game} from '../watchlist/watchlist.component';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+
+interface ArticleNotificationsRequest {
+    gameId: string;
+}
 
 @Component({
     selector: 'app-articles',
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent implements OnInit, OnDestroy {
+export class ArticlesComponent implements OnInit, AfterViewInit, OnDestroy {
     public gameId: string;
     public game: Game;
 
@@ -25,7 +29,25 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         }));
     }
 
+    ngAfterViewInit(): void {
+        if (this.game.notificationCounts.totalNotifications > 0) {
+            this.removeAllArticleNotifications();
+        }
+    }
+
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
+    }
+
+    /**
+     * Clear all user article notifications.
+     * @private
+     */
+    private removeAllArticleNotifications(): void {
+        const request: ArticleNotificationsRequest = {
+            gameId: this.gameId
+        };
+
+        this.httpClient.put('/private/user/notifications/articles/remove-all', request).subscribe();
     }
 }
