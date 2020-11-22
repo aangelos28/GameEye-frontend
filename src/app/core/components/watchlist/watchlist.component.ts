@@ -54,7 +54,10 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
             retryWhen(errors => errors.pipe(delay(2000), take(10))),
             catchError(err => of([]))
         ).subscribe(watchlistGames => {
-            this.watchlistGames = watchlistGames;
+            // Assign watchlist games and sort them by notification count descending
+            this.watchlistGames = watchlistGames.sort(
+                (a, b) => (a.notificationCounts.totalNotifications > b.notificationCounts.totalNotifications) ? -1 : 1
+            );
             this.loading = false;
         });
     }
