@@ -26,6 +26,7 @@ export interface Game {
     resourceNotifications: ResourceNotifications;
     title: string;
     logoUrl: string;
+    releaseDate: string;
 }
 
 interface WatchlistGameRequest {
