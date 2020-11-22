@@ -153,7 +153,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
      */
     public formatGameTitle(game: GameSuggestion): string {
         if (game.releaseDate && game.releaseDate !== '') {
-            console.log(game.releaseDate);
             return `${game.title} (${this.getDateYear(game.releaseDate)})`;
         } else {
             return game.title;
