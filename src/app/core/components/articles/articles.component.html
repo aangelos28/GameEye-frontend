@@ -12,7 +12,9 @@
                     </div>
                 </div>
                 <div class="p-3 ml-auto">
+                    <div *ngIf="article.impactScore == true">
                     <i class="icon-important fas fa-exclamation-circle"></i>
+                    </div>
                 </div>
             </div>
             <h5 class="article-date">{{getTimeSince(article.publicationDate)}}</h5>
@@ -20,7 +22,7 @@
         </div>
     </div>
     <ng-template #noArticles>
-        <p>No articles to display</p>
+        <p class="text-center">No articles to display</p>
     </ng-template>
 </div>
 </div>
