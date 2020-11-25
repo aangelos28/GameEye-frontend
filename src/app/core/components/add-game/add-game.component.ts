@@ -9,6 +9,7 @@ interface GameSuggestion {
     title: string;
     id: string;
     logoUrl: string;
+    releaseDate: string;
 }
 
 // HTTP request body for various watchlist endpoints
@@ -144,5 +145,26 @@ export class AddGameComponent implements OnInit, OnDestroy {
         };
 
         return this.httpClient.post<GameSuggestion[]>('/private/game/complete', requestBody);
+    }
+
+    /**
+     * Format a game title by showing the release year if it exists.
+     * @param game Game suggestion object
+     */
+    public formatGameTitle(game: GameSuggestion): string {
+        if (game.releaseDate && game.releaseDate !== '') {
+            return `${game.title} (${this.getDateYear(game.releaseDate)})`;
+        } else {
+            return game.title;
+        }
+    }
+
+    /**
+     * Get the year from a date.
+     *
+     * @param date Date to get year from
+     */
+    public getDateYear(date: string): number {
+        return new Date(date).getFullYear();
     }
 }
