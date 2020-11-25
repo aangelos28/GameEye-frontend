@@ -8,6 +8,16 @@ interface ArticleNotificationsRequest {
     gameId: string;
 }
 
+interface Article
+{
+    title: string;
+    url: string;
+    websiteName: string;
+    snippet: string;
+    publicationDate: Date;
+    impactScore: boolean;
+}
+
 @Component({
     selector: 'app-articles',
     templateUrl: './articles.component.html',
@@ -16,6 +26,7 @@ interface ArticleNotificationsRequest {
 export class ArticlesComponent implements OnInit, OnDestroy {
     public gameId: string;
     public game: Game;
+    public gameArticles: Article[];
 
     private subscriptions = new Subscription();
 
@@ -32,7 +43,13 @@ export class ArticlesComponent implements OnInit, OnDestroy {
                 }
             });
         }));
+        this.subscriptions.add(
+            this.httpClient.post<Article[]>('/private/game/articles', {id: this.gameId}).subscribe(gameArticles => {
+                    this.gameArticles = gameArticles;
+                }
+            ));
     }
+
 
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
@@ -55,11 +72,14 @@ export class ArticlesComponent implements OnInit, OnDestroy {
      * Get the time since the date an Article was published
      */
     private getTimeSince(date: Date): string{
-        let howLongAgo = ' ago';
+
+        let howLongAgo;
         const today = new Date();
 
 
-        let milliSince = (today.getDate() - date.getDate()) / 1000;
+        // @ts-ignore
+        let milliSince = (today.getDate() - date) / 1000;
+
         const daySince = Math.floor(milliSince / 86400);
         milliSince -= daySince * 86400;
 
@@ -74,15 +94,15 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
         if (daySince >= 1)
         {
-            howLongAgo = daySince + ' days ' + howLongAgo;
+            howLongAgo = `${daySince} days ago`;
         }
         else if (hourSince >= 1)
         {
-            howLongAgo = hourSince + ' hours ' + howLongAgo;
+            howLongAgo = `${hourSince} hours ago`;
         }
         else
         {
-            howLongAgo = minSince + ' minutes ' + howLongAgo;
+            howLongAgo = `${minSince} minutes ago`;
         }
 
 
