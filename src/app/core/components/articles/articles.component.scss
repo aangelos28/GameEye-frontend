@@ -1,7 +1,16 @@
+.p-3
+{
+    padding: 0px 1rem 1rem 1rem!important;
+}
 .icon-important {
     font-size: 31px;
     color: crimson;
-    line-height: 1vh;
+}
+
+.icon-spacer
+{
+    font-size: 31px;
+    visibility: hidden;
 }
 
 .article-container

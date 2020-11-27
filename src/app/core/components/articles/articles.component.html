@@ -13,7 +13,7 @@
                 </div>
                 <div class="p-3 ml-auto">
                     <div *ngIf="article.impactScore == true">
-
+                        <i class="icon-important fas fa-exclamation-circle"></i>
                     </div>
                 </div>
             </div>
@@ -22,6 +22,7 @@
                     <p class="article-snippet">{{article.snippet}}</p>
                     </div>
                 <div class="p-3">
+                    <i class="icon-spacer fas fa-exclamation-circle"></i>
                 </div>
             </div>
             <h5 class="article-date">{{getTimeSince(article.publicationDate)}}</h5>
