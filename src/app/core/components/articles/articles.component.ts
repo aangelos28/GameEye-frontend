@@ -8,8 +8,7 @@ interface ArticleNotificationsRequest {
     gameId: string;
 }
 
-interface Article
-{
+interface Article {
     title: string;
     url: string;
     websiteName: string;
@@ -43,11 +42,10 @@ export class ArticlesComponent implements OnInit, OnDestroy {
                 }
             });
         }));
-        this.subscriptions.add(
-            this.httpClient.post<Article[]>('/private/game/articles', {id: this.gameId}).subscribe(gameArticles => {
-                    this.gameArticles = gameArticles;
-                }
-            ));
+
+        this.httpClient.post<Article[]>('/private/game/articles', {id: this.gameId}).subscribe(gameArticles => {
+            this.gameArticles = gameArticles;
+        });
     }
 
 
@@ -71,11 +69,9 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     /**
      * Get the time since the date an Article was published
      */
-    private getTimeSince(date: Date): string{
-
+    public getTimeSince(date: Date): string {
         let howLongAgo;
         const today = new Date();
-
 
         // @ts-ignore
         let milliSince = (today.getDate() - date) / 1000;
@@ -83,30 +79,20 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         const daySince = Math.floor(milliSince / 86400);
         milliSince -= daySince * 86400;
 
-
         const hourSince = Math.floor(milliSince / 3600) % 24;
         milliSince -= hourSince * 3600;
-
 
         const minSince = Math.floor(milliSince / 60) % 60;
         milliSince -= minSince * 60;
 
-
-        if (daySince >= 1)
-        {
+        if (daySince >= 1) {
             howLongAgo = `${daySince} days ago`;
-        }
-        else if (hourSince >= 1)
-        {
+        } else if (hourSince >= 1) {
             howLongAgo = `${hourSince} hours ago`;
-        }
-        else
-        {
+        } else {
             howLongAgo = `${minSince} minutes ago`;
         }
 
-
         return howLongAgo;
-
     }
 }
