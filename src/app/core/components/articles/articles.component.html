@@ -2,23 +2,35 @@
 
 <div class="main container page">
     <div class="article-container">
-        <img class="article-website-logo" src="https://static1.squarespace.com/static/5a4e740c4c326d723144bf21/t/5a4ebe080852296d70939694/1604354690678/">
-        <div class="d-flex article-text-container">
-            <h3 class="article-title">GameStop Will Sell DOOM Eternal Early to Help Separate Crowds</h3>
-            <i class="icon-important fas fa-exclamation-circle"></i>
+    <div *ngIf="gameArticles?.length !== 0; else noArticles">
+        <div *ngFor="let article of gameArticles">
+            <p class="article-website-name">{{article.websiteName}}</p>
+            <div class="d-flex">
+                <div class="p-9">
+                    <div class="article-text-container">
+                        <h3 class="article-title"><a href="{{article.url}}" style="color: #3e4d61" target="_blank">{{article.title}}</a></h3>
+                    </div>
+                </div>
+                <div class="p-3 ml-auto">
+                    <div *ngIf="article.impactScore == true">
+                        <i class="icon-important fas fa-exclamation-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="p-9 article-snippet">
+                    <p class="article-snippet">{{article.snippet}}</p>
+                    </div>
+                <div class="p-3">
+                    <i class="icon-spacer fas fa-exclamation-circle"></i>
+                </div>
+            </div>
+            <h5 class="article-date">{{getTimeSince(article.publicationDate)}}</h5>
+            <mat-divider></mat-divider>
         </div>
-        <h5 class="article-date">4 hours ago</h5>
-        <mat-divider></mat-divider>
-        <img class="article-website-logo" src="https://gamespot1.cbsistatic.com/bundles/gamespotsite/images/logo.png">
-        <h3 class="article-title">What Time Does Doom Eternal Unlock on PS4, Xbox One, And Steam?</h3>
-        <h5 class="article-date">5 hours ago</h5>
-        <mat-divider></mat-divider>
-        <img class="article-website-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/GamesRadar.svg/1200px-GamesRadar.svg.png">
-        <div class="d-flex article-text-container">
-            <h3 class="article-title">Doom Eternal Review: "Screams At You To Move Faster And To Fight Harder, And You Can Do Nothing But Obey"</h3>
-            <i class="icon-important fas fa-exclamation-circle"></i>
         </div>
-        <h5 class="article-date">2 days ago</h5>
-        <mat-divider></mat-divider>
-    </div>
+    <ng-template #noArticles>
+        <p class="text-center">No articles to display</p>
+    </ng-template>
+</div>
 </div>

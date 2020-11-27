@@ -1,11 +1,27 @@
+.p-3
+{
+    padding: 0px 1rem 1rem 1rem!important;
+}
 .icon-important {
-    font-size: 30px;
+    font-size: 31px;
     color: crimson;
+}
+
+.icon-spacer
+{
+    font-size: 31px;
+    visibility: hidden;
+}
+
+.article-container
+{
+   padding-top: 25px;
 }
 
 .article-text-container {
     align-items: center;
     justify-content: space-between;
+    line-height: -2vh;
 }
 
 .article-website-logo {
@@ -22,6 +38,17 @@
 
 .article-date {
 
+}
+
+.article-snippet
+{
+    font-size: small;
+}
+
+.article-website-name
+{
+    font-weight: bold;
+    color: black;
 }
 
 .mat-divider {
