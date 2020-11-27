@@ -1,7 +1,7 @@
 .icon-important {
-    font-size: 30px;
+    font-size: 31px;
     color: crimson;
-    line-height: 5px;
+    line-height: 1vh;
 }
 
 .article-container
@@ -12,7 +12,7 @@
 .article-text-container {
     align-items: center;
     justify-content: space-between;
-    line-height: 1px;
+    line-height: -2vh;
 }
 
 .article-website-logo {
@@ -29,6 +29,17 @@
 
 .article-date {
 
+}
+
+.article-snippet
+{
+    font-size: small;
+}
+
+.article-website-name
+{
+    font-weight: bold;
+    color: black;
 }
 
 .mat-divider {

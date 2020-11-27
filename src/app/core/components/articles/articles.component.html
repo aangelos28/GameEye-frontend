@@ -4,23 +4,30 @@
     <div class="article-container">
     <div *ngIf="gameArticles?.length !== 0; else noArticles">
         <div *ngFor="let article of gameArticles">
-            <p>{{article.websiteName}}</p>
+            <p class="article-website-name">{{article.websiteName}}</p>
             <div class="d-flex">
                 <div class="p-9">
                     <div class="article-text-container">
-                        <h3 class="article-title"><a href="{{article.url}}" style="color: #3e4d61" target="_blank">{{article.snippet}}</a></h3>
+                        <h3 class="article-title"><a href="{{article.url}}" style="color: #3e4d61" target="_blank">{{article.title}}</a></h3>
                     </div>
                 </div>
                 <div class="p-3 ml-auto">
                     <div *ngIf="article.impactScore == true">
-                    <i class="icon-important fas fa-exclamation-circle"></i>
+
                     </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="p-9 article-snippet">
+                    <p class="article-snippet">{{article.snippet}}</p>
+                    </div>
+                <div class="p-3">
                 </div>
             </div>
             <h5 class="article-date">{{getTimeSince(article.publicationDate)}}</h5>
             <mat-divider></mat-divider>
         </div>
-    </div>
+        </div>
     <ng-template #noArticles>
         <p class="text-center">No articles to display</p>
     </ng-template>
