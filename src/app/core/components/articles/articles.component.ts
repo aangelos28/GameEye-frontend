@@ -74,7 +74,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         const today = new Date();
 
         // @ts-ignore
-        let milliSince = (today.getDate() - date) / 1000;
+        let milliSince = (today - date) / 1000;
 
         const daySince = Math.floor(milliSince / 86400);
         milliSince -= daySince * 86400;
