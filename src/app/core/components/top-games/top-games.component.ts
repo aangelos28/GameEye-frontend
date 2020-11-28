@@ -30,9 +30,10 @@ export class TopGamesComponent implements OnInit {
             retryWhen(errors => errors.pipe(delay(2000), take(5))),
             catchError(err => of([]))
         ).subscribe(games => {
-            this.mostWatchedGames = games;
+            // Only show games that have at least 1 watcher
+            this.mostWatchedGames = games.filter((game) => game.watchers > 0);
 
-            for (let i = 0; i < games.length; ++i) {
+            for (let i = 0; i < this.mostWatchedGames.length; ++i) {
                 this.mostWatchedGames[i].rank = i + 1;
             }
 
