@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-6 col-md-12 right">
-                <div matBadge="{{game?.notificationCounts.articleNotifications}}" matBadgeSize="large" matBadgePosition="above after">
+                <div matBadge="{{game?.notificationCounts.articleNotifications}}" [matBadgeHidden]="game?.notificationCounts.articleNotifications <= 0" matBadgeSize="large" matBadgePosition="above after">
                 <div class="card shadow" id="news" routerLink="/articles/{{gameId}}" mat-ripple matRippleCentered>
                     <div class="card-body">
                         <div class="row">
