@@ -50,7 +50,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         });
     }
 
-
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
@@ -66,7 +65,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
         this.httpClient.put('/private/user/notifications/articles/remove-all', request, {responseType: 'text'}).subscribe();
     }
-
 
     /**
      * Get the time since the date an Article was published
