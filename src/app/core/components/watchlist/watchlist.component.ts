@@ -56,9 +56,13 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
             catchError(err => of([]))
         ).subscribe(watchlistGames => {
             // Assign watchlist games and sort them by notification count descending
-            this.watchlistGames = watchlistGames.sort(
-                (a, b) => (a.notificationCounts.totalNotifications >= b.notificationCounts.totalNotifications) ? -1 : 1
-            );
+            if (watchlistGames.some((game => game.notificationCounts.totalNotifications > 0))) {
+                this.watchlistGames = watchlistGames.sort(
+                    (a, b) => (a.notificationCounts.totalNotifications >= b.notificationCounts.totalNotifications) ? -1 : 1
+                );
+            } else {
+                this.watchlistGames = watchlistGames;
+            }
 
             this.loading = false;
         });
