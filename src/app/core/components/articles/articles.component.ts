@@ -44,7 +44,9 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         }));
 
         this.httpClient.post<Article[]>('/private/game/articles', {id: this.gameId}).subscribe(gameArticles => {
-            this.gameArticles = gameArticles;
+            this.gameArticles = gameArticles.sort(
+                (a, b) => (a.publicationDate.valueOf() >= b.publicationDate.valueOf()) ? -1 : 1
+            );
         });
     }
 
