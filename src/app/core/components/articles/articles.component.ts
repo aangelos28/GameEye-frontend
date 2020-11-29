@@ -86,11 +86,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         milliSince -= minSince * 60;
 
         if (daySince >= 1) {
-            howLongAgo = `${daySince} days ago`;
+            howLongAgo = `${daySince} day(s) ago`;
         } else if (hourSince >= 1) {
-            howLongAgo = `${hourSince} hours ago`;
+            howLongAgo = `${hourSince} hour(s) ago`;
         } else {
-            howLongAgo = `${minSince} minutes ago`;
+            howLongAgo = `${minSince} minute(s) ago`;
         }
 
         return howLongAgo;
